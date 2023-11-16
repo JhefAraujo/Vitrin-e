@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos</title>
+    <link rel="stylesheet" href="css/pedidos.css">
+</head>
+
+<body>
+    <header>
+        <a href="index.html"><img src="back.png" class="back" alt="voltar"></a>
+        <h1>Conecta Clone</h1>
+    </header>
+    <div class="menu">
+        <h2>Lista de Pedidos</h2>
+        <div class="wrap">
+            <p>selecionar colunas mostradas</p>
+            <div class="tog">
+                <p>ativar notificações dos pedidos</p>
+                <input type="checkbox">
+            </div>
+        </div>
+    </div>
+    <nav>
+        <div id="aberto" onclick="seta('aberto'), toggle('em aberto')" class="botao active">Em aberto</div>
+        <div id="analise" onclick="seta('analise'), toggle('em analise')" class="botao">Em análise</div>
+        <div id="pago" onclick="seta('pago'), toggle('pago')" class="botao">Pago</div>
+        <div id="producao" onclick="seta('producao'), toggle('em produção')" class="botao">Em produção</div>
+        <div id="enviado" onclick="seta('enviado'), toggle('enviado')" class="botao">Enviado</div>
+        <div id="entregue" onclick="seta('entregue'), toggle('entregue')" class="botao">Entregue</div>
+        <div id="finalizado" onclick="seta('finalizado'), toggle('finalizado')" class="botao">Finalizado</div>
+        <div id="cancelado" onclick="seta('cancelado'), toggle('cancelado')" class="botao">Cancelado</div>
+        <div id="excluido" onclick="seta('excluido'), toggle('excluido')" class="botao">Excluído</div>
+    </nav>
+    <div class="manage">
+        <div class="move">
+            <p>mover itens selecionados para:</p>
+        </div>
+        <p id="exibindo"></p>
+        <input id="search" type="search" placeholder="Pesquisar pedidos">
+    </div>
+    <table>
+        <thead>
+            <td class="check"><input type="checkbox"></td>
+            <th>Cliente</th>
+            <th>Data</th>
+            <th>Valor</th>
+            <th>Vendedor</th>
+            <th>Catálogo</th>
+            <th class="wid"></th>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</body>
+<script src="js/pedidos.js"></script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos</title>
+    <link rel="stylesheet" href="css/produtos.css">
+</head>
+
+<body>
+    <header onload="getOrders()">
+        <a href="index.html"><img src="back.png" class="back" alt="voltar"></a>
+        <h1>Conecta Clone</h1>
+    </header>
+    <div class="menu">
+        <h2>Lista de Catálogos</h2>
+    </div>
+    <div class="wrap">
+        <div class="create">Criar nova categoria</div>
+        <div class="search">
+            <input id="texto" type="text" placeholder="Buscar por categorias">
+            <div class="pesquisa">Pesquisar</div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card">
+            <img class="pasta" src="folder.png" alt="file">
+            <p>Teste</p>
+        </div>
+</body>
+<script src="js/produtos.js">
+getOrders();
+</script>
+</html>

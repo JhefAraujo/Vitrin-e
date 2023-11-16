@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+header {
+    height: 70px;
+    background-color: #1A5F35;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.back {
+    position: absolute;
+    top: 20px;
+    left: 15vw;
+    cursor: pointer;
+}
+
+.back:hover {
+    filter: brightness(0.8);
+}
+
+.menu {
+    height: 87px;
+    background-color: #F5F5F5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px;
+}
+
+.menu > h2 {
+    color: #1A5F35;
+    font-weight: 600;
+}
+
+.wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 35px;
+}
+
+#barra {
+    width: 90vw;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid #CCCCCC;
+    padding: 5px;
+}
+
+.pesquisar {
+    width: 8vw;
+    background-color: #1A5F35;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#total {
+    margin-top: 35px;
+    margin-left: 1vw;
+    font-size: 11pt;
+}
+
+.select {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+.opt {
+    width: 49vw;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px 5px 0 0;
+}
+
+.active {
+    border-top: 1px solid #CCCCCC;
+    border-left: 1px solid #CCCCCC;
+    border-right: 1px solid #CCCCCC;
+    border-bottom: none;
+}
+
+.opt:not(.active):hover {
+    background-color: #CCCCCC;
+    cursor: pointer;
+}
+
+table {
+    width: 98vw;
+    border-collapse: collapse;
+    margin: auto;
+    border-radius: 25px;
+}
+
+th {
+    border: 1px solid rgb(206, 206, 206);
+    padding: 9px;
+    text-align: start;
+    font-size: small;
+}
+
+td {
+    border: 1px solid rgb(206, 206, 206);
+    padding: 9px;
+    text-align: start;
+    font-size: small;
+}
+
+tr:nth-child(2n) {
+    background-color: #F5F5F5;
+}
+
+.orange {
+    background-color: #FF6E28;
+    width: 70px;
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    color: white;
+}
+
+#wid {
+    width: 70px;
+}

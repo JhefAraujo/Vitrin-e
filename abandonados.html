@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sacolas Abandonadas</title>
+    <link rel="stylesheet" href="css/abandonados.css">
+</head>
+
+<body>
+    <header>
+        <a href="index.html"><img src="back.png" class="back" alt="voltar"></a>
+        <h1>Conecta Clone</h1>
+    </header>
+    <div class="menu">
+        <h2>Lista de Sacolas Abandonadas</h2>
+    </div>
+    <div class="wrap">
+        <input id="barra" type="text" placeholder="Pesquise por cliente, e-mail, telefone, vendedor ou catálogo e clique em 'pesquisar'">
+        <div class="pesquisar">pesquisar</div>
+    </div>
+    <p id="total">Total de cesta(s) abandonada(s) nos últimos 30 dias</p>
+    <div class="select">
+        <p onclick="seta('identificadas')" id="identificadas" class="opt active">Cestas identificadas</p>
+        <p onclick="seta('semIdentificacao')" class="opt" id="semIdentificacao">Cestas não identificadas</p>
+    </div>
+    <table>
+        <thead>
+            <th>Cliente</th>
+            <th>Data de modificação</th>
+            <th>Valor</th>
+            <th>Vendedor</th>
+            <th>Catálogo</th>
+            <th id="wid"></th>
+        </thead>
+        <tr>
+            <td>Teste</td>
+            <td>Teste</td>
+            <td>Teste</td>
+            <td>Teste</td>
+            <td>Teste</td>
+            <td><div class="orange">Detalhes</div></td>
+        </tr>
+    </table>
+</body>
+<script src="js/abandonados.js"></script>
+</html>

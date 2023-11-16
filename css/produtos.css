@@ -1,0 +1,159 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    padding-bottom: 25px;
+}
+
+header {
+    height: 70px;
+    background-color: #1A5F35;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.back {
+    position: absolute;
+    top: 20px;
+    left: 15vw;
+    cursor: pointer;
+}
+
+.back:hover {
+    filter: brightness(0.8);
+}
+
+.menu {
+    height: 87px;
+    background-color: #F5F5F5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px;
+}
+
+.menu > h2 {
+    color: #1A5F35;
+    font-weight: 600;
+}
+
+.wrap {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 97vw;
+    margin: auto;
+    border-bottom: 1px solid #CFCFCF;
+}
+
+.create {
+    padding: 7px;
+    background-color: #FF6E28;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.create:hover {
+    background-color: #F44F00;
+}
+
+.classificar {
+    width: 120px;
+    height: 30px;
+    border-bottom: 1px solid #CFCFCF;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.active {
+    border-bottom: 2px solid #FF6E28;
+    cursor: default;
+}
+
+.order {
+    display: flex;
+    column-gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.classificar:not(.active):hover {
+    cursor: pointer;
+}
+
+#texto {
+    width: 24vw;
+    height: 35px;
+    border: 1px solid #CFCFCF;
+    border-radius: 5px 0 0 5px;
+    padding: 5px;
+}
+
+#texto:focus {
+    border: 1px solid black;
+    outline: none;
+}
+
+.search {
+    display: flex;
+    border-collapse: collapse;
+}
+
+.settings {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 5px;
+}
+
+.pesquisa {
+    background-color: #1A5F35;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.pesquisa:hover {
+    background-color: #062613;
+}
+
+.container {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: 15vw 15vw 15vw 15vw 15vw 15vw;
+    column-gap: 15px;
+    row-gap: 15px;
+    margin-top: 25px;
+}
+
+.card {
+    width: 15vw;
+    height: 16vw;
+    background-color: #F5F5F5;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.card:hover {
+    background-color: #E8E8E8;
+}
