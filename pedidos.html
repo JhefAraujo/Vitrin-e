@@ -13,48 +13,151 @@
         <a href="index.html"><img src="back.png" class="back" alt="voltar"></a>
         <h1>Conecta Clone</h1>
     </header>
-    <div class="menu">
-        <h2>Lista de Pedidos</h2>
-        <div class="wrap">
-            <p>selecionar colunas mostradas</p>
-            <div class="tog">
-                <p>ativar notificações dos pedidos</p>
-                <input type="checkbox">
+    <main>
+        <div class="menu">
+            <h2>Lista de Pedidos</h2>
+        </div>
+        <nav>
+            <div id="aberto" onclick="seta('aberto'), toggle('em aberto')" class="botao active">Em aberto</div>
+            <div id="analise" onclick="seta('analise'), toggle('em analise')" class="botao">Em análise</div>
+            <div id="pago" onclick="seta('pago'), toggle('pago')" class="botao">Pago</div>
+            <div id="producao" onclick="seta('producao'), toggle('em produção')" class="botao">Em produção</div>
+            <div id="enviado" onclick="seta('enviado'), toggle('enviado')" class="botao">Enviado</div>
+            <div id="entregue" onclick="seta('entregue'), toggle('entregue')" class="botao">Entregue</div>
+            <div id="finalizado" onclick="seta('finalizado'), toggle('finalizado')" class="botao">Finalizado</div>
+            <div id="cancelado" onclick="seta('cancelado'), toggle('cancelado')" class="botao">Cancelado</div>
+            <div id="excluido" onclick="seta('excluido'), toggle('excluido')" class="botao">Excluído</div>
+        </nav>
+        <div class="manage">
+            <div class="mover">
+                <div class="move" tabindex="0">
+                    <p>mover itens selecionados para:</p>
+                </div>
+                <div class="moveMenu">
+                    <p>Em Aberto</p>
+                    <p>Pago</p>
+                    <p>Em produção</p>
+                    <p>Enviado</p>
+                    <p>Entregue</p>
+                    <p>Finalizado</p>
+                    <p>Cancelado</p>
+                    <p>Excluído</p>
+                </div>
             </div>
+            <p id="exibindo"></p>
+            <input id="search" type="search" placeholder="Pesquisar pedidos">
         </div>
-    </div>
-    <nav>
-        <div id="aberto" onclick="seta('aberto'), toggle('em aberto')" class="botao active">Em aberto</div>
-        <div id="analise" onclick="seta('analise'), toggle('em analise')" class="botao">Em análise</div>
-        <div id="pago" onclick="seta('pago'), toggle('pago')" class="botao">Pago</div>
-        <div id="producao" onclick="seta('producao'), toggle('em produção')" class="botao">Em produção</div>
-        <div id="enviado" onclick="seta('enviado'), toggle('enviado')" class="botao">Enviado</div>
-        <div id="entregue" onclick="seta('entregue'), toggle('entregue')" class="botao">Entregue</div>
-        <div id="finalizado" onclick="seta('finalizado'), toggle('finalizado')" class="botao">Finalizado</div>
-        <div id="cancelado" onclick="seta('cancelado'), toggle('cancelado')" class="botao">Cancelado</div>
-        <div id="excluido" onclick="seta('excluido'), toggle('excluido')" class="botao">Excluído</div>
-    </nav>
-    <div class="manage">
-        <div class="move">
-            <p>mover itens selecionados para:</p>
+        <table>
+            <thead>
+                <th class="check"><input type="checkbox"></th>
+                <th>Cliente</th>
+                <th>Data</th>
+                <th>Valor</th>
+                <th>Vendedor</th>
+                <th>Catálogo</th>
+                <th class="wid"></th>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <div class="rest">
+            <span class="loader"></span>
         </div>
-        <p id="exibindo"></p>
-        <input id="search" type="search" placeholder="Pesquisar pedidos">
-    </div>
-    <table>
-        <thead>
-            <td class="check"><input type="checkbox"></td>
-            <th>Cliente</th>
-            <th>Data</th>
-            <th>Valor</th>
-            <th>Vendedor</th>
-            <th>Catálogo</th>
-            <th class="wid"></th>
-        </thead>
-        <tbody>
-
-        </tbody>
-    </table>
+    </main>
+    <section id="details">
+        <div class="menu">
+            <h2 id="clientName"></h2>
+        </div>
+        <table class="cliente-table">
+            <thead>
+                <th id="nomeCliente">Cliente</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="dado-table">Nome Completo</td>
+                    <td class="dadoTable" id="nomeTable"></td>
+                </tr>
+                <tr>
+                    <td class="dado-table">CPF</td>
+                    <td class="dadoTable" id="cpfTable"></td>
+                </tr>
+                <tr>
+                    <td class="dado-table">E-mail</td>
+                    <td class="dadoTable" id="emailTable"></td>
+                </tr>
+                <tr>
+                    <td class="dado-table">Telefone</td>
+                    <td class="dadoTable" id="telefoneTable"></td>
+                </tr>
+                <tr>
+                    <td class="dado-table">CEP</td>
+                    <td class="dadoTable" id="cepTable"></td>
+                </tr>
+                <tr>
+                    <td class="dado-table">Estado</td>
+                    <td class="dadoTable" id="estadoTable"></td>
+                </tr>
+                <tr>
+                    <td class="dado-table">Cidade</td>
+                    <td class="dadoTable" id="cidadeTable"></td>
+                </tr>
+                <tr>
+                    <td class="dado-table">Endereço</td>
+                    <td class="dadoTable" id="enderecoTable"></td>
+                </tr>
+                <tr>
+                    <td class="dado-table">Bairro</td>
+                    <td id="bairroTable"></td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="cliente-table">
+            <thead>
+                <th id="nomeCliente">Pedido</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="dado-table situacao">Situação</td>
+                    <td class="dadoTable" id="situTable">
+                        <select name="situation" id="situation">
+                            <option selected value="Em aberto">Em aberto</option>
+                            <option value="Em análise">Em análise</option>
+                            <option value="Pago">Pago</option>
+                            <option value="Em produção">Em produção</option>
+                            <option value="Enviado">Enviado</option>
+                            <option value="Entregue">Entregue</option>
+                            <option value="Finalizado">Finalizado</option>
+                            <option value="Cancelado">Cancelado</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="dado-table">Data</td>
+                    <td class="dadoTable" id="dataTable"></td>
+                </tr>
+                <tr>
+                    <td class="dado-table">Observação</td>
+                    <td class="dadoTable" id="obsTable"><input type="text" id="observacao"></td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="cliente-table">
+            <thead>
+                <th id="nomeCatalogo">Catalogo</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="dado-table">Vendedor</td>
+                    <td class="dadoTable"></td>
+                </tr>
+                <tr>
+                    <td class="dado-table">Descrição</td>
+                    <td class="dadoTable"></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
 </body>
 <script src="js/pedidos.js"></script>
+
 </html>

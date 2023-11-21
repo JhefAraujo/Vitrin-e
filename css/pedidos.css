@@ -1,19 +1,43 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap");
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 
 header {
     height: 70px;
-    background-color: #1A5F35;
+    background-color: #1a5f35;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
+}
+
+::-webkit-scrollbar {
+    filter: opacity(0);
+    background-color: rgba(255, 255, 255, 0.288);
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+    display: none !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #1a5f35;
+    width: 3px;
+    border: 2px solid white;
+    border-radius: 15px;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
 }
 
 .back {
@@ -29,7 +53,7 @@ header {
 
 .menu {
     height: 85px;
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -37,7 +61,7 @@ header {
 }
 
 .menu > h2 {
-    color: #1A5F35;
+    color: #1a5f35;
     font-weight: 600;
 }
 
@@ -85,11 +109,48 @@ nav {
     margin: auto;
 }
 
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #1a5f35;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 
+
 .move {
-    background-color: #FF6E28;
+    background-color: #ff6e28;
     color: white;
     padding: 9px;
     border-radius: 5px;
+    cursor: pointer;
+    height: 35px;
+}
+
+.move:focus {
+    background-color: #ac4a19;
+}
+
+.move:focus + .moveMenu {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.mover {
+    display: flex;
+    transform: translateY(117px);
+    column-gap: 5px;
 }
 
 #search {
@@ -112,6 +173,36 @@ th {
     padding: 9px;
     text-align: start;
     font-size: small;
+    background-color: #f5f5f5;
+}
+
+.moveMenu {
+    position: relative;
+    z-index: 1;
+    background-color: white;
+    align-self: flex-start;
+    justify-self: flex-start;
+    padding: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    width: 150px;
+    border: 1px solid rgb(206, 206, 206);
+    border-radius: 5px;
+    opacity: 0;
+    pointer-events: none;
+    transition-duration: 0.3s;
+}
+
+.moveMenu p {
+    padding: 7px;
+    font-size: small;
+    padding-left: 20px;
+    padding-right: none;
+    cursor: pointer;
+}
+
+.moveMenu p:hover {
+    background-color: #f5f5f5;
 }
 
 td {
@@ -123,7 +214,7 @@ td {
 }
 
 tr:nth-child(2n) {
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
 }
 
 .tog {
@@ -137,8 +228,13 @@ tr:nth-child(2n) {
     margin: 5px;
 }
 
+.inp {
+    display: flex;
+    align-items: center;
+}
+
 .orange {
-    background-color: #FF6E28;
+    background-color: #ff6e28;
     width: 70px;
     text-align: center;
     padding: 5px;
@@ -149,4 +245,70 @@ tr:nth-child(2n) {
 
 .wid {
     width: 70px;
+}
+
+#situation {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    color: black;
+}
+
+#observacao {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+}
+
+option {
+    color: black;
+}
+
+#details {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    height: calc(100vh - 70px);
+    width: 100vw;
+    background-color: white;
+    z-index: 1;
+    display: none;
+    padding-bottom: 15px;
+}
+
+#details table {
+    margin-top: 15px;
+}
+
+.dado-table {
+    width: 50%;
+    background-color: #f5f5f5;
+}
+
+#nomeCliente {
+    width: 200%;
+    clear: both;
+    display: block;
+    border-bottom: none;
+    background-color: #f5f5f5;
+}
+
+.dadoTable {
+    background-color: white;
+}
+
+.rest {
+    height: 50vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#nomeCatalogo {
+    width: 200%;
+    clear: both;
+    display: block;
+    border-bottom: none;
+    background-color: #f5f5f5;
 }
