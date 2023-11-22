@@ -44,13 +44,12 @@ header {
 }
 
 .wrap {
-    height: 70px;
+    height: 90px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 97vw;
     margin: auto;
-    border-bottom: 1px solid #CFCFCF;
 }
 
 .create {
@@ -156,4 +155,75 @@ header {
 
 .card:hover {
     background-color: #E8E8E8;
+}
+
+
+#list {
+    display: none;
+}
+
+.select {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+.select {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+.opt {
+    width: 49vw;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px 5px 0 0;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.active {
+    border-top: 1px solid #CCCCCC;
+    border-left: 1px solid #CCCCCC;
+    border-right: 1px solid #CCCCCC;
+    border-bottom: none;
+}
+
+.opt:not(.active):hover {
+    background-color: #CCCCCC;
+    cursor: pointer;
+}
+
+.remove {
+    padding: 7px;
+    background-color: #ED7878;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.change {
+    padding: 7px;
+    background-color: #0E5129;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btns {
+    display: flex;
+    column-gap: 3px;
+}
+
+.search {
+    width: 25vw;
+    padding: 7px;
+    border-radius: 5px;
+    border: 1px solid #CCCCCC;
 }

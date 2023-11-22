@@ -34,14 +34,15 @@
                     <p>mover itens selecionados para:</p>
                 </div>
                 <div class="moveMenu">
-                    <p>Em Aberto</p>
-                    <p>Pago</p>
-                    <p>Em produção</p>
-                    <p>Enviado</p>
-                    <p>Entregue</p>
-                    <p>Finalizado</p>
-                    <p>Cancelado</p>
-                    <p>Excluído</p>
+                    <p onclick="alteradado('em aberto', 2)">Em aberto</p>
+                    <p onclick="alteradado('em analise', 2)">Em análise</p>
+                    <p onclick="alteradado('pago', 2)">Pago</p>
+                    <p onclick="alteradado('em produção', 2)">Em produção</p>
+                    <p onclick="alteradado('enviado', 2)">Enviado</p>
+                    <p onclick="alteradado('entregue', 2)">Entregue</p>
+                    <p onclick="alteradado('finalizado', 2)">Finalizado</p>
+                    <p onclick="alteradado('cancelado', 2)">Cancelado</p>
+                    <p onclick="alteradado('excluido', 2)">Excluído</p>
                 </div>
             </div>
             <p id="exibindo"></p>
@@ -113,21 +114,21 @@
         </table>
         <table class="cliente-table">
             <thead>
-                <th id="nomeCliente">Pedido</th>
+                <th id="numPedido">Pedido</th>
             </thead>
             <tbody>
                 <tr>
                     <td class="dado-table situacao">Situação</td>
                     <td class="dadoTable" id="situTable">
                         <select name="situation" id="situation">
-                            <option selected value="Em aberto">Em aberto</option>
-                            <option value="Em análise">Em análise</option>
-                            <option value="Pago">Pago</option>
-                            <option value="Em produção">Em produção</option>
-                            <option value="Enviado">Enviado</option>
-                            <option value="Entregue">Entregue</option>
-                            <option value="Finalizado">Finalizado</option>
-                            <option value="Cancelado">Cancelado</option>
+                            <option selected value="Em aberto" onclick="alteradado('em aberto', 1)">Em aberto</option>
+                            <option value="Em análise" onclick="alteradado('em aberto')">Em análise</option>
+                            <option value="Pago" onclick="alteradado('pago')">Pago</option>
+                            <option value="Em produção" onclick="alteradado('em producao')">Em produção</option>
+                            <option value="Enviado" onclick="alteradado('enviado')">Enviado</option>
+                            <option value="Entregue" onclick="alteradado('entregue')">Entregue</option>
+                            <option value="Finalizado" onclick="alteradado('finalizado')">Finalizado</option>
+                            <option value="Cancelado" onclick="alteradado('cancelado')">Cancelado</option>
                         </select>
                     </td>
                 </tr>
@@ -148,11 +149,11 @@
             <tbody>
                 <tr>
                     <td class="dado-table">Vendedor</td>
-                    <td class="dadoTable"></td>
+                    <td class="dadoTable" id="vendedorTable"></td>
                 </tr>
                 <tr>
                     <td class="dado-table">Descrição</td>
-                    <td class="dadoTable"></td>
+                    <td class="dadoTable" id="descTable"></td>
                 </tr>
             </tbody>
         </table>

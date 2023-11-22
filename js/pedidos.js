@@ -7,7 +7,7 @@ function seta(id) {
 
 async function getOrders() {
     teste = await fetch(
-        "https://script.google.com/macros/s/AKfycbxb0DjMmPztQzs4S-3vFvrxUclqnCjK_FLR7V2LDWuq5wEYWFmaF42ZAYChTyWZ0fUiYw/exec"
+        "https://script.google.com/macros/s/AKfycbzkXdM1Vc9breZpACoiMDF1qxXeSTm4p8OK-y54B6PXD-x6KbdBF1-i6DCUWWY7yCO9mA/exec"
     );
     testedois = teste.json();
     return testedois;
@@ -32,7 +32,11 @@ async function renderOrders() {
 
             criaPedido.innerHTML = `<input type='checkbox'></th> ${i + 1}`;
             criaCliente.innerHTML = brute[i]["0"];
-            criaData.innerHTML = brute[i]["16"].slice(0, 10);
+            criaData.innerHTML = brute[i]["16"]
+                .slice(0, 10)
+                .split("-")
+                .reverse()
+                .join("/");
             criaValor.innerHTML = brute[i]["13"];
             criaVendedor.innerHTML = brute[i]["17"];
             criaCatalogo.innerHTML = brute[i]["9"];
@@ -57,16 +61,14 @@ async function renderOrders() {
 
 var testi = renderOrders();
 
-
 async function toggle(id) {
-
-    
-for (let i = 0; i < document.getElementsByClassName('botao').length; i++) {
-    str = document.getElementsByClassName('botao')[i].innerHTML;
-    process = document.getElementsByClassName('botao')[i].innerHTML.replace(/[^a-zA-Z\u00C0-\u00FF\s]/g, '');
-    console.log(process)
-    document.getElementsByClassName('botao')[i].innerHTML = process;
-}
+    for (let i = 0; i < document.getElementsByClassName("botao").length; i++) {
+        str = document.getElementsByClassName("botao")[i].innerHTML;
+        process = document
+            .getElementsByClassName("botao")
+            [i].innerHTML.replace(/[^a-zA-Z\u00C0-\u00FF\s]/g, "");
+        document.getElementsByClassName("botao")[i].innerHTML = process;
+    }
 
     document.getElementsByTagName("tbody")[0].innerHTML = "";
     bruto = await testi;
@@ -86,11 +88,15 @@ for (let i = 0; i < document.getElementsByClassName('botao').length; i++) {
             criaCatalogo = document.createElement("td");
             criaDetalhe = document.createElement("td");
 
-            criaPedido.innerHTML = `<input class="inp" type='checkbox'></th> <p>${
+            criaPedido.innerHTML = `<input class="inp" type='checkbox'><p>${
                 i + 1
             }</p>`;
             criaCliente.innerHTML = tratado[i]["0"];
-            criaData.innerHTML = tratado[i]["16"].slice(0, 10);
+            criaData.innerHTML = tratado[i]["16"]
+                .slice(0, 10)
+                .split("-")
+                .reverse()
+                .join("/");
             criaValor.innerHTML = tratado[i]["13"];
             criaVendedor.innerHTML = tratado[i]["17"];
             criaCatalogo.innerHTML = tratado[i]["9"];
@@ -106,8 +112,18 @@ for (let i = 0; i < document.getElementsByClassName('botao').length; i++) {
             document.getElementsByTagName("tbody")[0].appendChild(criatr);
         }
     }
-    if (id == 'em aberto') {
-        document.getElementById('aberto').innerHTML = `Em aberto - ${
+    if (id == "em aberto") {
+        document.getElementById("aberto").innerHTML = `Em aberto - ${
+            document.getElementsByTagName("tr").length - 18
+        }`;
+    }
+    if (id == "em analise") {
+        document.getElementById("analise").innerHTML = `Em análise - ${
+            document.getElementsByTagName("tr").length - 18
+        }`;
+    }
+    if (id == "em produção") {
+        document.getElementById("producao").innerHTML = `Em produção - ${
             document.getElementsByTagName("tr").length - 18
         }`;
     }
@@ -131,6 +147,7 @@ async function reveal(id) {
     tratado = JSON.parse(bruto);
     arr = tratado[id];
 
+    document.getElementById("numPedido").innerHTML += " - " + (id + 1);
     document.getElementById("clientName").innerHTML = "pedido de " + arr[0];
     document.getElementById("nomeTable").innerHTML = arr[0];
     document.getElementById("cpfTable").innerHTML = arr[1];
@@ -141,4 +158,31 @@ async function reveal(id) {
     document.getElementById("cidadeTable").innerHTML = arr[6];
     document.getElementById("enderecoTable").innerHTML = arr[7];
     document.getElementById("bairroTable").innerHTML = arr[8];
+    document.getElementById("dataTable").innerHTML = arr[16]
+        .slice(0, 10)
+        .split("-")
+        .reverse()
+        .join("/");
+    document.getElementById("vendedorTable").innerHTML = arr[17];
+    document.getElementById("descTable").innerHTML = arr[9];
+}
+
+function alteradado(id, column) {
+    var formdata = new FormData();
+    formdata.append("coluna", column);
+    formdata.append("valor", id);
+
+    var requestOptions = {
+        method: "POST",
+        body: formdata,
+        redirect: "follow",
+    };
+
+    fetch(
+        "https://script.google.com/macros/s/AKfycbxfjnBNYOvW7HLX6KbDdJ1P3njxEHxmiAeLhACHmDaaZ9dLvhkBy_-smSiFfhJxz0z0tg/exec",
+        requestOptions
+    );
+    setTimeout(() => {
+        window.location.reload();
+    }, 2000);
 }

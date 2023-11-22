@@ -147,10 +147,16 @@ nav {
     pointer-events: all;
 }
 
+.moveMenu:hover {
+    opacity: 1;
+    pointer-events: all;
+}
+
 .mover {
     display: flex;
-    transform: translateY(117px);
+    transform: translateY(10px);
     column-gap: 5px;
+    height: 50px;
 }
 
 #search {
@@ -306,6 +312,14 @@ option {
 }
 
 #nomeCatalogo {
+    width: 200%;
+    clear: both;
+    display: block;
+    border-bottom: none;
+    background-color: #f5f5f5;
+}
+
+#numPedido {
     width: 200%;
     clear: both;
     display: block;

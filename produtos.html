@@ -13,23 +13,43 @@
         <a href="index.html"><img src="back.png" class="back" alt="voltar"></a>
         <h1>Conecta Clone</h1>
     </header>
-    <div class="menu">
-        <h2>Lista de Catálogos</h2>
-    </div>
-    <div class="wrap">
-        <div class="create">Criar nova categoria</div>
-        <div class="search">
-            <input id="texto" type="text" placeholder="Buscar por categorias">
-            <div class="pesquisa">Pesquisar</div>
+    <main>
+        <div class="menu">
+            <h2>Lista de Catálogos</h2>
         </div>
-    </div>
-    <div class="container">
-        <div class="card">
-            <img class="pasta" src="folder.png" alt="file">
-            <p>Teste</p>
+        <div class="wrap">
+            <div class="create">Criar nova categoria</div>
+            <div class="search">
+                <input id="texto" type="text" placeholder="Buscar por categorias">
+                <div class="pesquisa">Pesquisar</div>
+            </div>
         </div>
+        <div class="container">
+            <div onclick="seta('anel')" class="card">
+                <img class="pasta" src="folder.png" alt="file">
+                <p onclick="details('anel')">Anel</p>
+            </div>
+    </main>
+    <section id="list">
+        <div class="menu">
+            <h2>Anel</h2>
+        </div>
+        <div class="wrap">
+            <div class="create">Criar novo produto</div>
+            <input class="search" type="text" placeholder="Buscar por referência ou descrição">
+            <div class="btns">
+                <div class="remove">Remover categoria</div>
+                <div class="change">Alterar nome da categoria</div>
+            </div>
+        </div>
+        <div class="select">
+            <p onclick="seta('identificadas')" id="identificadas" class="opt active">Ativos</p>
+            <p onclick="seta('semIdentificacao')" class="opt" id="semIdentificacao">Inativos</p>
+        </div>
+    </section>
 </body>
 <script src="js/produtos.js">
-getOrders();
+    getOrders();
 </script>
+
 </html>
