@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <header onload="getOrders()">
+    <header>
         <a href="index.html"><img src="back.png" class="back" alt="voltar"></a>
         <h1>Conecta Clone</h1>
     </header>
@@ -25,14 +25,14 @@
             </div>
         </div>
         <div class="container">
-            <div onclick="seta('anel')" class="card">
+            <div onclick="display(), render('0 ANEL')" class="card">
                 <img class="pasta" src="folder.png" alt="file">
-                <p onclick="details('anel')">Anel</p>
+                <p>Anel</p>
             </div>
     </main>
     <section id="list">
         <div class="menu">
-            <h2>Anel</h2>
+            <h2>Anéis</h2>
         </div>
         <div class="wrap">
             <div class="create">Criar novo produto</div>
@@ -43,13 +43,13 @@
             </div>
         </div>
         <div class="select">
-            <p onclick="seta('identificadas')" id="identificadas" class="opt active">Ativos</p>
-            <p onclick="seta('semIdentificacao')" class="opt" id="semIdentificacao">Inativos</p>
+            <p onclick="seta('identificadas'), render('0 ANEL')" id="identificadas" class="opt active">Ativos</p>
+            <p onclick="seta('semIdentificacao'), render('0 ANEL')" class="opt" id="semIdentificacao">Inativos</p>
         </div>
+        <div class="containertwo">
+        </div>
+        <span id="loader" class="loader"></span>
     </section>
+    <script src="js/produtos.js"></script>
 </body>
-<script src="js/produtos.js">
-    getOrders();
-</script>
-
 </html>

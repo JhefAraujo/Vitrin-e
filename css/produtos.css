@@ -5,6 +5,24 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+::-webkit-scrollbar {
+    filter: opacity(0);
+    background-color: rgba(255, 255, 255, 0.288);
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+    display: none !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #1a5f35;
+    width: 3px;
+    border: 2px solid white;
+    border-radius: 15px;
+}
+
 body {
     padding-bottom: 25px;
 }
@@ -140,6 +158,16 @@ header {
     margin-top: 25px;
 }
 
+.containertwo {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: 11.5vw 11.5vw 11.5vw 11.5vw 11.5vw 11.5vw 11.5vw 11.5vw;
+    margin-top: 25px;
+    row-gap: 10px;
+    column-gap: 12px;
+}
+
 .card {
     width: 15vw;
     height: 16vw;
@@ -151,6 +179,49 @@ header {
     flex-direction: column;
     cursor: pointer;
     padding: 5px;
+    margin: auto;
+}
+
+.cardtwo:hover {
+    background-color: #CCCCCC;
+}
+
+.image {
+    height: 80%;
+    width: 90%;
+    border: 1px solid #CFCFCF;
+    border-radius: 10px;
+    padding: 3px;
+    overflow: hidden;
+    background-color: white;
+}
+
+.image img {
+    height: 100%;
+    border-radius: 10px;
+}
+
+.cardtwo {
+    width: 11.5vw;
+    height: 13vw;
+    background-color: #F5F5F5;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+    margin: auto;
+}
+
+.cardtwo > p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: small;
+    white-space: nowrap;
+    color: #062613;
+    width: 90%;
 }
 
 .card:hover {
@@ -227,3 +298,26 @@ header {
     border-radius: 5px;
     border: 1px solid #CCCCCC;
 }
+
+.loader {
+    position: fixed;
+    top: 65vh;
+    left: calc(50vw - 24px);
+    width: 48px;
+    height: 48px;
+    border: 5px solid #062613;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 
