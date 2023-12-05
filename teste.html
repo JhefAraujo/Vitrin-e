@@ -194,12 +194,12 @@
             align-items: center;
             justify-content: center;
         }
+
         .carousel {
             display: flex;
             transition-duration: 0.5s;
             transform: translateX(0);
             height: 100%;
-            width: 200%;
         }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -266,6 +266,12 @@
         </div>
     </section>
     <script>
+        window.addEventListener("load", function () {
+            setTimeout(function () {
+                // This hides the address bar:
+                window.scrollTo(0, 1);
+            }, 0);
+        });
         window.addEventListener('scroll', () => {
             produto = document.getElementsByClassName('card');
             for (let i = 0; i < produto.length; i++) {
@@ -276,7 +282,7 @@
             }
         });
         function carouselright(element) {
-            element.parentElement.children[0].style.transform = 'translateX(-50%)';
+            element.parentElement.children[0].style.transform = 'translateX(-100%)';
         }
         function carouselleft(element) {
             element.parentElement.children[0].style.transform = 'translateX(0)';
