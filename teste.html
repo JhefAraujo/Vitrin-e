@@ -103,6 +103,7 @@
         }
 
         .card img {
+            z-index: -5;
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -163,10 +164,47 @@
             width: 100%;
             font-weight: 300;
         }
+
+        .leftArrow {
+            position: absolute;
+            top: 45%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 0 10px 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rightArrow {
+            position: absolute;
+            top: 45%;
+            right: 0;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 10px 0px 0px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .carousel {
+            display: flex;
+            transition-duration: 0.5s;
+            transform: translateX(0);
+            height: 100%;
+        }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;1,300&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/2a683e0d82.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -193,13 +231,19 @@
             <p class="price">R$ 246,00</p>
         </div>
         <div class="card element">
-            <img src="https://conecta-vendas.s3.amazonaws.com/mallorca_joias/fbe84cae-fdf4-42e8-8257-96daeb00a921.webp"
-                alt="">
+            <div class="carousel">
+                <img src="https://conecta-vendas.s3.amazonaws.com/mallorca_joias/fbe84cae-fdf4-42e8-8257-96daeb00a921.webp"
+                    alt="">
+                <img src="https://conecta-vendas.s3.amazonaws.com/mallorca_joias/b86eb46b-704c-4f8c-aff1-79a37768d479.webp"
+                    alt="">
+            </div>
 
             <div class="cardInfo">
                 <p class="titulo">Brinco SM, com banho de ouro 18k</p>
             </div>
             <p class="price">R$ 246,00</p>
+            <div class="leftArrow" onclick="carouselleft(this)"><i class="fa-solid fa-arrow-left fa-lg"></i></div>
+            <div class="rightArrow" onclick="carouselright(this)"><i class="fa-solid fa-arrow-right fa-lg"></i></div>
         </div>
         <div class="card element">
             <img src="https://conecta-vendas.s3.amazonaws.com/mallorca_joias/e3726a58-f42a-4ba4-ae2a-cf6a5a9e233b.webp"
@@ -228,11 +272,14 @@
                 if (element.getBoundingClientRect().y < 600) {
                     element.setAttribute("class", "visible card");
                 }
-                else {
-                    console.log('aa')
-                }
             }
         });
+        function carouselright(element) {
+            element.parentElement.children[0].style.transform = 'translateX(-100%)';
+        }
+        function carouselleft(element) {
+            element.parentElement.children[0].style.transform = 'translateX(0)';
+        }
     </script>
 </body>
 
