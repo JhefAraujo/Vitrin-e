@@ -36,7 +36,7 @@
         </div>
         <div class="wrap">
             <div class="create">Criar novo produto</div>
-            <input class="search" type="text" placeholder="Buscar por referência ou descrição">
+            <input class="busca" type="text" placeholder="Buscar por referência ou descrição">
             <div class="btns">
                 <div class="remove">Remover categoria</div>
                 <div class="change">Alterar nome da categoria</div>
@@ -50,6 +50,55 @@
         </div>
         <span id="loader" class="loader"></span>
     </section>
+    <section id="productSettings">
+        <div class="menu">
+            <h2>Editar produto</h2>
+        </div>
+        <div class="first">
+            <div class="wrapper">
+                <label for="ref">Referência</label>
+                <input type="text" name="ref" id="ref">
+            </div>
+            <div class="wrapper">
+                <label for="cat">Categoria</label>
+                <select name="cat" id="cat">
+                    <option value="Teste">Teste</option>
+                </select>
+            </div>
+            <div class="wrapper">
+                <label for="datetime">Data da publicação</label>
+                <input type="date" name="datetime" id="datetime">
+            </div>
+        </div>
+        <div class="second">
+            <div class="wrapper">
+                <label for="peso">Peso em gramas</label>
+                <input type="number" class="peso" id="peso" name="peso">
+            </div>
+            <div class="wrapper">
+                <label for="quantidadeMin">Quantidade mínima para compra</label>
+                <input type="number" class="quantidadeMin" id="quantidadeMin" name="quantidadeMin">
+            </div>
+            <div class="wrapper">
+                <label for="obs">Cliente pode inserir observações?</label>
+                <select name="obs" id="obs">
+                    <option value="sim">Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+            </div>
+            <div class="wrapper">
+                <label for="mult">Multiplicador</label>
+                <input type="number" name="mult" id="mult">
+            </div>
+        </div>
+        <div class="description">
+            <div class="wrapper">
+                <label for="desc">Descrição</label>
+                <textarea name="desc" id="desc" cols="30" rows="4"></textarea>
+            </div>
+        </div>
+    </section>
     <script src="js/produtos.js"></script>
 </body>
+
 </html>

@@ -30,7 +30,7 @@ async function renderOrders() {
             criaCatalogo = document.createElement("td");
             criaDetalhe = document.createElement("td");
 
-            criaPedido.innerHTML = `<input type='checkbox'></th> ${i + 1}`;
+            criaPedido.innerHTML = `<div class="checkbtn"><input type='checkbox'></th> <p>${i + 1}</p></div>`;
             criaCliente.innerHTML = brute[i]["0"];
             criaData.innerHTML = brute[i]["16"]
                 .slice(0, 10)
@@ -88,9 +88,11 @@ async function toggle(id) {
             criaCatalogo = document.createElement("td");
             criaDetalhe = document.createElement("td");
 
-            criaPedido.innerHTML = `<input class="inp" type='checkbox'><p>${
-                i + 1
-            }</p>`;
+            criaPedido.innerHTML = `<div class="checkbtn">
+                <input class="inp" type='checkbox'><p>${
+                    i + 1
+                }</p>
+            </div>`;
             criaCliente.innerHTML = tratado[i]["0"];
             criaData.innerHTML = tratado[i]["16"]
                 .slice(0, 10)

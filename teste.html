@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo</title>
+    <style>
+        @font-face {
+            font-family: 'SuaFonte';
+            src: url('vogue.ttf');
+            src: url('vogue.ttf') format('ttf');
+            /* Adicione outros formatos (e.g., woff2, ttf) conforme necessário para compatibilidade com navegadores */
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            font-family: 'Roboto', serif;
+        }
+
+        html,
+        body {
+            width: 100vw;
+            overflow-x: hidden;
+        }
+
+        p {
+            font-weight: 100;
+        }
+
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            height: 100vh;
+            overflow-x: hidden;
+            font-weight: 400;
+        }
+
+        main h1 {
+            font-size: 300%;
+            text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.5);
+            font-weight: lighter;
+            font-family: 'SuaFonte', sans-serif;
+        }
+
+        main p {
+            position: absolute;
+            top: 90vh;
+            left: 50vw;
+            transform: translateX(-50%);
+        }
+
+        .filter {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            filter: brightness(0.5);
+            background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%);
+        }
+
+        .filter video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+            object-position: center;
+            height: 100vh;
+            width: 100vw;
+            z-index: -2;
+            background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%);
+        }
+
+        .products {
+            background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            row-gap: 25px;
+            padding: 5vh;
+            min-height: 100vh;
+            width: 100vw;
+            flex-direction: column;
+        }
+
+        .card {
+            border-radius: 1px;
+            height: 400px;
+            width: 87vw;
+            overflow: hidden;
+            position: relative;
+            outline: 1px solid rgba(255, 255, 255, 0.534);
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cardInfo {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 20%;
+        }
+
+        .visible {
+            animation: teste 1.5s;
+        }
+
+        .element {
+            opacity: 0;
+        }
+
+        @keyframes teste {
+            0% {
+                opacity: 0;
+                filter: brightness(0);
+            }
+
+            100% {
+                opacity: 1;
+                filter: brightness(1);
+            }
+        }
+
+        a {
+            color: white;
+        }
+
+        .price {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: 300;
+        }
+
+        .titulo {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            width: 100%;
+            font-weight: 300;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;1,300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <main>
+        <h1>Acqua</h1>
+        <a href="#products">
+            <p>Clique para explorar</p>
+        </a>
+        <div class="filter">
+            <video src="bgvideo.mov" autoplay muted loop></video>
+        </div>
+    </main>
+    <section class="products" id="products">
+        <div class="card element">
+            <img src="https://conecta-vendas.s3.amazonaws.com/mallorca_joias/b86eb46b-704c-4f8c-aff1-79a37768d479.webp"
+                alt="">
+
+            <div class="cardInfo">
+                <p class="titulo">Anel SM, com banho de ouro 18k</p>
+            </div>
+            <p class="price">R$ 246,00</p>
+        </div>
+        <div class="card element">
+            <img src="https://conecta-vendas.s3.amazonaws.com/mallorca_joias/fbe84cae-fdf4-42e8-8257-96daeb00a921.webp"
+                alt="">
+
+            <div class="cardInfo">
+                <p class="titulo">Brinco SM, com banho de ouro 18k</p>
+            </div>
+            <p class="price">R$ 246,00</p>
+        </div>
+        <div class="card element">
+            <img src="https://conecta-vendas.s3.amazonaws.com/mallorca_joias/e3726a58-f42a-4ba4-ae2a-cf6a5a9e233b.webp"
+                alt="">
+
+            <div class="cardInfo">
+                <p class="titulo">Colar SM, com banho de ouro 18k</p>
+            </div>
+            <p class="price">R$ 246,00</p>
+        </div>
+        <div class="card element">
+            <img src="https://conecta-vendas.s3.amazonaws.com/mallorca_joias/495852d5-9bb9-4d7b-866c-66e02f041fa6.webp"
+                alt="">
+
+            <div class="cardInfo">
+                <p class="titulo">Bracelete SM, com banho de ouro 18k</p>
+            </div>
+            <p class="price">R$ 246,00</p>
+        </div>
+    </section>
+    <script>
+        window.addEventListener('scroll', () => {
+            produto = document.getElementsByClassName('card');
+            for (let i = 0; i < produto.length; i++) {
+                const element = produto[i];
+                if (element.getBoundingClientRect().y < 600) {
+                    element.setAttribute("class", "visible card");
+                }
+                else {
+                    console.log('aa')
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

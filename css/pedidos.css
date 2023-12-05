@@ -234,6 +234,11 @@ tr:nth-child(2n) {
     margin: 5px;
 }
 
+.checkbtn {
+    display: flex;
+    column-gap: 8px;
+}
+
 .inp {
     display: flex;
     align-items: center;

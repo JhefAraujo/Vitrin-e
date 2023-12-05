@@ -13,291 +13,345 @@
         <a href="index.html"><img src="back.png" class="back" alt="voltar"></a>
         <h1>Conecta Clone</h1>
     </header>
-    <div class="menu">
-        <h2>Lista de Catálogos</h2>
-    </div>
-    <div class="wrap">
-        <div class="create">Criar novo catálogo</div>
-        <div class="search">
-            <input id="texto" type="text" placeholder="Filtrar catálogos">
-            <div class="pesquisa">Pesquisar</div>
+    <main>
+        <div class="menu">
+            <h2>Lista de Catálogos</h2>
         </div>
-        <div class="order">
-            <p>Ordenar por:</p>
-            <div onclick="seta('novos')" id="novos" class="classificar active">Novos</div>
-            <div onclick="seta('titulo')" id="titulo" class="classificar">Título</div>
-            <div onclick="seta('usuario')" id="usuario" class="classificar">Ususário</div>
+        <div class="wrap">
+            <div class="create">Criar novo catálogo</div>
+            <div class="search">
+                <input id="texto" type="text" placeholder="Filtrar catálogos">
+                <div class="pesquisa">Pesquisar</div>
+            </div>
+            <div class="order">
+                <p>Ordenar por:</p>
+                <div onclick="seta('novos')" id="novos" class="classificar active">Novos</div>
+                <div onclick="seta('titulo')" id="titulo" class="classificar">Título</div>
+                <div onclick="seta('usuario')" id="usuario" class="classificar">Ususário</div>
+            </div>
         </div>
-    </div>
-    <div class="container">
-        <div class="card">
-            <div class="line">
-                <div class="views"><img src="view.png" class="view" alt="views">1557</div>
-                <div class="settings">
-                    <img class="edit" src="edit.png" alt="edit">
-                    <img src="close.png" alt="close" class="close">
+        <div class="container">
+            <div class="card" onclick="revelarCatalogo(this), fetchdata()">
+                <div class="line">
+                    <div class="views"><img src="view.png" class="view" alt="views">1557</div>
+                    <div class="settings">
+                        <img class="edit" src="edit.png" alt="edit">
+                        <img src="close.png" alt="close" class="close">
+                    </div>
+                </div>
+                <img class="arquivo" src="new-document.png" alt="file">
+                <div class="info">
+                    <p>Teste</p>
+                    <p class="subinfo">x produtos</p>
+                </div>
+                <div class="btns">
+                    <div class="link">copiar link</div>
+                    <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
+                    <div class="telegram"><img src="telegram.png" alt="telegram"></div>
                 </div>
             </div>
-            <img class="arquivo" src="new-document.png" alt="file">
-            <div class="info">
-                <p>Teste</p>
-                <p class="subinfo">x produtos</p>
-            </div>
-            <div class="btns">
-                <div class="link">copiar link</div>
-                <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
-                <div class="telegram"><img src="telegram.png" alt="telegram"></div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="line">
-                <div class="views"><img src="view.png" class="view" alt="views">1557</div>
-                <div class="settings">
-                    <img class="edit" src="edit.png" alt="edit">
-                    <img src="close.png" alt="close" class="close">
+            <div class="card" onclick="revelarCatalogo(this)">
+                <div class="line">
+                    <div class="views"><img src="view.png" class="view" alt="views">1557</div>
+                    <div class="settings">
+                        <img class="edit" src="edit.png" alt="edit">
+                        <img src="close.png" alt="close" class="close">
+                    </div>
+                </div>
+                <img class="arquivo" src="new-document.png" alt="file">
+                <div class="info">
+                    <p>Teste</p>
+                    <p class="subinfo">x produtos</p>
+                </div>
+                <div class="btns">
+                    <div class="link">copiar link</div>
+                    <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
+                    <div class="telegram"><img src="telegram.png" alt="telegram"></div>
                 </div>
             </div>
-            <img class="arquivo" src="new-document.png" alt="file">
-            <div class="info">
-                <p>Teste</p>
-                <p class="subinfo">x produtos</p>
-            </div>
-            <div class="btns">
-                <div class="link">copiar link</div>
-                <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
-                <div class="telegram"><img src="telegram.png" alt="telegram"></div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="line">
-                <div class="views"><img src="view.png" class="view" alt="views">1557</div>
-                <div class="settings">
-                    <img class="edit" src="edit.png" alt="edit">
-                    <img src="close.png" alt="close" class="close">
+            <div class="card" onclick="revelarCatalogo(this)">
+                <div class="line">
+                    <div class="views"><img src="view.png" class="view" alt="views">1557</div>
+                    <div class="settings">
+                        <img class="edit" src="edit.png" alt="edit">
+                        <img src="close.png" alt="close" class="close">
+                    </div>
+                </div>
+                <img class="arquivo" src="new-document.png" alt="file">
+                <div class="info">
+                    <p>Teste</p>
+                    <p class="subinfo">x produtos</p>
+                </div>
+                <div class="btns">
+                    <div class="link">copiar link</div>
+                    <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
+                    <div class="telegram"><img src="telegram.png" alt="telegram"></div>
                 </div>
             </div>
-            <img class="arquivo" src="new-document.png" alt="file">
-            <div class="info">
-                <p>Teste</p>
-                <p class="subinfo">x produtos</p>
-            </div>
-            <div class="btns">
-                <div class="link">copiar link</div>
-                <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
-                <div class="telegram"><img src="telegram.png" alt="telegram"></div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="line">
-                <div class="views"><img src="view.png" class="view" alt="views">1557</div>
-                <div class="settings">
-                    <img class="edit" src="edit.png" alt="edit">
-                    <img src="close.png" alt="close" class="close">
+            <div class="card main-card" onclick="revelarCatalogo(this)">
+                <div class="line">
+                    <div class="views"><img src="view.png" class="view" alt="views">1557</div>
+                    <div class="settings">
+                        <img class="edit" src="edit.png" alt="edit">
+                        <img src="close.png" alt="close" class="close">
+                    </div>
+                </div>
+                <img class="arquivo" src="new-document.png" alt="file">
+                <div class="info">
+                    <p>Teste</p>
+                    <p class="subinfo">x produtos</p>
+                </div>
+                <div class="btns">
+                    <div class="link">copiar link</div>
+                    <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
+                    <div class="telegram"><img src="telegram.png" alt="telegram"></div>
                 </div>
             </div>
-            <img class="arquivo" src="new-document.png" alt="file">
-            <div class="info">
-                <p>Teste</p>
-                <p class="subinfo">x produtos</p>
-            </div>
-            <div class="btns">
-                <div class="link">copiar link</div>
-                <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
-                <div class="telegram"><img src="telegram.png" alt="telegram"></div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="line">
-                <div class="views"><img src="view.png" class="view" alt="views">1557</div>
-                <div class="settings">
-                    <img class="edit" src="edit.png" alt="edit">
-                    <img src="close.png" alt="close" class="close">
+            <div class="card" onclick="revelarCatalogo(this)">
+                <div class="line">
+                    <div class="views"><img src="view.png" class="view" alt="views">1557</div>
+                    <div class="settings">
+                        <img class="edit" src="edit.png" alt="edit">
+                        <img src="close.png" alt="close" class="close">
+                    </div>
+                </div>
+                <img class="arquivo" src="new-document.png" alt="file">
+                <div class="info">
+                    <p>Teste</p>
+                    <p class="subinfo">x produtos</p>
+                </div>
+                <div class="btns">
+                    <div class="link">copiar link</div>
+                    <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
+                    <div class="telegram"><img src="telegram.png" alt="telegram"></div>
                 </div>
             </div>
-            <img class="arquivo" src="new-document.png" alt="file">
-            <div class="info">
-                <p>Teste</p>
-                <p class="subinfo">x produtos</p>
-            </div>
-            <div class="btns">
-                <div class="link">copiar link</div>
-                <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
-                <div class="telegram"><img src="telegram.png" alt="telegram"></div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="line">
-                <div class="views"><img src="view.png" class="view" alt="views">1557</div>
-                <div class="settings">
-                    <img class="edit" src="edit.png" alt="edit">
-                    <img src="close.png" alt="close" class="close">
+            <div class="card" onclick="revelarCatalogo(this)">
+                <div class="line">
+                    <div class="views"><img src="view.png" class="view" alt="views">1557</div>
+                    <div class="settings">
+                        <img class="edit" src="edit.png" alt="edit">
+                        <img src="close.png" alt="close" class="close">
+                    </div>
+                </div>
+                <img class="arquivo" src="new-document.png" alt="file">
+                <div class="info">
+                    <p>Teste</p>
+                    <p class="subinfo">x produtos</p>
+                </div>
+                <div class="btns">
+                    <div class="link">copiar link</div>
+                    <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
+                    <div class="telegram"><img src="telegram.png" alt="telegram"></div>
                 </div>
             </div>
-            <img class="arquivo" src="new-document.png" alt="file">
-            <div class="info">
-                <p>Teste</p>
-                <p class="subinfo">x produtos</p>
-            </div>
-            <div class="btns">
-                <div class="link">copiar link</div>
-                <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
-                <div class="telegram"><img src="telegram.png" alt="telegram"></div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="line">
-                <div class="views"><img src="view.png" class="view" alt="views">1557</div>
-                <div class="settings">
-                    <img class="edit" src="edit.png" alt="edit">
-                    <img src="close.png" alt="close" class="close">
+            <div class="card" onclick="revelarCatalogo(this)">
+                <div class="line">
+                    <div class="views"><img src="view.png" class="view" alt="views">1557</div>
+                    <div class="settings">
+                        <img class="edit" src="edit.png" alt="edit">
+                        <img src="close.png" alt="close" class="close">
+                    </div>
+                </div>
+                <img class="arquivo" src="new-document.png" alt="file">
+                <div class="info">
+                    <p>Teste</p>
+                    <p class="subinfo">x produtos</p>
+                </div>
+                <div class="btns">
+                    <div class="link">copiar link</div>
+                    <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
+                    <div class="telegram"><img src="telegram.png" alt="telegram"></div>
                 </div>
             </div>
-            <img class="arquivo" src="new-document.png" alt="file">
-            <div class="info">
-                <p>Teste</p>
-                <p class="subinfo">x produtos</p>
-            </div>
-            <div class="btns">
-                <div class="link">copiar link</div>
-                <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
-                <div class="telegram"><img src="telegram.png" alt="telegram"></div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="line">
-                <div class="views"><img src="view.png" class="view" alt="views">1557</div>
-                <div class="settings">
-                    <img class="edit" src="edit.png" alt="edit">
-                    <img src="close.png" alt="close" class="close">
+            <div class="card" onclick="revelarCatalogo(this)">
+                <div class="line">
+                    <div class="views"><img src="view.png" class="view" alt="views">1557</div>
+                    <div class="settings">
+                        <img class="edit" src="edit.png" alt="edit">
+                        <img src="close.png" alt="close" class="close">
+                    </div>
+                </div>
+                <img class="arquivo" src="new-document.png" alt="file">
+                <div class="info">
+                    <p>Teste</p>
+                    <p class="subinfo">x produtos</p>
+                </div>
+                <div class="btns">
+                    <div class="link">copiar link</div>
+                    <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
+                    <div class="telegram"><img src="telegram.png" alt="telegram"></div>
                 </div>
             </div>
-            <img class="arquivo" src="new-document.png" alt="file">
-            <div class="info">
-                <p>Teste</p>
-                <p class="subinfo">x produtos</p>
-            </div>
-            <div class="btns">
-                <div class="link">copiar link</div>
-                <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
-                <div class="telegram"><img src="telegram.png" alt="telegram"></div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="line">
-                <div class="views"><img src="view.png" class="view" alt="views">1557</div>
-                <div class="settings">
-                    <img class="edit" src="edit.png" alt="edit">
-                    <img src="close.png" alt="close" class="close">
+            <div class="card" onclick="revelarCatalogo(this)">
+                <div class="line">
+                    <div class="views"><img src="view.png" class="view" alt="views">1557</div>
+                    <div class="settings">
+                        <img class="edit" src="edit.png" alt="edit">
+                        <img src="close.png" alt="close" class="close">
+                    </div>
+                </div>
+                <img class="arquivo" src="new-document.png" alt="file">
+                <div class="info">
+                    <p>Teste</p>
+                    <p class="subinfo">x produtos</p>
+                </div>
+                <div class="btns">
+                    <div class="link">copiar link</div>
+                    <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
+                    <div class="telegram"><img src="telegram.png" alt="telegram"></div>
                 </div>
             </div>
-            <img class="arquivo" src="new-document.png" alt="file">
-            <div class="info">
-                <p>Teste</p>
-                <p class="subinfo">x produtos</p>
-            </div>
-            <div class="btns">
-                <div class="link">copiar link</div>
-                <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
-                <div class="telegram"><img src="telegram.png" alt="telegram"></div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="line">
-                <div class="views"><img src="view.png" class="view" alt="views">1557</div>
-                <div class="settings">
-                    <img class="edit" src="edit.png" alt="edit">
-                    <img src="close.png" alt="close" class="close">
+            <div class="card" onclick="revelarCatalogo(this)">
+                <div class="line">
+                    <div class="views"><img src="view.png" class="view" alt="views">1557</div>
+                    <div class="settings">
+                        <img class="edit" src="edit.png" alt="edit">
+                        <img src="close.png" alt="close" class="close">
+                    </div>
+                </div>
+                <img class="arquivo" src="new-document.png" alt="file">
+                <div class="info">
+                    <p>Teste</p>
+                    <p class="subinfo">x produtos</p>
+                </div>
+                <div class="btns">
+                    <div class="link">copiar link</div>
+                    <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
+                    <div class="telegram"><img src="telegram.png" alt="telegram"></div>
                 </div>
             </div>
-            <img class="arquivo" src="new-document.png" alt="file">
-            <div class="info">
-                <p>Teste</p>
-                <p class="subinfo">x produtos</p>
-            </div>
-            <div class="btns">
-                <div class="link">copiar link</div>
-                <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
-                <div class="telegram"><img src="telegram.png" alt="telegram"></div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="line">
-                <div class="views"><img src="view.png" class="view" alt="views">1557</div>
-                <div class="settings">
-                    <img class="edit" src="edit.png" alt="edit">
-                    <img src="close.png" alt="close" class="close">
+            <div class="card" onclick="revelarCatalogo(this)">
+                <div class="line">
+                    <div class="views"><img src="view.png" class="view" alt="views">1557</div>
+                    <div class="settings">
+                        <img class="edit" src="edit.png" alt="edit">
+                        <img src="close.png" alt="close" class="close">
+                    </div>
+                </div>
+                <img class="arquivo" src="new-document.png" alt="file">
+                <div class="info">
+                    <p>Teste</p>
+                    <p class="subinfo">x produtos</p>
+                </div>
+                <div class="btns">
+                    <div class="link">copiar link</div>
+                    <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
+                    <div class="telegram"><img src="telegram.png" alt="telegram"></div>
                 </div>
             </div>
-            <img class="arquivo" src="new-document.png" alt="file">
-            <div class="info">
-                <p>Teste</p>
-                <p class="subinfo">x produtos</p>
-            </div>
-            <div class="btns">
-                <div class="link">copiar link</div>
-                <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
-                <div class="telegram"><img src="telegram.png" alt="telegram"></div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="line">
-                <div class="views"><img src="view.png" class="view" alt="views">1557</div>
-                <div class="settings">
-                    <img class="edit" src="edit.png" alt="edit">
-                    <img src="close.png" alt="close" class="close">
+            <div class="card" onclick="revelarCatalogo(this)">
+                <div class="line">
+                    <div class="views"><img src="view.png" class="view" alt="views">1557</div>
+                    <div class="settings">
+                        <img class="edit" src="edit.png" alt="edit">
+                        <img src="close.png" alt="close" class="close">
+                    </div>
+                </div>
+                <img class="arquivo" src="new-document.png" alt="file">
+                <div class="info">
+                    <p>Teste</p>
+                    <p class="subinfo">x produtos</p>
+                </div>
+                <div class="btns">
+                    <div class="link">copiar link</div>
+                    <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
+                    <div class="telegram"><img src="telegram.png" alt="telegram"></div>
                 </div>
             </div>
-            <img class="arquivo" src="new-document.png" alt="file">
-            <div class="info">
-                <p>Teste</p>
-                <p class="subinfo">x produtos</p>
-            </div>
-            <div class="btns">
-                <div class="link">copiar link</div>
-                <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
-                <div class="telegram"><img src="telegram.png" alt="telegram"></div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="line">
-                <div class="views"><img src="view.png" class="view" alt="views">1557</div>
-                <div class="settings">
-                    <img class="edit" src="edit.png" alt="edit">
-                    <img src="close.png" alt="close" class="close">
+            <div class="card" onclick="revelarCatalogo(this)">
+                <div class="line">
+                    <div class="views"><img src="view.png" class="view" alt="views">1557</div>
+                    <div class="settings">
+                        <img class="edit" src="edit.png" alt="edit">
+                        <img src="close.png" alt="close" class="close">
+                    </div>
+                </div>
+                <img class="arquivo" src="new-document.png" alt="file">
+                <div class="info">
+                    <p>Teste</p>
+                    <p class="subinfo">x produtos</p>
+                </div>
+                <div class="btns">
+                    <div class="link">copiar link</div>
+                    <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
+                    <div class="telegram"><img src="telegram.png" alt="telegram"></div>
                 </div>
             </div>
-            <img class="arquivo" src="new-document.png" alt="file">
-            <div class="info">
-                <p>Teste</p>
-                <p class="subinfo">x produtos</p>
-            </div>
-            <div class="btns">
-                <div class="link">copiar link</div>
-                <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
-                <div class="telegram"><img src="telegram.png" alt="telegram"></div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="line">
-                <div class="views"><img src="view.png" class="view" alt="views">1557</div>
-                <div class="settings">
-                    <img class="edit" src="edit.png" alt="edit">
-                    <img src="close.png" alt="close" class="close">
+            <div class="card" onclick="revelarCatalogo(this)">
+                <div class="line">
+                    <div class="views"><img src="view.png" class="view" alt="views">1557</div>
+                    <div class="settings">
+                        <img class="edit" src="edit.png" alt="edit">
+                        <img src="close.png" alt="close" class="close">
+                    </div>
+                </div>
+                <img class="arquivo" src="new-document.png" alt="file">
+                <div class="info">
+                    <p>Teste</p>
+                    <p class="subinfo">x produtos</p>
+                </div>
+                <div class="btns">
+                    <div class="link">copiar link</div>
+                    <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
+                    <div class="telegram"><img src="telegram.png" alt="telegram"></div>
                 </div>
             </div>
-            <img class="arquivo" src="new-document.png" alt="file">
-            <div class="info">
-                <p>Teste</p>
-                <p class="subinfo">x produtos</p>
+        </div>
+    </main>
+    <section class="catalogo" id="catalogo" style="display: none;">
+        <div class="menu">
+            <h2>Editar catálogo</h2>
+        </div>
+        <div class="firstCat cat">
+            <label for="nomeCatalogo">Título</label>
+            <input type="text" id="nomeCatalogo">
+        </div>
+        <div class="secondCat cat">
+            <div class="wrapper">
+                <label for="valorMin">Valor mínimo para compra</label>
+                <input type="text" id="valorMin" oninput="formatarMoeda(this)" maxlength="14">
             </div>
-            <div class="btns">
-                <div class="link">copiar link</div>
-                <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
-                <div class="telegram"><img src="telegram.png" alt="telegram"></div>
+            <div class="wrapper">
+                <label for="quantidadeMin">Quantidade mínima para compra</label>
+                <input type="text" id="quantidadeMin">
             </div>
         </div>
-    </div>
-    
+        <div class="bannerHeader">
+            <p>Adicionar Banners</p>
+        </div>
+        <div class="bannerBox">
+            <div class="fileWrap">
+                <label class="recomendado">Tamanho recomendado Desktop (1200px x 150px)</label>
+                <div class="charge">
+                    <label for="fileInput">Clique para carregar um arquivo</label>
+                </div>
+                <p>Desktop</p>
+                <label class="fileUpload">Inserir imagem</label>
+                <input style="display: none;" type="file" id="fileInput">
+            </div>
+            <div class="fileWrap">
+                <label class="recomendado">Tamanho recomendado Mobile (640px x 320px)</label>
+                <div class="charge">
+                    <label for="fileInput">Clique para carregar um arquivo</label>
+                </div>
+                <p>Mobile</p>
+                <div class="fileUpload">Enviar imagem</div>
+                <input style="display: none;" type="file" id="fileInput">
+            </div>
+        </div>
+        <div class="productHeader">Produtos</div>
+        <div class="productBox">
+            <div class="productContainer" id="productContainer">
+            </div>
+        </div>
+        <div class="save">
+            salvar
+        </div>
+        <div class="filter" onclick="offImage()" style="display: none;">
+            <div id="popupImage"></div>
+        </div>
+    </section>
 </body>
 <script src="js/catálogos.js"></script>
 

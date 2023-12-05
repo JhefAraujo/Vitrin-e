@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 
 ::-webkit-scrollbar {
@@ -29,7 +29,7 @@ body {
 
 header {
     height: 70px;
-    background-color: #1A5F35;
+    background-color: #1a5f35;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -49,7 +49,7 @@ header {
 
 .menu {
     height: 87px;
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -57,7 +57,7 @@ header {
 }
 
 .menu > h2 {
-    color: #1A5F35;
+    color: #1a5f35;
     font-weight: 600;
 }
 
@@ -72,20 +72,20 @@ header {
 
 .create {
     padding: 7px;
-    background-color: #FF6E28;
+    background-color: #ff6e28;
     color: white;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .create:hover {
-    background-color: #F44F00;
+    background-color: #f44f00;
 }
 
 .classificar {
     width: 120px;
     height: 30px;
-    border-bottom: 1px solid #CFCFCF;
+    border-bottom: 1px solid #cfcfcf;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -93,7 +93,7 @@ header {
 }
 
 .active {
-    border-bottom: 2px solid #FF6E28;
+    border-bottom: 2px solid #ff6e28;
     cursor: default;
 }
 
@@ -111,7 +111,7 @@ header {
 #texto {
     width: 24vw;
     height: 35px;
-    border: 1px solid #CFCFCF;
+    border: 1px solid #cfcfcf;
     border-radius: 5px 0 0 5px;
     padding: 5px;
 }
@@ -124,6 +124,7 @@ header {
 .search {
     display: flex;
     border-collapse: collapse;
+    border: none;
 }
 
 .settings {
@@ -134,7 +135,7 @@ header {
 }
 
 .pesquisa {
-    background-color: #1A5F35;
+    background-color: #1a5f35;
     color: white;
     display: flex;
     align-items: center;
@@ -171,7 +172,7 @@ header {
 .card {
     width: 15vw;
     height: 16vw;
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -183,13 +184,13 @@ header {
 }
 
 .cardtwo:hover {
-    background-color: #CCCCCC;
+    background-color: #cccccc;
 }
 
 .image {
     height: 80%;
     width: 90%;
-    border: 1px solid #CFCFCF;
+    border: 1px solid #cfcfcf;
     border-radius: 10px;
     padding: 3px;
     overflow: hidden;
@@ -204,7 +205,7 @@ header {
 .cardtwo {
     width: 11.5vw;
     height: 13vw;
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -225,9 +226,8 @@ header {
 }
 
 .card:hover {
-    background-color: #E8E8E8;
+    background-color: #e8e8e8;
 }
-
 
 #list {
     display: none;
@@ -256,24 +256,24 @@ header {
     align-items: center;
     justify-content: center;
     border-radius: 5px 5px 0 0;
-    border-bottom: 1px solid #CCCCCC;
+    border-bottom: 1px solid #cccccc;
 }
 
 .active {
-    border-top: 1px solid #CCCCCC;
-    border-left: 1px solid #CCCCCC;
-    border-right: 1px solid #CCCCCC;
+    border-top: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
     border-bottom: none;
 }
 
 .opt:not(.active):hover {
-    background-color: #CCCCCC;
+    background-color: #cccccc;
     cursor: pointer;
 }
 
 .remove {
     padding: 7px;
-    background-color: #ED7878;
+    background-color: #ed7878;
     color: white;
     border-radius: 5px;
     cursor: pointer;
@@ -281,7 +281,7 @@ header {
 
 .change {
     padding: 7px;
-    background-color: #0E5129;
+    background-color: #0e5129;
     color: white;
     border-radius: 5px;
     cursor: pointer;
@@ -292,11 +292,11 @@ header {
     column-gap: 3px;
 }
 
-.search {
+.busca {
     width: 25vw;
     padding: 7px;
     border-radius: 5px;
-    border: 1px solid #CCCCCC;
+    border: 1px solid #cccccc;
 }
 
 .loader {
@@ -311,13 +311,81 @@ header {
     display: inline-block;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
-    }
+}
 
-    @keyframes rotation {
+@keyframes rotation {
     0% {
         transform: rotate(0deg);
     }
     100% {
         transform: rotate(360deg);
     }
-    } 
+}
+
+.first {
+    margin: auto;
+    display: flex;
+    width: 97vw;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.second {
+    margin: auto;
+    margin-top: 20px;
+    display: flex;
+    width: 97vw;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.wrapper > input {
+    width: 31vw;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    padding: 5px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
+}
+
+.wrapper > label {
+    font-size: small;
+    font-weight: bold;
+}
+
+.wrapper > select {
+    width: 31vw;
+    height: 35px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+}
+
+.second > .wrapper > input {
+    width: 20.5vw;
+}
+
+option:checked {
+    box-shadow: 0 0 10px 100px #0e5129 inset;
+}
+
+.description {
+    margin: auto;
+    margin-top: 20px;
+    display: flex;
+    width: 97vw;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#desc {
+    width: 96vw;
+    resize: none;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    padding: 5px;
+}
