@@ -159,12 +159,14 @@
 
         .titulo {
             position: absolute;
+            height: 1em;
             top: 20%;
             left: 50%;
             transform: translateX(-50%);
             text-align: center;
             width: 100%;
             font-weight: 300;
+            overflow: hidden;
         }
 
         .leftArrow {
@@ -224,50 +226,37 @@
         </div>
     </main>
     <section class="products" id="products">
-        <div class="card element">
-            <img src="https://conecta-vendas.s3.amazonaws.com/mallorca_joias/b86eb46b-704c-4f8c-aff1-79a37768d479.webp"
-                alt="">
-
-            <div class="cardInfo">
-                <p class="titulo">Anel SM, com banho de ouro 18k</p>
-            </div>
-            <p class="price">R$ 246,00</p>
-        </div>
-        <div class="card element">
-            <div class="carousel">
-                <img src="https://conecta-vendas.s3.amazonaws.com/mallorca_joias/fbe84cae-fdf4-42e8-8257-96daeb00a921.webp"
-                    alt="">
-                <img src="https://conecta-vendas.s3.amazonaws.com/mallorca_joias/b86eb46b-704c-4f8c-aff1-79a37768d479.webp"
-                    alt="">
-            </div>
-
-            <div class="cardInfo">
-                <p class="titulo">Brinco SM, com banho de ouro 18k</p>
-            </div>
-            <p class="price">R$ 246,00</p>
-            <div class="leftArrow" onclick="carouselleft(this)"><i class="fa-solid fa-arrow-left fa-lg"></i></div>
-            <div class="rightArrow" onclick="carouselright(this)"><i class="fa-solid fa-arrow-right fa-lg"></i></div>
-        </div>
-        <div class="card element">
-            <img src="https://conecta-vendas.s3.amazonaws.com/mallorca_joias/e3726a58-f42a-4ba4-ae2a-cf6a5a9e233b.webp"
-                alt="">
-
-            <div class="cardInfo">
-                <p class="titulo">Colar SM, com banho de ouro 18k</p>
-            </div>
-            <p class="price">R$ 246,00</p>
-        </div>
-        <div class="card element">
-            <img src="https://conecta-vendas.s3.amazonaws.com/mallorca_joias/495852d5-9bb9-4d7b-866c-66e02f041fa6.webp"
-                alt="">
-
-            <div class="cardInfo">
-                <p class="titulo">Bracelete SM, com banho de ouro 18k</p>
-            </div>
-            <p class="price">R$ 246,00</p>
-        </div>
     </section>
     <script>
+        async function fetchAndAppend() {
+            url = 'https://script.google.com/macros/s/AKfycbzUAPR0RI1BkPc5n17zGMnzWam-JKpT9ICzc-0gs6_V5Q22UmLfviLLar9Me-Y2SUCSew/exec';
+            response = await fetch(url);
+            brute = await response.json();
+            for (let i = 0; i < brute.length; i++) {
+                const element = brute[i];
+                imagem = element[0].split(' ');
+                if (element[8] == "Verano") {
+                    criaCard = document.createElement('div');
+                    criaCard.setAttribute('class', 'card element');
+                    criaCard.innerHTML = `<div class="carousel"><img src="${imagem[0]}"alt=""></div>
+                                            <div class="cardInfo">
+                                                ${element[2]}
+                                            </div>
+                                            <p class="price">R$${element[6]},00</p>`
+                    document.getElementById('products').appendChild(criaCard);
+                    criaCard.children[1].children[0].remove();
+                    if (imagem.length > 1) {
+                        criaCard.innerHTML += '<div class="leftArrow" onclick="carouselleft(this)"><i class="fa-solid fa-arrow-left fa-lg"></i></div><div class="rightArrow" onclick="carouselright(this)"><i class="fa-solid fa-arrow-right fa-lg"></i></div>'
+                        criaCard.children[0].innerHTML = `<div class="carousel">
+                <img src="${imagem[0]}"alt="">
+                <img src="${imagem[1]}"alt="">
+            </div>`
+                    }
+                }
+
+            }
+        }
+        fetchAndAppend();
         window.addEventListener("load", function () {
             setTimeout(function () {
                 // This hides the address bar:
