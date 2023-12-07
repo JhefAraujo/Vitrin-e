@@ -204,6 +204,24 @@
             transform: translateX(0);
             min-height: 100%;
         }
+
+        .loader {
+            background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 11;
+            height: 100vh;
+            width: 100vw;
+            transition-duration: 1s;
+        }
+
+        .loader img {
+            width: 80vw;
+        }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -213,9 +231,9 @@
 </head>
 
 <body>
-    <header>
-
-    </header>
+    <div class="loader">
+        <img class="logo" src="logoVetor.svg" alt="Logo Mallorca">
+    </div>
     <main>
         <h1>Verano</h1>
         <a href="#products">
@@ -255,6 +273,10 @@
                 }
 
             }
+            document.getElementsByClassName('loader')[0].style.opacity = '0';
+            setTimeout(() => {
+                document.getElementsByClassName('loader')[0].style.display = 'none';
+            }, 1000);
         }
         fetchAndAppend();
         window.addEventListener("load", function () {
