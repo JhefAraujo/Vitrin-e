@@ -322,12 +322,18 @@ header {
     }
 }
 
+#productSettings {
+    display: flex;
+    flex-direction: column;
+}
+
 .first {
     margin: auto;
     display: flex;
     width: 97vw;
     align-items: center;
     justify-content: space-around;
+    margin-top: 35px !important;
 }
 
 .second {
@@ -340,7 +346,7 @@ header {
 }
 
 .wrapper > input {
-    width: 31vw;
+    width: 46vw;
     height: 35px;
     border-radius: 5px;
     border: 1px solid #cccccc;
@@ -359,7 +365,7 @@ header {
 }
 
 .wrapper > select {
-    width: 31vw;
+    width: 49vw;
     height: 35px;
     border: 1px solid #cccccc;
     border-radius: 5px;
@@ -367,6 +373,10 @@ header {
 
 .second > .wrapper > input {
     width: 20.5vw;
+}
+
+.second > .wrapper > select {
+    width: 31.5vw !important;
 }
 
 option:checked {
@@ -388,4 +398,203 @@ option:checked {
     border-radius: 5px;
     border: 1px solid #cccccc;
     padding: 5px;
+}
+
+.firstCreate {
+    width: 97vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+    margin-top: 40px;
+}
+
+.createWrap {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    row-gap: 5px;
+}
+
+.createWrap input, .createWrap select {
+    width: 32vw;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #cfcfcf;
+    padding: 5px;
+}
+
+.createWrap select option {
+    height: 40px;
+}
+
+#createDesc {
+    width: 97vw;
+    height: 90px;
+    padding: 10px;
+    font-size: large;
+    border-radius: 5px;
+    border: 1px solid #cfcfcf;
+    margin-left: auto;
+}
+
+.secondCreate {
+    margin-top: 15px;
+    width: 97vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.midiaBox {
+    border: 1px solid #cccccc;
+    width: 50vw;
+    margin: auto;
+    margin-top: 25px !important;
+    height: 150px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+}
+
+.txtSpace {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 40%;
+    position: absolute;
+    top: 0;
+    background-color: #e8e8e8;
+    border-bottom: 1px solid #cccccc;
+}
+
+.midiaBtn {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #cccccc;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.variations {
+    margin-top: 25px !important;
+    height: 120px;
+    width: 60vw;
+    margin: auto;
+    border: 1px solid #cccccc;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    position: relative;
+}
+
+.variations input {
+    width: 90%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #cfcfcf;
+    padding: 10px;
+}
+
+.variations div {
+    background-color: #e8e8e8;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    position: absolute;
+    bottom: 5px;
+}
+
+.variations h3 {
+    background-color: #e8e8e8;
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    border-bottom: 1px solid #cccccc;
+}
+
+.formPost {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.536);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formPost form {
+    position: relative;
+    background-color: white;
+    border-radius: 5px;
+    height: 60vh;
+    width: 60vh;
+    display: flex;
+    align-items: center;
+    row-gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid #e8e8e8;
+}
+
+.formPost form input {
+    width: 90%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    padding: 5px;
+}
+
+.submitForm {
+    position: absolute;
+    bottom: 5%;
+    background-color: #e8e8e8;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.closeForm {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    background-color: #f44f00;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.save {
+    padding: 20px;
+    display: inline;
+    color: white;
+    background-color: #0e5129;
+    border-radius: 10px;
+    cursor: pointer;
+    position: fixed;
+    bottom: 2vh;
+    right: 2vh;
 }

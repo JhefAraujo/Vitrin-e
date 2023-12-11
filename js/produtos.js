@@ -1,3 +1,21 @@
+async function renderCatalogos() {
+    url =
+        "https://script.google.com/macros/s/AKfycbxA31_rhJv9HQV2kxFTPqO4FizbKDvP0YkxRLJ2VhCUbe4ndYM-11SfpybGW1x2X8zxCQ/exec";
+    res = await fetch(url);
+    obj = await res.json();
+    for (let i = 0; i < obj.length; i++) {
+        const element = obj[i];
+        criaDiv = document.createElement("div");
+        criaDiv.setAttribute("class", "card");
+        criaDiv.innerHTML = `<img class="pasta" src="folder.png" alt="file">
+        <p>${element[0]}</p>`;
+        document.getElementsByClassName("container")[0].appendChild(criaDiv);
+        criaDiv.setAttribute("onclick", `display(), render("${element[0]}")`);
+    }
+}
+
+renderCatalogos();
+
 function display(id) {
     document.getElementById("list").style.display = "block";
     document.getElementsByTagName("main")[0].style.display = "none";
@@ -16,7 +34,7 @@ async function renderProducts() {
 }
 
 async function render(category) {
-    document.getElementsByClassName('containertwo')[0].innerHTML = '';
+    document.getElementsByClassName("containertwo")[0].innerHTML = "";
     document.getElementById("loader").style.display = "block";
     brute = await renderProducts();
     if (document.getElementById("identificadas").className == "opt active") {
@@ -24,6 +42,7 @@ async function render(category) {
             if (brute[i]["4"] == category && brute[i]["7"] == "sim") {
                 criaDiv = document.createElement("div");
                 criaDiv.setAttribute("class", "cardtwo");
+                criaDiv.setAttribute("onclick", "settings(this)")
                 criaPara = document.createElement("p");
                 criaImage = document.createElement("div");
                 criaImage.setAttribute("class", "image");
@@ -36,9 +55,8 @@ async function render(category) {
                 criaImage.innerHTML = `<img src="${brute[i]["0"]}" alt="${brute[i]["1"]}">`;
             }
         }
-    }
-    else {
-        document.getElementsByClassName('containertwo')[0].innerHTML = '';
+    } else {
+        document.getElementsByClassName("containertwo")[0].innerHTML = "";
         for (let i = 0; i < brute.length; i++) {
             if (brute[i]["4"] == category && brute[i]["7"] == "não") {
                 criaDiv = document.createElement("div");
@@ -57,4 +75,37 @@ async function render(category) {
         }
     }
     document.getElementById("loader").style.display = "none";
+}
+
+async function postForm() {
+    inputValue = document.getElementById("category").value;
+    var formdata = new FormData();
+    formdata.append("item", inputValue);
+
+    var requestOptions = {
+        method: "POST",
+        body: formdata,
+        redirect: "follow",
+    };
+
+    fetch(
+        "https://script.google.com/macros/s/AKfycbz46_iFeoHHu4dOTT4-1tawmQwoQPkmmotH8VrWYwj9c1uEPxOpHdktrL0OSWnvTQ-t8g/exec",
+        requestOptions
+    )
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.log("error", error));
+
+    setTimeout(() => {
+        document.getElementById("formPost").style.display = "none";
+        window.location.reload();
+    }, 2000);
+}
+
+function settings(teste) {
+    console.log(teste);
+    document.getElementById('productSettings').style.display = 'flex';
+    document.getElementById('list').style.display = 'none';
+    document.getElementById('ref').value = teste.children[1].innerHTML;
+    document.getElementsByTagName('a')[0].href = 'produtos.html';
 }

@@ -15,27 +15,24 @@
     </header>
     <main>
         <div class="menu">
-            <h2>Lista de Catálogos</h2>
+            <h2>Lista de Categorias</h2>
         </div>
         <div class="wrap">
-            <div class="create">Criar nova categoria</div>
+            <div class="create" onclick="document.getElementById('formPost').style.display = 'flex'">Criar nova categoria</div>
             <div class="search">
                 <input id="texto" type="text" placeholder="Buscar por categorias">
                 <div class="pesquisa">Pesquisar</div>
             </div>
         </div>
         <div class="container">
-            <div onclick="display(), render('0 ANEL')" class="card">
-                <img class="pasta" src="folder.png" alt="file">
-                <p>Anel</p>
-            </div>
+        </div>
     </main>
     <section id="list">
         <div class="menu">
             <h2>Anéis</h2>
         </div>
         <div class="wrap">
-            <div class="create">Criar novo produto</div>
+            <div class="create" onclick="criarNovo()">Criar novo produto</div>
             <input class="busca" type="text" placeholder="Buscar por referência ou descrição">
             <div class="btns">
                 <div class="remove">Remover categoria</div>
@@ -65,10 +62,6 @@
                     <option value="Teste">Teste</option>
                 </select>
             </div>
-            <div class="wrapper">
-                <label for="datetime">Data da publicação</label>
-                <input type="date" name="datetime" id="datetime">
-            </div>
         </div>
         <div class="second">
             <div class="wrapper">
@@ -97,6 +90,53 @@
                 <textarea name="desc" id="desc" cols="30" rows="4"></textarea>
             </div>
         </div>
+        <div class="save">Salvar</div>
+    </section>
+    <section id="createProduct" style="display: none;">
+        <div class="menu">
+            <h2>Criar novo produto</h2>
+        </div>
+        <div class="firstCreate">
+            <div class="createWrap">
+                <label for="referencia">Referência</label>
+                <input type="text" name="referencia" id="referencia">
+            </div>
+            <div class="createWrap">
+                <label for="categoria">Categoria</label>
+                <select name="categoria" id="categoria">
+                    <option value="Anel">Anel</option>
+                </select>
+            </div>
+            <div class="createWrap">
+                <label for="dataPublica">Data de publicação</label>
+                <input type="date" name="dataPublica" id="dataPublica">
+            </div>
+        </div>
+        <div class="secondCreate">
+            <label for="createDesc">Descrição</label>
+            <input type="text" id="createDesc" name="createDesc">
+        </div>
+        <div class="midiaBox">
+            <div class="txtSpace">
+                <h3>Mídias do produto</h3>
+                <p>Tamanho recomendado: 800px x 800px JPG,PNG ou WEBP</p>
+            </div>
+            <label class="midiaBtn" for="midia">Adicionar midia</label>
+            <input type="file" name="midia" id="midia" style="display: none;">
+        </div>
+        <div class="variations">
+            <h3>Variações</h3>
+            <input type="text" placeholder="Ex: Ródio">
+            <div class="addBtn">Adicionar</div>
+        </div>
+    </section>
+    <section class="formPost" id="formPost" style="display: none;">
+        <form action="">
+            <label for="category">Nome da categoria</label>
+            <input type="text" id="category">
+            <div class="submitForm" onclick="postForm()">Enviar</div>
+            <div class="closeForm" onclick="document.getElementById('formPost').style.display = 'none'">X</div>
+        </form>
     </section>
     <script src="js/produtos.js"></script>
 </body>
