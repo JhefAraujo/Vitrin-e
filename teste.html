@@ -16,6 +16,7 @@
 
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display&display=swap');
+
         * {
             padding: 0;
             margin: 0;
@@ -257,9 +258,7 @@
                     criaCard = document.createElement('div');
                     criaCard.setAttribute('class', 'card element');
                     criaCard.innerHTML = `<div class="carousel"><img src="${imagem[0]}"alt=""></div>
-                                            <div class="cardInfo">
-                                                <p class"titulo">${element[2]}</p>
-                                            </div>
+                                            <div class="cardInfo"><p class="titulo">${element[2]}</p></div>
                                             <p class="price">R$${element[6]},00</p>`
                     document.getElementById('products').appendChild(criaCard);
                     criaCard.children[1].children[0].remove();
@@ -269,9 +268,9 @@
                 <img src="${imagem[0]}"alt="">
                 <img src="${imagem[1]}"alt="">
             </div>`
+            
                     }
                 }
-
             }
             document.getElementsByClassName('loader')[0].style.opacity = '0';
             setTimeout(() => {

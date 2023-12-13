@@ -121,6 +121,8 @@ function settings(teste) {
         document.getElementsByClassName('imgCardContainer')[0].appendChild(criaImgCard);
     }
 
+    document.getElementsByClassName('imgCard')[1].style.border = '1px solid #FF6E28'
+
     for (let i = 0; i < obj.length; i++) {
         const element = obj[i][0];
         criaOpt = document.createElement('option');
