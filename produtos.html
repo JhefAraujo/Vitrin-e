@@ -11,7 +11,7 @@
 <body>
     <header>
         <a href="index.html"><img src="back.png" class="back" alt="voltar"></a>
-        <h1>Conecta Clone</h1>
+        <h1>Vitrin-e</h1>
     </header>
     <main>
         <div class="menu">
@@ -32,7 +32,7 @@
             <h2>Anéis</h2>
         </div>
         <div class="wrap">
-            <div class="create" onclick="criarNovo()">Criar novo produto</div>
+            <div class="create" onclick="createProduct()">Criar novo produto</div>
             <input class="busca" type="text" placeholder="Buscar por referência ou descrição">
             <div class="btns">
                 <div class="remove">Remover categoria</div>
@@ -49,7 +49,11 @@
     </section>
     <section id="productSettings" style="display: none;">
         <div class="menu">
-            <h2>Editar produto</h2>
+            <h2 class="edit">Editar produto</h2>
+            <div class="wrapActive">
+                <label for="ativo">Ativo?</label>
+                <input type="checkbox" name="ativo" id="ativo">
+            </div>
         </div>
         <div class="first">
             <div class="wrapper">
@@ -90,7 +94,18 @@
                 <textarea name="desc" id="desc" cols="30" rows="4"></textarea>
             </div>
         </div>
+        <div class="wrapper2">
+            <label class="codigo" for="cod">Código</label>
+            <input type="text" name="cod" id="cod">
+        </div>
         <div class="save">Salvar</div>
+        <h2 class="imagensTxt">Imagens</h2>
+        <div class="imgCardContainer">
+            <div class="imgCard" style="display: none;">
+                <img src="https://conecta-vendas.s3.amazonaws.com/mallorca_joias/fd2a2ada72f707bae3eb1d8cc449c7ed.jpeg" alt="">
+                <div class="cardBtn">Remover</div>
+            </div>
+        </div>
     </section>
     <section id="createProduct" style="display: none;">
         <div class="menu">

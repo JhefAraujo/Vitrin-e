@@ -41,7 +41,7 @@ async function render(category) {
         for (let i = 0; i < brute.length; i++) {
             if (brute[i]["4"] == category && brute[i]["7"] == "sim") {
                 criaDiv = document.createElement("div");
-                criaDiv.setAttribute("class", "cardtwo");
+                criaDiv.setAttribute("class", `cardtwo ${'card' + i}`);
                 criaDiv.setAttribute("onclick", "settings(this)")
                 criaPara = document.createElement("p");
                 criaImage = document.createElement("div");
@@ -52,7 +52,7 @@ async function render(category) {
                 criaDiv.appendChild(criaImage);
                 criaDiv.appendChild(criaPara);
                 criaPara.innerHTML = brute[i]["1"];
-                criaImage.innerHTML = `<img src="${brute[i]["0"]}" alt="${brute[i]["1"]}">`;
+                criaImage.innerHTML = `<img src="${brute[i]["0"].split(' ')[0]}" alt="${brute[i]["1"]}">`;
             }
         }
     } else {
@@ -60,7 +60,7 @@ async function render(category) {
         for (let i = 0; i < brute.length; i++) {
             if (brute[i]["4"] == category && brute[i]["7"] == "não") {
                 criaDiv = document.createElement("div");
-                criaDiv.setAttribute("class", "cardtwo");
+                criaDiv.setAttribute("class", `cardtwo ${'card' + i}`);
                 criaPara = document.createElement("p");
                 criaImage = document.createElement("div");
                 criaImage.setAttribute("class", "image");
@@ -104,8 +104,36 @@ async function postForm() {
 
 function settings(teste) {
     console.log(teste);
+    id = teste.classList[1].slice(4);
     document.getElementById('productSettings').style.display = 'flex';
     document.getElementById('list').style.display = 'none';
     document.getElementById('ref').value = teste.children[1].innerHTML;
+    document.getElementById('desc').value = brute[id][2].slice(13);
+    document.getElementById('cod').value = brute[id][2].slice(0,10);
     document.getElementsByTagName('a')[0].href = 'produtos.html';
+
+    arrayImg = brute[id][0].split(' ');
+    for (let i = 0; i < arrayImg.length; i++) {
+        const element = arrayImg[i];
+        criaImgCard = document.createElement('div');
+        criaImgCard.innerHTML = `<div class="imgCard"><img src="${element}" alt="">
+        <div class="cardBtn">Remover</div></div>`;
+        document.getElementsByClassName('imgCardContainer')[0].appendChild(criaImgCard);
+    }
+
+    for (let i = 0; i < obj.length; i++) {
+        const element = obj[i][0];
+        criaOpt = document.createElement('option');
+        criaOpt.innerHTML = element;
+        criaOpt.value = element;
+        document.getElementById('cat').appendChild(criaOpt);
+        if (document.getElementsByTagName('option')[i].value == brute[id][4]) {
+            document.getElementsByTagName('option')[i].setAttribute('selected', 'true')
+        }
+    }
+}
+
+function createProduct() {
+    document.getElementById('list').style.display = 'none';
+    document.getElementById('createProduct').style.display = 'block';
 }
