@@ -310,13 +310,14 @@
             justify-content: center;
         }
         .send {
-            height: 10vh;
-            width: 10vh;
+            height: 8vh;
+            width: 8vh;
             background-color: goldenrod;
             border-radius: 50%;
             animation: walk 0.5s ease-in-out;
             align-items: center;
             justify-content: center;
+            transform: translateX(-1vh);
         }
         @keyframes walk {
             0%{
@@ -325,7 +326,7 @@
             }
             100% {
                 opacity: 1;
-                transform: translateX(0);
+                transform: translateX(-1vh);
             }
         }
     </style>
