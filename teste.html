@@ -315,6 +315,8 @@
             background-color: goldenrod;
             border-radius: 50%;
             animation: walk 0.5s ease-in-out;
+            align-items: center;
+            justify-content: center;
         }
         @keyframes walk {
             0%{
@@ -366,13 +368,15 @@
             parent.children[4].children[1].innerHTML ++;
             quantidade ++;
             document.getElementsByTagName('header')[0].children[1].style.display = 'block';
-            document.getElementsByTagName('header')[0].children[2].style.display = 'block';
+            document.getElementsByTagName('header')[0].children[2].style.display = 'flex';
             document.getElementsByTagName('header')[0].children[0].style.margin = '0';
+            carrinho();
         }
         function plusElem(element) {
             parentPlus = element.parentElement;
             parentPlus.children[1].innerHTML ++;
             quantidade ++;
+            carrinho();
         }
         function minusElem(element) {
             parentPlus = element.parentElement;
@@ -383,6 +387,10 @@
                 parentAbsol.children[3].style.display = 'block';
             }
             quantidade --;
+            carrinho();
+        }
+        function carrinho() {
+            document.getElementsByTagName('header')[0].children[2].innerHTML = quantidade;
         }
         async function fetchAndAppend() {
             url = 'https://script.google.com/macros/s/AKfycbzUAPR0RI1BkPc5n17zGMnzWam-JKpT9ICzc-0gs6_V5Q22UmLfviLLar9Me-Y2SUCSew/exec';
