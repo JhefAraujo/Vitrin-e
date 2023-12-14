@@ -290,7 +290,6 @@
                                             <div class="cardInfo"><p class="titulo">${element[2]}</p></div>
                                             <p class="price">R$${element[6]},00</p>`
                     document.getElementById('products').appendChild(criaCard);
-                    criaCard.children[1].children[0].remove();
                     if (imagem.length > 1) {
                         criaCard.innerHTML += '<div class="leftArrow" onclick="carouselleft(this)"><i class="fa-solid fa-arrow-left fa-lg"></i></div><div class="rightArrow" onclick="carouselright(this)"><i class="fa-solid fa-arrow-right fa-lg"></i></div>'
                         criaCard.children[0].innerHTML = `<div class="carousel">
