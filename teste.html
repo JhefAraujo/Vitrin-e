@@ -254,7 +254,7 @@
             filter: drop-shadow(3px 3px 2px rgba(5, 5, 5, 1));
             z-index: 10;
             margin: auto;
-            transition-duration: 0.5s;
+            transition: all 0.5s;
         }
 
         .loader img {
@@ -329,6 +329,14 @@
                 transform: translateX(-1vh);
             }
         }
+        @keyframes reverseWalk {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -392,6 +400,11 @@
         }
         function carrinho() {
             document.getElementsByTagName('header')[0].children[2].innerHTML = quantidade;
+            if (quantidade == 0) {
+                document.getElementsByTagName('header')[0].children[1].style.display = 'none';
+                document.getElementsByTagName('header')[0].children[2].style.display = 'none';
+                document.getElementsByTagName('header')[0].children[0].style.margin = 'auto';
+            }
         }
         async function fetchAndAppend() {
             url = 'https://script.google.com/macros/s/AKfycbzUAPR0RI1BkPc5n17zGMnzWam-JKpT9ICzc-0gs6_V5Q22UmLfviLLar9Me-Y2SUCSew/exec';
