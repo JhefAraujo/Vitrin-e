@@ -19,8 +19,6 @@ function formatarMoeda(input) {
     input.value = valor;
 }
 
-formatarMoeda(document.getElementById("valorMin"));
-
 function revelarCatalogo(element) {
     document.getElementsByTagName("main")[0].style.display = "none";
     document.getElementById("catalogo").style.display = "block";

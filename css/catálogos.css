@@ -451,6 +451,10 @@ header {
     overflow: hidden;
 }
 
+#dataValidade {
+    width: 13vw;
+}
+
 .productImg img {
     height: 100%;
     width: 100%;

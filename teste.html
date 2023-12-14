@@ -93,6 +93,8 @@
             min-height: 100vh;
             width: 100vw;
             flex-direction: column;
+            position: relative;
+            z-index: 0;
         }
 
         .card {
@@ -101,11 +103,12 @@
             width: 87vw;
             overflow: hidden;
             position: relative;
+            z-index: 1;
             outline: 1px solid rgba(255, 255, 255, 0.534);
         }
 
         .card img {
-            z-index: -5;
+            z-index: 0;
             width: 100%;
             min-height: 100%;
             object-fit: cover;
@@ -220,6 +223,30 @@
             transition-duration: 1s;
         }
 
+        header {
+            position: fixed;
+            z-index: 10;
+            top: 0px;
+            padding-top: 15px;
+            height: 90px;
+            width: 100vw;
+            overflow: hidden;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        header img {
+            height: 90px;
+            margin: auto;
+            position: fixed;
+            top: 0;
+            padding-top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            filter: drop-shadow(3px 3px 2px rgba(5, 5, 5, 1));
+            z-index: 10;
+        }
+
         .loader img {
             width: 80vw;
         }
@@ -235,6 +262,9 @@
     <div class="loader">
         <img class="logo" src="logoVetor.svg" alt="Logo Mallorca">
     </div>
+    <header>
+        <img src="mono-02.svg" alt="Logo Mallorca">
+    </header>
     <main>
         <h1>Verano</h1>
         <a href="#products">
