@@ -241,15 +241,20 @@
             border-radius: 10vh;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            color: white;
             border: 1px solid rgba(7, 7, 7, 0.7);
         }
 
         header img {
             height: 10vh;
-            margin: auto;
-            padding: 1vh;
+            width: 10vh;
+            padding-top: 1vh;
+            padding-bottom: 1vh;
             filter: drop-shadow(3px 3px 2px rgba(5, 5, 5, 1));
             z-index: 10;
+            margin: auto;
+            transition-duration: 0.5s;
         }
 
         .loader img {
@@ -265,8 +270,62 @@
             padding: 10px;
             background-color: goldenrod;
             border-radius: 35px;
+            width: 30%;
+            text-align: center;
+            height: 40px;
         }
 
+        .quantity {
+            color: white;
+            position: absolute;
+            bottom: 2%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 35px;
+            width: 40%;
+            text-align: center;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        .plus {
+            background-color: goldenrod;
+            border-radius: 50%;
+            height: 100%;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .minus {
+            background-color: goldenrod;
+            border-radius: 50%;
+            height: 100%;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .send {
+            height: 10vh;
+            width: 10vh;
+            background-color: goldenrod;
+            border-radius: 50%;
+            animation: walk 0.5s ease-in-out;
+        }
+        @keyframes walk {
+            0%{
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -281,6 +340,8 @@
     </div>
     <header>
         <img src="mono-02.svg" alt="Logo Mallorca">
+        <p style="display: none;">enviar pedido -></p>
+        <div style="display: none;" class="send"></div>
     </header>
     <main>
         <h1>Verano</h1>
@@ -294,6 +355,35 @@
     <section class="products" id="products">
     </section>
     <script>
+        var pedido = {};
+        var quantidade = 0;
+        function showQuantity(element) {
+            parent = element.parentElement;
+            minus = parent.children[4].children[0];
+            plus = parent.children[4].children[2];
+            parent.children[3].style.display = 'none';
+            parent.children[4].style.display = 'flex';
+            parent.children[4].children[1].innerHTML ++;
+            quantidade ++;
+            document.getElementsByTagName('header')[0].children[1].style.display = 'block';
+            document.getElementsByTagName('header')[0].children[2].style.display = 'block';
+            document.getElementsByTagName('header')[0].children[0].style.margin = '0';
+        }
+        function plusElem(element) {
+            parentPlus = element.parentElement;
+            parentPlus.children[1].innerHTML ++;
+            quantidade ++;
+        }
+        function minusElem(element) {
+            parentPlus = element.parentElement;
+            parentAbsol = parentPlus.parentElement;
+            parentPlus.children[1].innerHTML --;
+            if (parentPlus.children[1].innerHTML == 0) {
+                parentPlus.style.display = 'none';
+                parentAbsol.children[3].style.display = 'block';
+            }
+            quantidade --;
+        }
         async function fetchAndAppend() {
             url = 'https://script.google.com/macros/s/AKfycbzUAPR0RI1BkPc5n17zGMnzWam-JKpT9ICzc-0gs6_V5Q22UmLfviLLar9Me-Y2SUCSew/exec';
             response = await fetch(url);
@@ -307,7 +397,12 @@
                     criaCard.innerHTML = `<div class="carousel"><img src="${imagem[0]}"alt=""></div>
                                             <div class="cardInfo"><p class="titulo">${element[2].slice(11)}</p></div>
                                             <p class="price">R$${element[6]},00</p>
-                                            <p class="buy">Eu quero!</p>`
+                                            <p onclick="showQuantity(this)" class="buy">Eu quero!</p>
+                                            <div style="display: none;" class="quantity">
+                                            <div onclick="minusElem(this)" class="minus">-</div>
+                                            <p class="numb"></p>
+                                            <div onclick="plusElem(this)" class="plus">+</div>
+                                            </div>`
                     document.getElementById('products').appendChild(criaCard);
                     if (imagem.length > 1) {
                         criaCard.innerHTML += '<div class="leftArrow" onclick="carouselleft(this)"><i class="fa-solid fa-arrow-left fa-lg"></i></div><div class="rightArrow" onclick="carouselright(this)"><i class="fa-solid fa-arrow-right fa-lg"></i></div>'
