@@ -75,7 +75,7 @@
             top: 0;
             left: 0;
             object-fit: cover;
-            object-position: center;
+            object-position: center top;
             height: 100vh;
             width: 100vw;
             z-index: -2;
@@ -344,13 +344,24 @@
             }
         }
         @media screen and (min-width: 650px) {
+            ::-webkit-scrollbar {
+                display: none;
+            }
             .card {
                 width: 27vw !important;
                 height: 450px !important;
+                margin: auto;
             }
             #products {
                 display: grid;
+                margin: auto !important;
                 grid-template-columns: 1fr 1fr 1fr;
+            }
+            header {
+                width: 26vw !important;
+            }
+            .loader img {
+                width: 45vw !important;
             }
         }
     </style>
