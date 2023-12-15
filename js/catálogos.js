@@ -36,7 +36,7 @@ async function fetchdata() {
     bruto = await response.json();
     for (let i = 0; i < bruto.length; i++) {
         if (bruto[i]["8"] == nome) {
-            firstimg = bruto[i][0].split(' ')
+            firstimg = bruto[i][0].split(' ');
             criaCard = document.createElement("div");
             criaCard.setAttribute("class", "productCard");
             criaImage = document.createElement("div");
