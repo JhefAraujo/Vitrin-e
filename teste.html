@@ -315,6 +315,7 @@
             align-items: center;
             justify-content: center;
         }
+
         .send {
             height: 8vh;
             width: 8vh;
@@ -325,41 +326,50 @@
             justify-content: center;
             transform: translateX(-1vh);
         }
+
         @keyframes walk {
-            0%{
+            0% {
                 opacity: 0;
                 transform: translateX(-50px);
             }
+
             100% {
                 opacity: 1;
                 transform: translateX(-1vh);
             }
         }
+
         @keyframes reverseWalk {
             0% {
                 transform: translateX(0);
             }
+
             100% {
                 transform: translateX(-100%);
             }
         }
+
         @media screen and (min-width: 650px) {
             ::-webkit-scrollbar {
                 display: none;
             }
+
             .card {
                 width: 27vw !important;
                 height: 450px !important;
                 margin: auto;
             }
+
             #products {
                 display: grid;
                 margin: auto !important;
                 grid-template-columns: 1fr 1fr 1fr;
             }
+
             header {
                 width: 26vw !important;
             }
+
             .loader img {
                 width: 45vw !important;
             }
@@ -379,7 +389,7 @@
     <header>
         <img src="mono-02.svg" alt="Logo Mallorca">
         <p style="display: none;">enviar pedido -></p>
-        <div style="display: none;" class="send"></div>
+        <div style="display: none;" class="send" onclick="sendWhatsAppMessage()"></div>
     </header>
     <main>
         <h1>Verano</h1>
@@ -401,8 +411,8 @@
             plus = parent.children[4].children[2];
             parent.children[3].style.display = 'none';
             parent.children[4].style.display = 'flex';
-            parent.children[4].children[1].innerHTML ++;
-            quantidade ++;
+            parent.children[4].children[1].innerHTML++;
+            quantidade++;
             document.getElementsByTagName('header')[0].children[1].style.display = 'block';
             document.getElementsByTagName('header')[0].children[2].style.display = 'flex';
             document.getElementsByTagName('header')[0].children[0].style.margin = '0';
@@ -410,19 +420,19 @@
         }
         function plusElem(element) {
             parentPlus = element.parentElement;
-            parentPlus.children[1].innerHTML ++;
-            quantidade ++;
+            parentPlus.children[1].innerHTML++;
+            quantidade++;
             carrinho();
         }
         function minusElem(element) {
             parentPlus = element.parentElement;
             parentAbsol = parentPlus.parentElement;
-            parentPlus.children[1].innerHTML --;
+            parentPlus.children[1].innerHTML--;
             if (parentPlus.children[1].innerHTML == 0) {
                 parentPlus.style.display = 'none';
                 parentAbsol.children[3].style.display = 'block';
             }
-            quantidade --;
+            quantidade--;
             carrinho();
         }
         function carrinho() {
@@ -489,6 +499,20 @@
         }
         function carouselleft(element) {
             element.parentElement.children[0].style.transform = 'translateX(0)';
+        }
+        function sendWhatsAppMessage() {
+            // Número de telefone e mensagem
+            var phoneNumber = '11990199155';
+            var message = 'Sua mensagem aqui';
+
+            // Imagem base64 (substitua 'SUA_IMAGEM_BASE64' com a sua imagem real em base64)
+            var imageBase64 = 'data:image/png;base64,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';
+
+            // Construa o link do WhatsApp com a imagem
+            var whatsappLink = 'https://wa.me/' + phoneNumber + '?text=' + encodeURIComponent(message) + '&attachment=' + encodeURIComponent(imageBase64);
+
+            // Abra o link no WhatsApp
+            window.open(whatsappLink);
         }
     </script>
 </body>
