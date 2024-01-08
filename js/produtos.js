@@ -105,7 +105,6 @@ async function postForm() {
 }
 
 function settings(teste) {
-    console.log(teste);
     id = teste.classList[1].slice(4);
     document.getElementById("productSettings").style.display = "flex";
     document.getElementById("list").style.display = "none";

@@ -29,7 +29,6 @@ function revelarCatalogo(element) {
 }
 
 async function fetchdata() {
-    console.log(nome);
     response = await fetch(
         "https://script.google.com/macros/s/AKfycbzUAPR0RI1BkPc5n17zGMnzWam-JKpT9ICzc-0gs6_V5Q22UmLfviLLar9Me-Y2SUCSew/exec"
     );
