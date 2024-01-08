@@ -1,10 +1,29 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 const port = 3000;
 
+function gerarStringAleatoria(tamanho) {
+    const caracteres =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var resultado = "";
+
+    for (let i = 0; i < tamanho; i++) {
+        const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+        resultado += caracteres.charAt(indiceAleatorio);
+    }
+
+    return resultado;
+}
+
+result = gerarStringAleatoria(15);
+
 // Rota para a página inicial
-app.get('/', (req, res) => {
-  const htmlContent = `
+app.get("/", (req, res) => {
+    res.send('localhost:3000/' + result);
+});
+
+app.get(`/${result}`, (req, res) => {
+    const htmlContent = `
   <!DOCTYPE html>
   <html lang="pt-br">
   
@@ -394,7 +413,7 @@ app.get('/', (req, res) => {
           <img class="logo" src="https://raw.githubusercontent.com/JhefAraujo/Clone-conecta/0006c106a38a3a2358166227f9320cc91f684f39/logoVetor.svg" alt="Logo Mallorca">
       </div>
       <header>
-          <img src="mono-02.svg" alt="Logo Mallorca">
+          <img src="https://raw.githubusercontent.com/JhefAraujo/Clone-conecta/main/logowrite.svg" alt="Logo Mallorca">
           <p style="display: none;">enviar pedido -></p>
           <div style="display: none;" class="send" onclick="sendWhatsAppMessage()"></div>
       </header>
@@ -526,10 +545,10 @@ app.get('/', (req, res) => {
   
   </html>
   `;
-  res.send(htmlContent);
+    res.send(htmlContent);
 });
 
 // Iniciando o servidor
 app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
+    console.log(`Servidor rodando em http://localhost:${port}`);
 });
