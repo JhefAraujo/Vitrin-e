@@ -25,6 +25,10 @@
             font-family: 'Roboto', serif;
         }
 
+        *::selection {
+            background-color: rgba(0, 0, 0, 0.367);
+        }
+
         html,
         body {
             width: 100vw;
@@ -193,6 +197,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
         }
 
         .rightArrow {
@@ -209,6 +214,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
         }
 
         .carousel {
@@ -279,6 +285,7 @@
             width: 30%;
             text-align: center;
             height: 40px;
+            cursor: pointer;
         }
 
         .quantity {
@@ -304,6 +311,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
+        }
+
+        .plus::selection {
+            background-color: transparent;
         }
 
         .minus {
@@ -314,6 +326,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
+        }
+
+        .minus::selection {
+            background-color: transparent;
         }
 
         .send {

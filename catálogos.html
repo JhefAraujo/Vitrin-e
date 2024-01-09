@@ -27,7 +27,7 @@
                 <p>Ordenar por:</p>
                 <div onclick="seta('novos')" id="novos" class="classificar active">Novos</div>
                 <div onclick="seta('titulo')" id="titulo" class="classificar">Título</div>
-                <div onclick="seta('usuario')" id="usuario" class="classificar">Ususário</div>
+                <div onclick="seta('usuario')" id="usuario" class="classificar">Usuário</div>
             </div>
         </div>
         <div class="container">
@@ -63,6 +63,39 @@
             <div id="popupImage"></div>
         </div>
     </section>
+    <section class="catalogo" id="createCatalog">
+        <div class="menu">
+            <h2>Criar catálogo</h2>
+        </div>
+        <div class="firstCat cat">
+            <label for="nomeCatalogo">Título</label>
+            <input type="text" id="nomeCatalogo">
+        </div>
+        <div class="secondCat cat">
+            <div class="wrapper">
+                <label for="dataValidade">Data de validade</label>
+                <input type="date" id="dataValidade" maxlength="14">
+            </div>
+        </div>
+        <div class="productHeader">Produtos
+            <div class="addproduct">
+                Adicionar
+            </div>
+        </div>
+        <div class="productBox">
+            <div class="productContainer" id="productContainer">
+            </div>
+        </div>
+        <div class="save">
+            salvar
+        </div>
+        <div class="filter" onclick="offImage()" style="display: none;">
+            <div id="popupImage"></div>
+        </div>
+    </section>
+    <div class="addpopup">
+        <div class="pop"></div>
+    </div>
 </body>
 <script src="js/catálogos.js"></script>
 </html>
