@@ -35,7 +35,7 @@ async function fetchdata() {
     bruto = await response.json();
     for (let i = 0; i < bruto.length; i++) {
         if (bruto[i]["8"] == nome) {
-            firstimg = bruto[i][0].split(' ');
+            firstimg = bruto[i][0].split(" ");
             criaCard = document.createElement("div");
             criaCard.setAttribute("class", "productCard");
             criaImage = document.createElement("div");
@@ -75,7 +75,7 @@ async function renderCatalogos() {
         const element = brute[i];
         criaCard = document.createElement("div");
         criaCard.setAttribute("class", "card");
-        criaCard.setAttribute('onclick', 'revelarCatalogo(this), fetchdata()')
+        criaCard.setAttribute("onclick", "revelarCatalogo(this), fetchdata()");
         criaCard.innerHTML = `<div class="line">
         <div class="views"><img src="view.png" class="view" alt="views">1557</div>
         <div class="settings">
@@ -93,7 +93,7 @@ async function renderCatalogos() {
         <div class="telegram"><img src="telegram.png" alt="telegram"></div>
     </div>`;
     }
-    document.getElementsByClassName('container')[0].appendChild(criaCard)
+    document.getElementsByClassName("container")[0].appendChild(criaCard);
 }
 
 renderCatalogos();
