@@ -531,7 +531,24 @@
             // Abra o link no WhatsApp
             window.open(whatsappLink);
         }
+
+        function baixarImagem(url) {
+            fetch(url)
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'imagem.webp';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                })
+                .catch(error => {
+                    console.error('Erro ao baixar a imagem:', error);
+                });
+        }
     </script>
 </body>
-
 </html>
