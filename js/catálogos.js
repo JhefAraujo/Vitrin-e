@@ -25,6 +25,15 @@ function revelarCatalogo(element) {
     document.getElementsByTagName("a")[0].href = "catálogos.html";
     nome = element.children[2].children[0].innerHTML;
     document.getElementById("nomeCatalogo").value = nome;
+    for (let i = 0; i < brute.length; i++) {
+        elemento = brute[i];
+        if (elemento[0] == nome) {
+           document.getElementById("dataValidade").value = elemento[1].slice(0,10); 
+        }
+        if (elemento[0] == nome && elemento[3] == "espec") {
+            document.getElementById("base").checked = true;
+        }
+    }
     return nome;
 }
 
@@ -92,8 +101,8 @@ async function renderCatalogos() {
         <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
         <div class="telegram"><img src="telegram.png" alt="telegram"></div>
     </div>`;
-    }
     document.getElementsByClassName("container")[0].appendChild(criaCard);
+    }
 }
 
 renderCatalogos();
