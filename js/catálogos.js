@@ -56,10 +56,14 @@ async function fetchdata() {
 
             criaInfo = document.createElement("div");
             criaInfo.setAttribute("class", "productInfo");
-            criaInfo.innerHTML = `<p>${bruto[i][1]}</p><div class="removerProduto">Remover do catálogo</div>`;
+            criaInfo.innerHTML = `<p>${bruto[i][1]}</p><div class="removerProduto" onClick="removeProduct(this.parentElement.parentElement)">Remover do catálogo</div>`;
             criaCard.appendChild(criaInfo);
         }
     }
+}
+
+function removeProduct(element) {
+    element.remove();
 }
 
 function showImage(element) {
@@ -86,7 +90,7 @@ async function renderCatalogos() {
         criaCard.setAttribute("class", "card");
         criaCard.setAttribute("onclick", "revelarCatalogo(this), fetchdata()");
         criaCard.innerHTML = `<div class="line">
-        <div class="views"><img src="view.png" class="view" alt="views">1557</div>
+        <div class="views"><img src="view.png" class="view" alt="views">${element[4]}</div>
         <div class="settings">
             <img class="edit" src="edit.png" alt="edit">
             <img src="close.png" alt="close" class="close">
