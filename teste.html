@@ -398,16 +398,17 @@
             width: 100vw;
             background-color: rgba(0, 0, 0, 0.8);
             color: white;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border: 1px  solid black;
-            box-shadow: 1px 1px 25px black;
+            animation: surgir 0.7s ease-out;
+            display: none;
         }
         .cookies h2 {
             text-align: center;
             position: absolute;
             top: 2vh;
-            left: 50%;
-            transform: translateX(-50%);
+            width: 100%;
         }
         .cookies p {
             width: 90%;
@@ -429,6 +430,22 @@
             border-radius: 3px;
             left: 50%;
             transform: translateX(-50%);
+        }
+        @keyframes surgir {
+            0% {
+                transform: translateY(100%);
+            }
+            100% {
+                transform: translate(0);
+            }
+        }
+        @keyframes desaparecer {
+            0% {
+                transform: translateY(0%);
+            }
+            100% {
+                transform: translateY(100%);
+            }
         }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -461,10 +478,15 @@
     <div class="cookies">
         <h2>Aviso de cookies</h2>
         <p>Este site utiliza cookies para melhorar a sua experiência de navegação. Ao continuar a utilizar este site, você concorda com o nosso uso de cookies.</p>
-        <span class="continuar">Ok</span>
+        <span onclick="desaparece()" class="continuar">Ok</span>
     </div>
     <script>
-        document.cookie = "username=; expires=Thu, 01 Jan 2970 00:00:00 UTC; path=/;";
+        function desaparece() {
+            document.getElementsByClassName('cookies')[0].style.animation = 'desaparecer 0.7s ease-out';
+            setTimeout(() => {
+                document.getElementsByClassName('cookies')[0].style.display = 'none';
+            }, 700);
+        }
 
         var pedido = {};
         var quantidade = 0;
@@ -539,6 +561,7 @@
             document.getElementsByClassName('loader')[0].style.opacity = '0';
             setTimeout(() => {
                 document.getElementsByClassName('loader')[0].style.display = 'none';
+                document.getElementsByClassName('cookies')[0].style.display = 'block';
             }, 1000);
         }
         fetchAndAppend();
