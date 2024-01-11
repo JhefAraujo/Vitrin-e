@@ -4,7 +4,6 @@ const randomstring = require("randomstring");
 
 const app = express();
 const port = 3000;
-// Gera um link aleatório de 10 caracteres
 const randomLink = randomstring.generate(10);
 
 app.get("/", (req, res) => {

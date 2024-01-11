@@ -391,6 +391,45 @@
                 width: 45vw !important;
             }
         }
+        .cookies {
+            position: fixed;
+            bottom: 0;
+            height: 30vh;
+            width: 100vw;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            backdrop-filter: blur(5px);
+            border: 1px  solid black;
+            box-shadow: 1px 1px 25px black;
+        }
+        .cookies h2 {
+            text-align: center;
+            position: absolute;
+            top: 2vh;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .cookies p {
+            width: 90%;
+            margin: auto;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .continuar {
+            text-align: center;
+            color: black;
+            font-weight: bolder;
+            padding: 10px;
+            background-color: white;
+            width: 15vw;
+            position: absolute;
+            bottom: 2vh;
+            border-radius: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -419,7 +458,14 @@
     </main>
     <section class="products" id="products">
     </section>
+    <div class="cookies">
+        <h2>Aviso de cookies</h2>
+        <p>Este site utiliza cookies para melhorar a sua experiência de navegação. Ao continuar a utilizar este site, você concorda com o nosso uso de cookies.</p>
+        <span class="continuar">Ok</span>
+    </div>
     <script>
+        document.cookie = "username=; expires=Thu, 01 Jan 2970 00:00:00 UTC; path=/;";
+
         var pedido = {};
         var quantidade = 0;
         function showQuantity(element) {
@@ -551,4 +597,5 @@
         }
     </script>
 </body>
+
 </html>
