@@ -622,3 +622,13 @@ input:checked + .slider:before {
     align-items: center;
     column-gap: 5px;
 }
+
+.thirdCat label {
+    background-color: #1a5f35;
+    padding: 10px;
+    width: max-content;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: auto;
+}
