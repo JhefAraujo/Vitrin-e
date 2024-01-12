@@ -108,5 +108,5 @@ async function renderCatalogos() {
     document.getElementsByClassName("container")[0].appendChild(criaCard);
     }
 }
-
+//criar funcionalidade
 renderCatalogos();
