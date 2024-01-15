@@ -391,6 +391,7 @@
                 width: 45vw !important;
             }
         }
+
         .cookies {
             position: fixed;
             bottom: 0;
@@ -400,16 +401,18 @@
             color: white;
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px  solid black;
+            border: 1px solid black;
             animation: surgir 0.7s ease-out;
             display: none;
         }
+
         .cookies h2 {
             text-align: center;
             position: absolute;
             top: 2vh;
             width: 100%;
         }
+
         .cookies p {
             width: 90%;
             margin: auto;
@@ -418,6 +421,7 @@
             top: 50%;
             transform: translate(-50%, -50%);
         }
+
         .continuar {
             text-align: center;
             color: black;
@@ -431,36 +435,40 @@
             left: 50%;
             transform: translateX(-50%);
         }
+
         @keyframes surgir {
             0% {
                 transform: translateY(100%);
             }
+
             100% {
                 transform: translate(0);
             }
         }
+
         @keyframes desaparecer {
             0% {
                 transform: translateY(0%);
             }
+
             100% {
                 transform: translateY(100%);
             }
         }
+
         .popinfo {
             position: fixed;
             top: 0;
             left: 0;
             height: 100vh;
             width: 100vw;
-            display: flex;
             backdrop-filter: blur(5px);
             z-index: 999999999;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
-            display: none;
         }
+
         .pop {
             display: flex;
             flex-direction: column;
@@ -468,17 +476,30 @@
             justify-content: center;
             background-color: rgb(0, 0, 0);
             height: 40vh;
-            width: 50vw;
+            width: 60vw;
             color: white;
-            border-radius: 5px;
+            border-radius: 8px;
+            position: relative;
         }
+
         .submit {
             background-color: goldenrod;
             padding: 5px;
             border-radius: 5px;
+            position: absolute;
+            bottom: 10px;
         }
+
         .wrap {
             width: min-content;
+        }
+
+        .master {
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
         }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -510,22 +531,25 @@
     </section>
     <div class="cookies">
         <h2>Aviso de cookies</h2>
-        <p>Este site utiliza cookies para melhorar a sua experiência de navegação. Ao continuar a utilizar este site, você concorda com o nosso uso de cookies.</p>
+        <p>Este site utiliza cookies para melhorar a sua experiência de navegação. Ao continuar a utilizar este site,
+            você concorda com o nosso uso de cookies.</p>
         <span onclick="desaparece()" class="continuar">Ok</span>
     </div>
     <div class="popinfo">
         <div class="pop">
-            <div class="wrap">
-                <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome">
-            </div>
-            <div class="wrap">
-                <label for="tel">Telefone</label>
-                <input type="text" id="tel" name="tel">
-            </div>
-            <div class="wrap">
-                <label for="email">Email</label>
-                <input type="text" id="email" name="email">
+            <div class="master">
+                <div class="wrap">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome">
+                </div>
+                <div class="wrap">
+                    <label for="tel">Telefone</label>
+                    <input type="text" id="tel" name="tel">
+                </div>
+                <div class="wrap">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email">
+                </div>
             </div>
             <div class="submit">Enviar</div>
         </div>
@@ -538,7 +562,7 @@
             }, 700);
         }
 
-        var pedido = {};
+        var pedido = [];
         var quantidade = 0;
         function showQuantity(element) {
             parent = element.parentElement;
@@ -558,6 +582,8 @@
             parentPlus.children[1].innerHTML++;
             quantidade++;
             carrinho();
+            titulo = parentPlus.parentElement.children[1].children[0].innerHTML;
+            pedido.push({produto: titulo, quanti: parentPlus.children[1].innerHTML})
         }
         function minusElem(element) {
             parentPlus = element.parentElement;
@@ -636,19 +662,45 @@
         function carouselleft(element) {
             element.parentElement.children[0].style.transform = 'translateX(0)';
         }
+
         function sendWhatsAppMessage() {
-            // Número de telefone e mensagem
-            var phoneNumber = '11990199155';
-            var message = 'Sua mensagem aqui';
+            if (clienteIdentificado == true) {
+                enviarPedido()
+            }
+        }
 
-            // Imagem base64 (substitua 'SUA_IMAGEM_BASE64' com a sua imagem real em base64)
-            var imageBase64 = 'data:image/png;base64,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';
+        function enviarPedido() {
+            var formdata = new FormData();
+            formdata.append("nome", "jhefferson manoel de araujo");
+            formdata.append("cpf", "111.111.111-51");
+            formdata.append("email", "teste@teste.com");
+            formdata.append("telefone", "11990199155");
+            formdata.append("cep", "09970240");
+            formdata.append("estado", "SP");
+            formdata.append("cidade", "São Paulo");
+            formdata.append("endereco", "Rua Frei Caneca 558");
+            formdata.append("bairro", "consolacao");
+            formdata.append("caralogo", "verano");
+            formdata.append("frete", "teste");
+            formdata.append("valorfrete", "15");
+            formdata.append("pagamento", "cartao");
+            formdata.append("valorpedido", "150");
+            formdata.append("produtos", "Anel teste + brinco teste");
+            formdata.append("situacao", "em aberto");
+            formdata.append("data", "15/01/2024");
+            formdata.append("vendedor", "teste");
 
-            // Construa o link do WhatsApp com a imagem
-            var whatsappLink = 'https://wa.me/' + phoneNumber + '?text=' + encodeURIComponent(message) + '&attachment=' + encodeURIComponent(imageBase64);
+            var requestOptions = {
+                method: 'POST',
+                body: formdata,
+                redirect: 'follow',
+                mode: 'no-cors'
+            };
 
-            // Abra o link no WhatsApp
-            window.open(whatsappLink);
+            fetch("https://script.google.com/macros/s/AKfycby8UCVgOuKamlDT-MRw2azfKHYo4rO7yVx7f7buQTg8qpWIrWyc2U_tW5fVWMjv8P97vA/exec", requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
         }
 
         function baixarImagem(url) {
