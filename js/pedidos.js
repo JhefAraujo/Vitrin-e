@@ -169,10 +169,15 @@ async function reveal(id) {
     document.getElementById("descTable").innerHTML = arr[9];
 }
 
-function alteradado(id, column) {
+function alteradado(id) {
     var formdata = new FormData();
-    formdata.append("coluna", column);
-    formdata.append("valor", id);
+
+    grupo = document.querySelectorAll('input[type="checkbox"]:checked');
+    for (let i = 0; i < grupo.length; i++) {
+        const element = grupo[i];
+        formdata.append("coluna", parseInt(element.parentElement.children[1].innerHTML) + 1);
+        formdata.append("valor", id);
+    }
 
     var requestOptions = {
         method: "POST",

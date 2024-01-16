@@ -113,3 +113,7 @@ async function renderCatalogos() {
 }
 //criar funcionalidade
 renderCatalogos();
+
+function criaCatalogo() {
+    document.getElementById('')
+}
