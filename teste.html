@@ -464,7 +464,7 @@
             width: 100vw;
             backdrop-filter: blur(5px);
             z-index: 999999999;
-            display: none;
+            display: flex;
             align-items: center;
             justify-content: center;
         }
@@ -499,7 +499,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-around;
+            justify-content: center;
+            row-gap: 10px;
+        }
+
+        .master input {
+            height: 35px;
+            padding: 5px;
+            font-weight: bold;
         }
 
         .card .down {
@@ -554,18 +561,9 @@
     <div class="popinfo">
         <div class="pop">
             <div class="master">
-                <div class="wrap">
-                    <label for="nome">Nome</label>
-                    <input type="text" id="nome" name="nome">
-                </div>
-                <div class="wrap">
-                    <label for="tel">Telefone</label>
-                    <input type="text" id="tel" name="tel">
-                </div>
-                <div class="wrap">
-                    <label for="email">Email</label>
-                    <input type="text" id="email" name="email">
-                </div>
+                    <input autocomplete="off" type="text" placeholder="Nome" id="nome" name="nome">
+                    <input autocomplete="off" type="text" placeholder="Telefone" id="tel" name="tel">
+                    <input autocomplete="off" type="text" placeholder="E-mail" id="email" name="email">
             </div>
             <div class="submit">Enviar</div>
         </div>
