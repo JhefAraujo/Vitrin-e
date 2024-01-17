@@ -129,13 +129,14 @@
             <label for="createDesc">Descrição</label>
             <input type="text" id="createDesc" name="createDesc">
         </div>
-        <div class="midiaBox">
-            <div class="txtSpace">
-                <h3>Mídias do produto</h3>
-                <p>Tamanho recomendado: 800px x 800px JPG,PNG ou WEBP</p>
-            </div>
+        <div class="txtSpace">
+            <h3>Mídias do produto</h3>
+            <p>Tamanho recomendado: 800px x 800px JPG,PNG ou WEBP</p>
+        </div>
+        <div id="mediabox" class="midiaBox">
+
             <label class="midiaBtn" for="midia">Adicionar midia</label>
-            <input type="file" name="midia" id="midia" style="display: none;">
+            <input oninput="renderimg(this.value)" type="file" name="midia" id="midia" style="display: none;">
         </div>
         <div class="variations">
             <h3>Variações</h3>

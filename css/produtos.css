@@ -460,7 +460,7 @@ option:checked {
 }
 
 #createDesc {
-    width: 60vw;
+    width: 50vw;
     height: 90px;
     padding: 10px;
     font-size: large;
@@ -474,7 +474,7 @@ option:checked {
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 70vw;
+    width: 65vw;
     margin-left: auto;
     margin-right: auto;
 }
@@ -483,31 +483,35 @@ option:checked {
     border: 1px solid #cccccc;
     width: 50vw;
     margin: auto;
-    margin-top: 25px !important;
-    height: 150px;
     border-radius: 5px;
+    min-height: 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
     position: relative;
+    padding: 15px;
+}
+
+.midiaBox .imgCard {
+    height: 5vw;
 }
 
 .txtSpace {
+    margin-top: 25px !important;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 40%;
-    position: absolute;
+    width: 50vw;
+    margin: auto;
+    height: 60px;
     top: 0;
     background-color: #e8e8e8;
-    border-bottom: 1px solid #cccccc;
+    border: 1px 1px 1px 0 solid black;
 }
 
 .midiaBtn {
-    position: absolute;
     bottom: 5%;
     left: 50%;
     transform: translateX(-50%);

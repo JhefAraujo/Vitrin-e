@@ -145,3 +145,10 @@ function createProduct() {
     document.getElementById("list").style.display = "none";
     document.getElementById("createProduct").style.display = "block";
 }
+
+function renderimg(id) {
+    criaImgCard = document.createElement("div");
+    criaImgCard.innerHTML = `<div class="imgCard"><p>${id}</p>
+    <div class="cardBtn">Remover</div></div>`;
+    document.getElementsByClassName("midiaBox")[0].appendChild(criaImgCard);
+}
