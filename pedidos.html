@@ -139,14 +139,14 @@
                     <td class="dado-table situacao">Situação</td>
                     <td class="dadoTable" id="situTable">
                         <select name="situation" id="situation">
-                            <option selected value="Em aberto" onclick="alteradado('em aberto', 1)">Em aberto</option>
-                            <option value="Em análise" onclick="alteradado('em aberto')">Em análise</option>
-                            <option value="Pago" onclick="alteradado('pago')">Pago</option>
-                            <option value="Em produção" onclick="alteradado('em producao')">Em produção</option>
-                            <option value="Enviado" onclick="alteradado('enviado')">Enviado</option>
-                            <option value="Entregue" onclick="alteradado('entregue')">Entregue</option>
-                            <option value="Finalizado" onclick="alteradado('finalizado')">Finalizado</option>
-                            <option value="Cancelado" onclick="alteradado('cancelado')">Cancelado</option>
+                            <option selected value="em aberto" onclick="alteradado('em aberto', 1)">Em aberto</option>
+                            <option value="em analise" onclick="alteradado('em aberto')">Em análise</option>
+                            <option value="pago" onclick="alteradado('pago')">Pago</option>
+                            <option value="em produção" onclick="alteradado('em producao')">Em produção</option>
+                            <option value="enviado" onclick="alteradado('enviado')">Enviado</option>
+                            <option value="entregue" onclick="alteradado('entregue')">Entregue</option>
+                            <option value="finalizado" onclick="alteradado('finalizado')">Finalizado</option>
+                            <option value="cancelado" onclick="alteradado('cancelado')">Cancelado</option>
                         </select>
                     </td>
                 </tr>
@@ -175,7 +175,7 @@
                 </tr>
             </tbody>
         </table>
-        <div class="save">Salvar</div>
+        <div class="save" onclick="editdado(document.getElementById('numPedido').innerHTML.replace(/\D/g, ''))">Salvar</div>
     </section>
 </body>
 <script src="js/pedidos.js"></script>

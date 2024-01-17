@@ -160,6 +160,7 @@ async function reveal(id) {
     document.getElementById("testecidade").value = arr[6];
     document.getElementById("testeendereco").value = arr[7];
     document.getElementById("testebairro").value = arr[8];
+    document.getElementById("situation").value = arr[15]
     document.getElementById("dataTable").innerHTML = arr[16]
         .slice(0, 10)
         .split("-")
@@ -187,10 +188,16 @@ function alteradado(id) {
         formdata.append("valor", id);
 
         fetch(
-            "https://script.google.com/macros/s/AKfycbxfjnBNYOvW7HLX6KbDdJ1P3njxEHxmiAeLhACHmDaaZ9dLvhkBy_-smSiFfhJxz0z0tg/exec",
+            "https://script.google.com/macros/s/AKfycbwAfsa-t01dGJMvnJXbujCYP0YXqH8csnSyEOARIzeXEukSQKug0SMrYmF3NUbHu2l9Bg/exec",
             requestOptions
         );
     }
+
+    setTimeout(() => {
+        window.location.reload();
+    }, 2000);
+
+}
 
 function editdado(id) {
     var formdata = new FormData();
@@ -199,6 +206,7 @@ function editdado(id) {
         method: "POST",
         body: formdata,
         redirect: "follow",
+        mode: "no-cors"
     };
 
     formdata.append("cliente", document.getElementById('testecliente').value);
@@ -212,14 +220,20 @@ function editdado(id) {
     formdata.append("bairro", document.getElementById('testebairro').value);
     formdata.append("catalogo", document.getElementById('descTable').innerHTML);
     formdata.append("frete", document.getElementById('descTable').innerHTML);
-    formdata.append();
-    formdata.append();
-    formdata.append();
-    formdata.append();
-    formdata.append();
-    formdata.append();
-    formdata.append();
-}
+    formdata.append("valorfrete", document.getElementById('descTable').innerHTML);
+    formdata.append("pagamento", document.getElementById('descTable').innerHTML);
+    formdata.append("valorpedido", document.getElementById('descTable').innerHTML);
+    formdata.append("produtos", document.getElementById('descTable').innerHTML);
+    formdata.append("situacao", document.getElementById('situation').value);
+    formdata.append("data", document.getElementById('dataTable').innerHTML);
+    formdata.append("vendedor", document.getElementById('vendedorTable').innerHTML);
+    formdata.append("acao", "edit");
+    formdata.append("id", parseInt(id) + 1)
+
+    fetch(
+        "https://script.google.com/macros/s/AKfycby4CNMT_XKXTOv6ll7fhIKNmx_NZnjAgujPcHT4KA4KBEM12VE246Y8T1Qd_bq_nF142w/exec",
+        requestOptions
+    );
 
     setTimeout(() => {
         window.location.reload();
