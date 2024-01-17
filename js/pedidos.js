@@ -186,9 +186,10 @@ function alteradado(id) {
 
         formdata.append("coluna", parseInt(element.parentElement.children[1].innerHTML) + 1);
         formdata.append("valor", id);
+        formdata.append("action", "menu")
 
         fetch(
-            "https://script.google.com/macros/s/AKfycbwAfsa-t01dGJMvnJXbujCYP0YXqH8csnSyEOARIzeXEukSQKug0SMrYmF3NUbHu2l9Bg/exec",
+            "https://script.google.com/macros/s/AKfycbxiG42iCyis3fJqshWMW9zOuU2lrLxzFUr3H3JjoaTyMfFujRMScz6MdSvkEvu7rJ8KRA/exec",
             requestOptions
         );
     }
