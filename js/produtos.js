@@ -152,3 +152,8 @@ function renderimg(id) {
     <div class="cardBtn">Remover</div></div>`;
     document.getElementsByClassName("midiaBox")[0].appendChild(criaImgCard);
 }
+
+function addvariation() {
+    criaInput = document.createElement('input');
+    document.getElementsByClassName('variations')[0].appendChild(criaInput);
+}

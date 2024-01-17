@@ -483,8 +483,8 @@ option:checked {
     border: 1px solid #cccccc;
     width: 50vw;
     margin: auto;
-    border-radius: 5px;
-    min-height: 150px;
+    border-radius: 0 0 5px 5px;
+    min-height: 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -508,14 +508,13 @@ option:checked {
     height: 60px;
     top: 0;
     background-color: #e8e8e8;
-    border: 1px 1px 1px 0 solid black;
+    border-radius: 5px 5px 0 0;
+    border: 1px solid #cccccc;
 }
 
 .midiaBtn {
-    bottom: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #cccccc;
+    background-color: #e8e8e8;
+    border: 1px solid #cccccc;
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
@@ -523,7 +522,7 @@ option:checked {
 
 .variations {
     margin-top: 25px !important;
-    height: 120px;
+    min-height: 120px;
     width: 60vw;
     margin: auto;
     border: 1px solid #cccccc;
@@ -634,6 +633,16 @@ option:checked {
     position: fixed;
     bottom: 2vh;
     right: 2vh;
+}
+
+.salve {
+    background-color: #0e5129;
+    padding: 15px;
+    border-radius: 5px;
+    position: fixed;
+    bottom: 2vw;
+    right: 2vw;
+    color: white;
 }
 
 .imgCard img {
