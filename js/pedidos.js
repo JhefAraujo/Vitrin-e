@@ -151,15 +151,15 @@ async function reveal(id) {
 
     document.getElementById("numPedido").innerHTML += " - " + (id + 1);
     document.getElementById("clientName").innerHTML = "pedido de " + arr[0];
-    document.getElementById("nomeTable").innerHTML = arr[0];
-    document.getElementById("cpfTable").innerHTML = arr[1];
-    document.getElementById("emailTable").innerHTML = arr[2];
-    document.getElementById("telefoneTable").innerHTML = arr[3];
-    document.getElementById("cepTable").innerHTML = arr[4];
-    document.getElementById("estadoTable").innerHTML = arr[5];
-    document.getElementById("cidadeTable").innerHTML = arr[6];
-    document.getElementById("enderecoTable").innerHTML = arr[7];
-    document.getElementById("bairroTable").innerHTML = arr[8];
+    document.getElementById("testecliente").value = arr[0];
+    document.getElementById("testecpf").value = arr[1];
+    document.getElementById("testeemail").value = arr[2];
+    document.getElementById("testetelefone").value = arr[3];
+    document.getElementById("testecep").value = arr[4];
+    document.getElementById("testeestado").value = arr[5];
+    document.getElementById("testecidade").value = arr[6];
+    document.getElementById("testeendereco").value = arr[7];
+    document.getElementById("testebairro").value = arr[8];
     document.getElementById("dataTable").innerHTML = arr[16]
         .slice(0, 10)
         .split("-")
@@ -170,14 +170,30 @@ async function reveal(id) {
 }
 
 function alteradado(id) {
-    var formdata = new FormData();
-
     grupo = document.querySelectorAll('input[type="checkbox"]:checked');
+
     for (let i = 0; i < grupo.length; i++) {
+        var formdata = new FormData();
+    
+        var requestOptions = {
+            method: "POST",
+            body: formdata,
+            redirect: "follow",
+        };
+
         const element = grupo[i];
+
         formdata.append("coluna", parseInt(element.parentElement.children[1].innerHTML) + 1);
         formdata.append("valor", id);
+
+        fetch(
+            "https://script.google.com/macros/s/AKfycbxfjnBNYOvW7HLX6KbDdJ1P3njxEHxmiAeLhACHmDaaZ9dLvhkBy_-smSiFfhJxz0z0tg/exec",
+            requestOptions
+        );
     }
+
+function editdado(id) {
+    var formdata = new FormData();
 
     var requestOptions = {
         method: "POST",
@@ -185,10 +201,26 @@ function alteradado(id) {
         redirect: "follow",
     };
 
-    fetch(
-        "https://script.google.com/macros/s/AKfycbxfjnBNYOvW7HLX6KbDdJ1P3njxEHxmiAeLhACHmDaaZ9dLvhkBy_-smSiFfhJxz0z0tg/exec",
-        requestOptions
-    );
+    formdata.append("cliente", document.getElementById('testecliente').value);
+    formdata.append("cpf", document.getElementById('testecpf').value);
+    formdata.append("email", document.getElementById('testeemail').value);
+    formdata.append("telefone", document.getElementById('testetelefone').value);
+    formdata.append("cep", document.getElementById('testecep').value);
+    formdata.append("estado", document.getElementById('testeestado').value);
+    formdata.append("cidade", document.getElementById('testecidade').value);
+    formdata.append("endereco", document.getElementById('testeendereco').value);
+    formdata.append("bairro", document.getElementById('testebairro').value);
+    formdata.append("catalogo", document.getElementById('descTable').innerHTML);
+    formdata.append("frete", document.getElementById('descTable').innerHTML);
+    formdata.append();
+    formdata.append();
+    formdata.append();
+    formdata.append();
+    formdata.append();
+    formdata.append();
+    formdata.append();
+}
+
     setTimeout(() => {
         window.location.reload();
     }, 2000);
