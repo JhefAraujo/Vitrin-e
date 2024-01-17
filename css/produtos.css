@@ -429,11 +429,12 @@ option:checked {
 }
 
 .firstCreate {
-    width: 97vw;
+    width: 50vw;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    column-gap: 30px;
     margin: auto;
     margin-top: 40px;
 }
@@ -459,18 +460,21 @@ option:checked {
 }
 
 #createDesc {
-    width: 97vw;
+    width: 60vw;
     height: 90px;
     padding: 10px;
     font-size: large;
     border-radius: 5px;
     border: 1px solid #cfcfcf;
-    margin-left: auto;
 }
 
 .secondCreate {
-    margin-top: 15px;
-    width: 97vw;
+    row-gap: 5px;
+    margin-top: 35px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 70vw;
     margin-left: auto;
     margin-right: auto;
 }
