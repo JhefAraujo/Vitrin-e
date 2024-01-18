@@ -678,6 +678,7 @@
             time += 172800 * 1000;
             now.setTime(time);
             document.cookie = `nome=${nome}; identificado=true; expires=${now.toUTCString()}; SameSite=None; Secure`;
+            document.cookie = `identificado=true; expires=${now.toUTCString()}; SameSite=None; Secure`;
         }
 
         function showQuantity(element) {
