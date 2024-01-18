@@ -675,7 +675,6 @@
             formData.append("telefone", telefone);
             formData.append("email", email);
 
-            document.getElementsByClassName('popinfo')[0].style.display = 'none';
             var now = new Date();
             var time = now.getTime();
             time += 172800 * 1000;
@@ -686,6 +685,10 @@
             document.getElementById('products').innerHTML = '';
             enviado = true;
             fetchAndAppend();
+
+            setTimeout(() => {
+                document.getElementsByClassName('popinfo')[0].style.display = 'none';
+            }, 1500);
         }
 
         function showQuantity(element) {
