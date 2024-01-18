@@ -650,9 +650,7 @@
         data = new Date();
         biscoito = getCookie('identificado');
 
-        if (biscoito == 'true') {
-            document.getElementsByClassName('popinfo')[0].style.display = 'none';
-        }
+
 
         if (expirado == true) {
             document.getElementById('expira').style.display = 'flex';
@@ -660,6 +658,10 @@
 
         if (identificado == false) {
             document.getElementsByClassName('popinfo')[0].style.display = 'flex';
+        }
+
+        if (biscoito == 'true') {
+            document.getElementsByClassName('popinfo')[0].style.display = 'none';
         }
 
         function enviarCliente() {
