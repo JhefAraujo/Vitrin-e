@@ -675,7 +675,7 @@
             document.getElementsByClassName('popinfo')[0].style.display = 'none';
             var now = new Date();
             var time = now.getTime();
-            time += 3600 * 48000;
+            time += 172800 * 1000;
             document.cookie = `nome=${nome}; identificado=true; expires=${now.toUTCString()}; SameSite=None; Secure`;
         }
 
