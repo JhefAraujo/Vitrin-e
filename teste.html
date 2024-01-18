@@ -202,8 +202,8 @@
 
         .cadastre {
             position: absolute;
-            top: 2%;
-            width: 90%;
+            top: 7%;
+            width: 85%;
             margin: auto;
         }
 
@@ -239,7 +239,7 @@
             position: fixed;
             top: 0;
             left: 0;
-            z-index: 9999999999;
+            z-index: 999999999999999999999999;
             height: 100vh;
             width: 100vw;
             transition-duration: 1s;
@@ -472,7 +472,7 @@
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             z-index: 999999999;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
         }
@@ -534,6 +534,37 @@
             justify-content: center;
             border-radius: 50%;
         }
+
+        .acesso {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 99;
+            height: 100vh;
+            background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%);
+            width: 100vw;
+        }
+
+        .alerta {
+            padding: 5px;
+            font-weight: bolder;
+            color: white;
+        }
+
+        .nocadastro {
+            position: fixed;
+            bottom: 5%;
+            color: white;
+            background-color: black;
+            width: 80%;
+            font-size: small;
+            border: 15px solid black;
+            border-radius: 5px;
+            text-align: center;
+        }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -574,11 +605,17 @@
         <div class="pop">
             <p class="cadastre">Cadastre-se abaixo para conferir os valores dos produtos.</p>
             <div class="master">
-                    <input autocomplete="off" type="text" placeholder="Nome" id="nome" name="nome">
-                    <input autocomplete="off" type="text" placeholder="Telefone" id="tel" name="tel">
-                    <input autocomplete="off" type="text" placeholder="E-mail" id="email" name="email">
+                <input autocomplete="off" type="text" placeholder="Nome" id="nome" name="nome">
+                <input autocomplete="off" type="text" placeholder="Telefone" id="tel" name="tel">
+                <input autocomplete="off" type="text" placeholder="E-mail" id="email" name="email">
             </div>
             <div class="submit">Enviar</div>
+        </div>
+        <p class="nocadastro">Clique aqui para continuar sem cadastro (limitado)<p>
+    </div>
+    <div class="acesso" id="expira">
+        <div class="alerta">
+            <p>Este link expirou, solicite um novo!</p>
         </div>
     </div>
     <script>
@@ -589,8 +626,24 @@
             }, 700);
         }
 
+        var identificado = false;
+        var expirado = false;
         var pedido = [];
         var quantidade = 0;
+        data = new Date();
+
+        if (document.cookie.user == jhef) {
+            console.log('funciona')
+        }
+
+        if (expirado == true) {
+            document.getElementById('expira').style.display = 'flex';
+        }
+
+        if (identificado == false) {
+            document.getElementsByClassName('popinfo')[0].style.display = 'flex';
+        }
+
         function showQuantity(element) {
             parent = element.parentElement;
             minus = parent.children[4].children[0];
@@ -605,6 +658,7 @@
             document.getElementsByTagName('header')[0].children[0].src = 'mono-02.svg';
             carrinho();
         }
+
         function plusElem(element) {
             parentPlus = element.parentElement;
             parentPlus.children[1].innerHTML++;
@@ -613,6 +667,7 @@
             titulo = parentPlus.parentElement.children[1].children[0].innerHTML;
             pedido.push({ produto: titulo, quanti: parentPlus.children[1].innerHTML })
         }
+
         function minusElem(element) {
             parentPlus = element.parentElement;
             parentAbsol = parentPlus.parentElement;
@@ -624,6 +679,7 @@
             quantidade--;
             carrinho();
         }
+
         function carrinho() {
             document.getElementsByTagName('header')[0].children[2].innerHTML = quantidade;
             if (quantidade == 0) {
@@ -676,12 +732,14 @@
                     }
                 }
             }
+
             document.getElementsByClassName('loader')[0].style.opacity = '0';
             setTimeout(() => {
                 document.getElementsByClassName('loader')[0].style.display = 'none';
             }, 1000);
             document.getElementsByClassName('cookies')[0].style.display = 'block';
         }
+
         fetchAndAppend();
         window.addEventListener("load", function () {
             setTimeout(function () {
@@ -689,6 +747,7 @@
                 window.scrollTo(0, 1);
             }, 0);
         });
+
         window.addEventListener('scroll', () => {
             produto = document.getElementsByClassName('card');
             for (let i = 0; i < produto.length; i++) {
@@ -762,6 +821,7 @@
                     console.error('Erro ao baixar a imagem:', error);
                 });
         }
+
     </script>
 </body>
 
