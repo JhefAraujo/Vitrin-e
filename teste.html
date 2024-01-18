@@ -611,7 +611,7 @@
             </div>
             <div class="submit" onclick="enviarCliente()">Enviar</div>
         </div>
-        <p class="nocadastro">Clique aqui para continuar sem cadastro (limitado)
+        <p class="nocadastro" onclick="revelarFotos()">Clique aqui para continuar sem cadastro (limitado)
         <p>
     </div>
     <div class="acesso" id="expira">
@@ -641,6 +641,10 @@
                 }
             }
             return "";
+        }
+
+        function revelarFotos() {
+            document.getElementsByClassName('popinfo')[0].style.display = 'none';
         }
 
         var identificado = false;
