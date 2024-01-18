@@ -200,6 +200,13 @@
             cursor: pointer;
         }
 
+        .cadastre {
+            position: absolute;
+            top: 2%;
+            width: 90%;
+            margin: auto;
+        }
+
         .rightArrow {
             position: absolute;
             top: 45%;
@@ -502,12 +509,16 @@
             align-items: center;
             justify-content: center;
             row-gap: 10px;
+            position: absolute;
+            bottom: 17%;
         }
 
         .master input {
-            height: 35px;
+            height: 25px;
             padding: 5px;
             font-weight: bold;
+            border: none;
+            border-radius: 5px;
         }
 
         .card .down {
@@ -561,6 +572,7 @@
     </div>
     <div class="popinfo">
         <div class="pop">
+            <p class="cadastre">Cadastre-se abaixo para conferir os valores dos produtos.</p>
             <div class="master">
                     <input autocomplete="off" type="text" placeholder="Nome" id="nome" name="nome">
                     <input autocomplete="off" type="text" placeholder="Telefone" id="tel" name="tel">
