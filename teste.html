@@ -611,7 +611,8 @@
             </div>
             <div class="submit">Enviar</div>
         </div>
-        <p class="nocadastro">Clique aqui para continuar sem cadastro (limitado)<p>
+        <p class="nocadastro">Clique aqui para continuar sem cadastro (limitado)
+        <p>
     </div>
     <div class="acesso" id="expira">
         <div class="alerta">
@@ -624,6 +625,22 @@
             setTimeout(() => {
                 document.getElementsByClassName('cookies')[0].style.display = 'none';
             }, 700);
+        }
+
+        function getCookie(nomeCookie) {
+            var nome = nomeCookie + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var cookies = decodedCookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+                while (cookie.charAt(0) == ' ') {
+                    cookie = cookie.substring(1);
+                }
+                if (cookie.indexOf(nome) == 0) {
+                    return cookie.substring(nome.length, cookie.length);
+                }
+            }
+            return "";
         }
 
         var identificado = false;
