@@ -609,7 +609,7 @@
                 <input autocomplete="off" type="text" placeholder="Telefone" id="tel" name="tel">
                 <input autocomplete="off" type="text" placeholder="E-mail" id="email" name="email">
             </div>
-            <div class="submit">Enviar</div>
+            <div class="submit" onclick="enviarCliente()">Enviar</div>
         </div>
         <p class="nocadastro">Clique aqui para continuar sem cadastro (limitado)
         <p>
@@ -648,9 +648,9 @@
         var pedido = [];
         var quantidade = 0;
         data = new Date();
-        biscoito = getCookie('user');
+        biscoito = getCookie('identificado');
 
-        if (biscoito == 'Jhef') {
+        if (biscoito == 'true') {
             document.getElementsByClassName('popinfo')[0].style.display = 'none';
         }
 
@@ -660,6 +660,23 @@
 
         if (identificado == false) {
             document.getElementsByClassName('popinfo')[0].style.display = 'flex';
+        }
+
+        function enviarCliente() {
+            nome = document.getElementById('nome').value;
+            telefone = document.getElementById('tel').value;
+            email = document.getElementById('email').value;
+
+            formData = new FormData();
+            formData.append("nome", nome);
+            formData.append("telefone", telefone);
+            formData.append("email", email);
+
+            document.getElementsByClassName('popinfo')[0].style.display = 'none';
+            var now = new Date();
+            var time = now.getTime();
+            time += 3600 * 48000;
+            document.cookie = `nome=${nome}; identificado=true; expires=${now.toUTCString()}; SameSite=None; Secure`;
         }
 
         function showQuantity(element) {
