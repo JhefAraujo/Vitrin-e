@@ -681,7 +681,9 @@
             now.setTime(time);
             document.cookie = `nome=${nome}; identificado=true; expires=${now.toUTCString()}; SameSite=None; Secure`;
             document.cookie = `identificado=true; expires=${now.toUTCString()}; SameSite=None; Secure`;
-            window.location.reload();
+
+            document.getElementById('products').innerHTML = '';
+            fetchAndAppend();
         }
 
         function showQuantity(element) {
