@@ -80,13 +80,13 @@
             <h2>Criar catálogo</h2>
         </div>
         <div class="firstCat cat">
-            <label for="nomeCatalogo">Título</label>
-            <input type="text" id="nomeCatalogo">
+            <label for="nomeEnviar">Título</label>
+            <input type="text" id="nomeEnviar">
         </div>
         <div class="secondCat cat">
             <div class="wrapper">
-                <label for="dataValidade">Data de validade</label>
-                <input type="date" id="dataValidade" maxlength="14">
+                <label for="enviarData">Data de validade</label>
+                <input type="date" id="enviarData" maxlength="14">
             </div>
         </div>
         <div class="thirdCat cat">
@@ -102,7 +102,7 @@
             <div class="productContainer" id="productContainer">
             </div>
         </div>
-        <div class="save">
+        <div onclick="enviarNovoCatalogo()" class="save">
             salvar
         </div>
         <div class="filter" onclick="offImage()" style="display: none;">
@@ -111,6 +111,15 @@
     </section>
     <div class="addpopup">
         <div class="pop"></div>
+    </div>
+    <div id="popupExcluir">
+        <div class="popExcluir">
+            <p>Você tem certeza?</p>
+            <div class="xWrap">
+                <div onclick="excluir()" class="excluir">Excluir</div>
+                <div class="cancelar">Cancelar</div>
+            </div>
+        </div>
     </div>
 </body>
 <script src="js/catálogos.js"></script>

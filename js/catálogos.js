@@ -96,7 +96,7 @@ async function renderCatalogos() {
         <div class="views"><img src="view.png" class="view" alt="views">${element[4]}</div>
         <div class="settings">
             <img class="edit" src="edit.png" alt="edit">
-            <img src="close.png" alt="close" class="close">
+            <img onclick="popupExcluir(this)" src="close.png" alt="close" class="close">
         </div>
     </div>
     <img class="arquivo" src="new-document.png" alt="file">
@@ -115,6 +115,76 @@ async function renderCatalogos() {
 renderCatalogos();
 
 function criaCatalogo() {
-    document.getElementById('createCatalog').style.display = 'block';
-    document.getElementsByTagName('main')[0].style.display = 'none';
+    document.getElementById("createCatalog").style.display = "block";
+    document.getElementsByTagName("main")[0].style.display = "none";
+}
+
+function enviarNovoCatalogo() {
+    var formdata = new FormData();
+    formdata.append("nome", document.getElementById("nomeEnviar").value);
+    formdata.append(
+        "datavalidade",
+        document.getElementById("enviarData").value
+    );
+
+    var requestOptions = {
+        method: "POST",
+        body: formdata,
+        redirect: "follow",
+        mode: "no-cors",
+    };
+
+    fetch(
+        "https://script.google.com/macros/s/AKfycbx7Vvzuwx6ohZJUr84bRtzqSJyEEDiNS8ZxU6vn6vTh7aseLNNUe3Ii9uKMILIezdSc/exec",
+        requestOptions
+    )
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.log("error", error));
+
+    setTimeout(() => {
+        window.location.reload();
+    }, 2000);
+}
+
+var exclusao;
+
+function popupExcluir(catalogo) {
+    document.getElementById("popupExcluir").style.display = "flex";
+    exclusao = catalogo;
+}
+
+var marcadorExclusao;
+
+function excluir() {
+    catalogoExcluido =
+        exclusao.parentElement.parentElement.parentElement.children[2]
+            .children[0].innerHTML;
+    for (let i = 0; i < brute.length; i++) {
+        const element = brute[i];
+        if (element.includes(catalogoExcluido)) {
+            formdata = new FormData();
+
+            formdata.append("action", "excluir");
+            formdata.append("row", i);
+
+            var requestOptions = {
+                method: "POST",
+                body: formdata,
+                redirect: "follow",
+            };
+
+            fetch(
+                "https://script.google.com/macros/s/AKfycbwQzj3r_puiz-WSxr4R-MHA4DhQUHEY0l1tOpP_mGQ2Fmt1DlcyN4_O8u10Cd5X0k2Y/exec",
+                requestOptions
+            )
+                .then((response) => response.text())
+                .then((result) => console.log(result))
+                .catch((error) => console.log("error", error));
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
+        }
+    }
 }

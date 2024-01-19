@@ -632,3 +632,49 @@ input:checked + .slider:before {
     cursor: pointer;
     margin: auto;
 }
+
+#popupExcluir {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(25px);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.popExcluir {
+    background-color: white;
+    padding: 25px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.247);
+    text-align: center;
+    border-radius: 10px;
+}
+
+.excluir {
+    background-color: black;
+    color: white;
+    padding: 5px;
+    width: 85px;
+    text-align: center;
+    margin-top: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.cancelar {
+    background-color: #ccc;
+    padding: 5px;
+    width: 85px;
+    text-align: center;
+    margin-top: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.xWrap {
+    display: flex;
+    column-gap: 5px;
+}
