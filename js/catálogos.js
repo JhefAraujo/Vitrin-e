@@ -115,5 +115,6 @@ async function renderCatalogos() {
 renderCatalogos();
 
 function criaCatalogo() {
-    document.getElementById('')
+    document.getElementById('createCatalog').style.display = 'block';
+    document.getElementsByTagName('main')[0].style.display = 'none';
 }
