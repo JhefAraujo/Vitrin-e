@@ -523,9 +523,9 @@
 
         .card .down {
             position: absolute;
-            bottom: 2%;
+            top: 2%;
             background-color: goldenrod;
-            left: 27%;
+            left: 8%;
             transform: translateX(-50%);
             height: 40px;
             width: 40px;
@@ -890,9 +890,11 @@
             const element = document.getElementsByClassName('card')[i];
             if (document.getElementsByClassName('numb')[i].innerHTML > 0) {
                 document.getElementsByClassName('card')[i].style.outline = '2px solid goldenrod';
+                document.getElementsByClassName('card')[i].style.boxShadow = '0 0 20px 5px #daa52080';
             }
             else {
                 document.getElementsByClassName('card')[i].style.outline = '1px solid rgba(255, 255, 255, 0.534)';
+                document.getElementsByClassName('card')[i].style.boxShadow = 'none';
             }
         }
         }
