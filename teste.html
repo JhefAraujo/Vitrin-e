@@ -756,11 +756,11 @@
                     if (biscoito == 'true' || enviado == true) {
                         criaCard.innerHTML += `
                                             <p class="price">R$${element[6]},00</p>
-                                            <p onclick="showQuantity(this)" class="buy">Eu quero!</p>
+                                            <p onclick="showQuantity(this), gold()" class="buy">Eu quero!</p>
                                             <div style="display: none;" class="quantity">
-                                            <div onclick="minusElem(this)" class="minus">-</div>
+                                            <div onclick="minusElem(this), gold()" class="minus">-</div>
                                             <p class="numb"></p>
-                                            <div onclick="plusElem(this)" class="plus">+</div>
+                                            <div onclick="plusElem(this), gold()" class="plus">+</div>
                                             </div>
                                             <i class="fa-solid fa-download down" style="color: #ffffff;"></i>`
                     }
@@ -884,6 +884,17 @@
                 });
         }
 
+        function gold() {
+            for (let i = 0; i < document.getElementsByClassName('card').length; i++) {
+            const element = document.getElementsByClassName('card')[i];
+            if (document.getElementsByClassName('numb')[i].innerHTML > 0) {
+                document.getElementsByClassName('card')[i].style.outline = '2px solid goldenrod';
+            }
+            else {
+                document.getElementsByClassName('card')[i].style.outline = '1px solid rgba(255, 255, 255, 0.534)';
+            }
+        }
+        }
     </script>
 </body>
 
