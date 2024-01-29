@@ -700,13 +700,16 @@
             formData.append("telefone", telefone);
             formData.append("email", email);
 
-            var now = new Date();
-            var time = now.getTime();
-            time += 172800 * 1000;
-            now.setTime(time);
-            document.cookie = `nome=${nome}; identificado=true; expires=${now.toUTCString()}; SameSite=None; Secure`;
-            document.cookie = `identificado=true; expires=${now.toUTCString()}; SameSite=None; Secure`;
-            document.cookie = `telefone=${telefone}; expires= 29 Jan 2024 12:17:26; SameSite=None; Secure`;
+            let dataAtualUTC = new Date();
+            let dataDaqui48HorasUTC = new Date(dataAtualUTC.getTime() + (48 * 60 * 60 * 1000));
+            let dataDaqui48AnosUTC = new Date(dataAtualUTC.getTime() + (12 * 30 * 24 * 60 * 60 * 1000));
+            let dataString = dataDaqui48HorasUTC.toISOString();
+            document.cookie = `dataExpiracao=${dataString}; expires=${dataDaqui48HorasUTC.toUTCString()}; path=/`;
+            console.log("Cookie definido com sucesso.");
+
+            document.cookie = `nome=${nome}; identificado=true; expires=${dataDaqui48AnosUTC.toUTCString()}; SameSite=None; Secure`;
+            document.cookie = `identificado=true; expires=${dataDaqui48AnosUTC.toUTCString()}; SameSite=None; Secure`;
+            document.cookie = `telefone=${telefone}; expires= ${dataDaqui48AnosUTC.toUTCString()}; SameSite=None; Secure`;
 
             document.getElementById('products').innerHTML = '';
             enviado = true;
