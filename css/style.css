@@ -1,52 +1,76 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Corinthia&display=swap");
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 
 header {
     height: 70px;
-    background-color: #1A5F35;
+    background-color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: rgb(0, 0, 0);
+    z-index: 1;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.218);
+}
+
+video {
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+h1 {
+    font-family: "Corinthia", "cursive" !important;
+    font-weight: lighter;
+    font-size: 4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12px;
 }
 
 .card {
-    width: 12vw;
-    height: 12vw;
-    background-color: #e7e7e7;
-    border-radius: 15px;
+    width: 14vw;
+    height: 14vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     row-gap: 5px;
     padding: 10px;
+    background: linear-gradient(145deg, #ffffff, rgb(241, 241, 241));
 }
 
 .card:hover {
-    background-color: #CFCFCF;
+    background: linear-gradient(145deg, rgb(235, 235, 235), #ffffff);
+    box-shadow: none;
 }
 
 .card > img {
     height: 60%;
 }
 
-.card i, .card span {
+.card i,
+.card span {
     height: 60%;
     font-size: 50pt;
     margin: 0;
 }
 
-.card > p, a {
+.card > p,
+a {
     text-decoration: none;
-    color: #1A5F35;
-    font-weight: 500;
+    font-size: larger;
+    color: #000000;
+    font-weight: 400;
 }
 
 main {
@@ -55,10 +79,14 @@ main {
     align-items: center;
     justify-content: center;
     height: 80vh;
-    row-gap: 3vh;
 }
 
 .row {
     display: flex;
-    column-gap: 3vh;
+}
+
+.menu {
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.218);
 }
