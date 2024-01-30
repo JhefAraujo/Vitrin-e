@@ -719,6 +719,18 @@
             enviado = true;
             fetchAndAppend();
 
+            var requestOptions = {
+                method: 'POST',
+                body: formData,
+                redirect: 'follow',
+                mode: 'no-cors'
+            };
+
+            fetch("https://script.google.com/macros/s/AKfycbxYQIIta6UcMIFWPD-bT11dAzWtsnwXWkO7qR_DGGcNuCia_TMNUwRJQRRHualePY4e2g/exec", requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+
             setTimeout(() => {
                 document.getElementsByClassName('popinfo')[0].style.display = 'none';
             }, 1500);
@@ -736,7 +748,9 @@
             document.getElementsByTagName('header')[0].children[2].style.display = 'flex';
             document.getElementsByTagName('header')[0].children[0].style.margin = '0';
             document.getElementsByTagName('header')[0].children[0].src = 'mono-02.svg';
+            titulo = parent.children[1].children[0].innerHTML;
             carrinho();
+            pedido.push({ produto: titulo, quanti: parent.children[4].children[1].innerHTML })
         }
 
         function plusElem(element) {
@@ -758,6 +772,16 @@
             }
             quantidade--;
             carrinho();
+            titulo = parentPlus.parentElement.children[1].children[0].innerHTML;
+
+            for (let i = 0; i < pedido.length; i++) {
+                const element = pedido[i];
+                if (element['produto'].includes(titulo)) {
+                    pedido.splice(i, 1);
+                    break;
+                }
+            }
+
         }
 
         function carrinho() {
@@ -840,23 +864,21 @@
         }
 
         function sendWhatsAppMessage() {
-            if (clienteIdentificado == true) {
-                var formdata = new FormData();
-                formdata.append("nome", getCookie('nome'));
-                formdata.append("telefone", "11990199155");
-                formdata.append("email", "jhefferson.araujo@gmail.com");
+            var formdata = new FormData();
+            formdata.append("nome", getCookie('nome'));
+            formdata.append("email", "jhefferson.araujo@gmail.com");
+            formdata.append("telefone", "11990199155");
 
-                var requestOptions = {
-                    method: 'POST',
-                    body: formdata,
-                    redirect: 'follow'
-                };
+            var requestOptions = {
+                method: 'POST',
+                body: formdata,
+                redirect: 'follow'
+            };
 
-                fetch("https://script.google.com/macros/s/AKfycbxYQIIta6UcMIFWPD-bT11dAzWtsnwXWkO7qR_DGGcNuCia_TMNUwRJQRRHualePY4e2g/exec", requestOptions)
-                    .then(response => response.text())
-                    .then(result => console.log(result))
-                    .catch(error => console.log('error', error));
-            }
+            fetch("https://script.google.com/macros/s/AKfycbxYQIIta6UcMIFWPD-bT11dAzWtsnwXWkO7qR_DGGcNuCia_TMNUwRJQRRHualePY4e2g/exec", requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
         }
 
         function enviarPedido() {
