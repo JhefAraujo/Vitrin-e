@@ -792,6 +792,7 @@
         }
 
         function plusElem(element) {
+            element.parentElement.parentElement.children[2]
             for (let i = 0; i < pedido.length; i++) {
                 const elemento = pedido[i];
                 if (elemento['produto'].includes(titulo)) {
@@ -800,11 +801,14 @@
                 }
             }
             parentPlus = element.parentElement;
-            parentPlus.children[1].innerHTML++;
             quantidade++;
             carrinho();
             titulo = parentPlus.parentElement.children[1].children[0].innerHTML;
             preco = apenasNumeros(parentPlus.parentElement.children[2].innerHTML);
+            quanti = parentPlus.parentElement.children[4].children[1].innerHTML;
+            preco = (preco/quanti) + (preco);
+            parentPlus.parentElement.children[2].innerHTML = preco;
+            parentPlus.children[1].innerHTML++;
             pedido.push({ produto: titulo, quanti: parentPlus.children[1].innerHTML });
         }
 
