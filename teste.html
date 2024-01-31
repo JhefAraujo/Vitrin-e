@@ -754,6 +754,13 @@
         }
 
         function plusElem(element) {
+            for (let i = 0; i < pedido.length; i++) {
+                const elemento = pedido[i];
+                if (elemento['produto'].includes(titulo)) {
+                    pedido.splice(i, 1);
+                    break;
+                }
+            }
             parentPlus = element.parentElement;
             parentPlus.children[1].innerHTML++;
             quantidade++;
@@ -781,7 +788,6 @@
                     break;
                 }
             }
-
         }
 
         function carrinho() {
@@ -884,23 +890,10 @@
         function enviarPedido() {
             var formdata = new FormData();
             formdata.append("nome", "jhefferson manoel de araujo");
-            formdata.append("cpf", "111.111.111-51");
             formdata.append("email", "teste@teste.com");
             formdata.append("telefone", "11990199155");
-            formdata.append("cep", "09970240");
-            formdata.append("estado", "SP");
-            formdata.append("cidade", "São Paulo");
-            formdata.append("endereco", "Rua Frei Caneca 558");
-            formdata.append("bairro", "consolacao");
-            formdata.append("caralogo", "verano");
-            formdata.append("frete", "teste");
-            formdata.append("valorfrete", "15");
-            formdata.append("pagamento", "cartao");
             formdata.append("valorpedido", "150");
             formdata.append("produtos", "Anel teste + brinco teste");
-            formdata.append("situacao", "em aberto");
-            formdata.append("data", "15/01/2024");
-            formdata.append("vendedor", "teste");
 
             var requestOptions = {
                 method: 'POST',
