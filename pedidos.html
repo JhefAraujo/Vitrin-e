@@ -6,18 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedidos</title>
     <link rel="stylesheet" href="css/pedidos.css">
+    <script src="https://kit.fontawesome.com/2a683e0d82.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <video src="bgvid.mp4" autoplay muted loop></video>
     <header>
-        <a href="index.html"><img src="back.png" class="back" alt="voltar"></a>
+        <a href="index.html"><i class="fa-solid fa-chevron-left back" style="color: #000000;"></i></a>
         <h1>Vitrin-e</h1>
     </header>
     <main>
-        <div class="menu">
-            <h2>Lista de Pedidos</h2>
-        </div>
         <nav>
             <div id="aberto" onclick="seta('aberto'), toggle('em aberto')" class="botao active">Em aberto</div>
             <div id="analise" onclick="seta('analise'), toggle('em analise')" class="botao">Em análise</div>
@@ -141,13 +139,7 @@
                     <td class="dadoTable" id="situTable">
                         <select name="situation" id="situation">
                             <option selected value="em aberto" onclick="alteradado('em aberto', 1)">Em aberto</option>
-                            <option value="em analise" onclick="alteradado('em aberto')">Em análise</option>
-                            <option value="pago" onclick="alteradado('pago')">Pago</option>
-                            <option value="em produção" onclick="alteradado('em producao')">Em produção</option>
-                            <option value="enviado" onclick="alteradado('enviado')">Enviado</option>
-                            <option value="entregue" onclick="alteradado('entregue')">Entregue</option>
-                            <option value="finalizado" onclick="alteradado('finalizado')">Finalizado</option>
-                            <option value="cancelado" onclick="alteradado('cancelado')">Cancelado</option>
+                            <option value="finalizado" onclick="alteradado('em aberto')">Finalizado</option>
                         </select>
                     </td>
                 </tr>

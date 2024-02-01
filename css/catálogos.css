@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Corinthia&display=swap");
 
 * {
     margin: 0;
@@ -11,13 +12,34 @@ body {
     padding-bottom: 25px;
 }
 
+video {
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
 header {
     height: 70px;
-    background-color: #1a5f35;
+    background-color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: rgb(0, 0, 0);
+    z-index: 19000;
+    position: relative;
+    top: 0;
+}
+
+h1 {
+    font-family: "Corinthia", "cursive" !important;
+    font-weight: lighter;
+    font-size: 4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12px;
 }
 
 .back {
@@ -45,7 +67,7 @@ header {
 }
 
 .menu > h2 {
-    color: #1a5f35;
+    color: #000000;
     font-weight: 600;
 }
 
@@ -54,9 +76,11 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 97vw;
+    width: 100vw;
     margin: auto;
-    border-bottom: 1px solid #cfcfcf;
+    background-color: white;
+    padding: 2vw;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.218);
 }
 
 .create {
@@ -123,7 +147,7 @@ header {
 }
 
 .pesquisa {
-    background-color: #1a5f35;
+    background-color: #000000;
     color: white;
     display: flex;
     align-items: center;
@@ -131,10 +155,6 @@ header {
     padding: 5px;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
-}
-
-.pesquisa:hover {
-    background-color: #062613;
 }
 
 .container {
@@ -150,7 +170,7 @@ header {
 .card {
     width: 15vw;
     height: 16vw;
-    background-color: #f5f5f5;
+    background-color: #ffffff;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -158,10 +178,11 @@ header {
     flex-direction: column;
     cursor: pointer;
     padding: 5px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.218);
 }
 
 .card:hover {
-    background-color: #e8e8e8;
+    background-color: #f5f5f5;
 }
 
 .arquivo {
@@ -176,7 +197,7 @@ header {
 }
 
 .whatsapp {
-    background-color: #1a5f35;
+    background-color: #000000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -202,7 +223,7 @@ header {
 }
 
 .whatsapp:hover {
-    background-color: #062613;
+    background-color: #000000;
 }
 
 .telegram:hover {
@@ -390,7 +411,7 @@ header {
 }
 
 .fileUpload {
-    background-color: #1a5f358e;
+    background-color: #000000;
     color: white;
     margin: auto;
     padding: 5px;
@@ -478,6 +499,7 @@ header {
 .productContainer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    background-color: white;
 }
 
 .productInfo {
@@ -501,7 +523,7 @@ header {
 }
 
 .save {
-    background-color: #1a5f35;
+    background-color: #000000;
     color: white;
     padding: 10px;
     font-size: large;
@@ -546,7 +568,7 @@ header {
 }
 
 .addproduct {
-    background-color: #1a5f35;
+    background-color: #000000;
     padding: 5px;
     color: white;
     cursor: pointer;
@@ -604,11 +626,11 @@ header {
 }
 
 input:checked + .slider {
-    background-color: #1a5f35;
+    background-color: #000000;
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px #1a5f35;
+    box-shadow: 0 0 1px #000000;
 }
 
 input:checked + .slider:before {
@@ -624,7 +646,7 @@ input:checked + .slider:before {
 }
 
 .thirdCat label {
-    background-color: #1a5f35;
+    background-color: #000000;
     padding: 10px;
     width: max-content;
     color: white;
