@@ -845,14 +845,17 @@
         }
 
         function minusElem(element) {
+            parentPlus = element.parentElement;
+            parentAbsol = parentPlus.parentElement;
             preco = apenasNumeros(parentPlus.parentElement.children[2].innerHTML);
             quanti = apenasNumeros(parentPlus.children[1].innerHTML);
             preco -= (preco / quanti);
             if (preco != 0) {
                 parentPlus.parentElement.children[2].innerHTML = "R$" + preco.toString();
             }
-            parentPlus = element.parentElement;
-            parentAbsol = parentPlus.parentElement;
+            else {
+                console.log("era só isso");
+            }
             parentPlus.children[1].innerHTML--;
             if (parentPlus.children[1].innerHTML == 0) {
                 parentPlus.style.display = 'none';
