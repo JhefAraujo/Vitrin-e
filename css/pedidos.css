@@ -100,12 +100,12 @@ nav {
 
 .botao {
     margin-top: 15px;
-    width: 10.9vw;
+    width: 49vw;
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 2px solid rgb(0, 0, 0);
+    border-bottom: 1px solid rgb(0, 0, 0);
     border-radius: 5px 5px 0px 0px;
     cursor: pointer;
     font-size: smaller;
@@ -117,9 +117,9 @@ nav {
 
 .active {
     border-bottom: 0;
-    border-top: 2px solid rgb(0, 0, 0);
-    border-right: 2px solid rgb(0, 0, 0);
-    border-left: 2px solid rgb(0, 0, 0);
+    border-top: 1px solid rgb(0, 0, 0);
+    border-right: 1px solid rgb(0, 0, 0);
+    border-left: 1px solid rgb(0, 0, 0);
 }
 
 .manage {

@@ -18,14 +18,7 @@
     <main>
         <nav>
             <div id="aberto" onclick="seta('aberto'), toggle('em aberto')" class="botao active">Em aberto</div>
-            <div id="analise" onclick="seta('analise'), toggle('em analise')" class="botao">Em análise</div>
-            <div id="pago" onclick="seta('pago'), toggle('pago')" class="botao">Pago</div>
-            <div id="producao" onclick="seta('producao'), toggle('em produção')" class="botao">Em produção</div>
-            <div id="enviado" onclick="seta('enviado'), toggle('enviado')" class="botao">Enviado</div>
-            <div id="entregue" onclick="seta('entregue'), toggle('entregue')" class="botao">Entregue</div>
-            <div id="finalizado" onclick="seta('finalizado'), toggle('finalizado')" class="botao">Finalizado</div>
-            <div id="cancelado" onclick="seta('cancelado'), toggle('cancelado')" class="botao">Cancelado</div>
-            <div id="excluido" onclick="seta('excluido'), toggle('excluido')" class="botao">Excluído</div>
+            <div id="analise" onclick="seta('analise'), toggle('finalizado')" class="botao">Finalizado</div>
         </nav>
         <div class="manage">
             <div class="mover">
@@ -35,13 +28,6 @@
                 <div class="moveMenu">
                     <p onclick="alteradado('em aberto')">Em aberto</p>
                     <p onclick="alteradado('em analise')">Em análise</p>
-                    <p onclick="alteradado('pago')">Pago</p>
-                    <p onclick="alteradado('em produção')">Em produção</p>
-                    <p onclick="alteradado('enviado')">Enviado</p>
-                    <p onclick="alteradado('entregue')">Entregue</p>
-                    <p onclick="alteradado('finalizado')">Finalizado</p>
-                    <p onclick="alteradado('cancelado')">Cancelado</p>
-                    <p onclick="alteradado('excluido')">Excluído</p>
                 </div>
             </div>
             <p id="exibindo"></p>
