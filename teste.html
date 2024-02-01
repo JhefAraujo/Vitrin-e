@@ -617,6 +617,24 @@
             align-items: center;
             justify-content: space-around;
         }
+
+        #showerQuanti {
+            position: absolute;
+            top: 80%;
+            left: 70%;
+            z-index: 999999999999999999999;
+            transform: translate(-60%, -60%);
+            color: white;
+            font-weight: bold;
+            background: black;
+            width: -webkit-fill-available;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            padding: 1px;
+        }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -634,7 +652,10 @@
         <img src="https://github.com/JhefAraujo/Clone-conecta/blob/main/logo%20escrito.png?raw=true"
             alt="Logo Mallorca">
         <p style="display: none;">enviar pedido -></p>
-        <div style="display: none;" class="send" onclick="enviarPedido()"></div>
+        <div style="display: none;" class="send" onclick="enviarPedido()"><i class="fa-solid fa-cart-shopping"
+                style="color: #ffffff;"></i>
+            <p id="showerQuanti"></p>
+        </div>
         <div class="burguer">
             <div class="elem">
                 <p>A</p>
@@ -678,6 +699,8 @@
         </div>
     </div>
     <script>
+        var valorPedido = 0;
+
         function desaparece() {
             document.getElementsByClassName('cookies')[0].style.animation = 'desaparecer 0.7s ease-out';
             setTimeout(() => {
@@ -727,10 +750,18 @@
             document.getElementsByClassName('popinfo')[0].style.display = 'none';
         }
 
+        var nomeCliente;
+        var telefoneCliente;
+        var emailCliente;
+
         function enviarCliente() {
             nome = document.getElementById('nome').value;
             telefone = document.getElementById('tel').value;
             email = document.getElementById('email').value;
+
+            nomeCliente = document.getElementById('nome').value;
+            telefoneCliente = document.getElementById('tel').value;
+            emailCliente = document.getElementById('email').value;
 
             formData = new FormData();
             formData.append("nome", nome);
@@ -782,8 +813,9 @@
             document.getElementsByTagName('header')[0].children[0].style.margin = '0';
             document.getElementsByTagName('header')[0].children[0].src = 'mono-02.svg';
             titulo = parent.children[1].children[0].innerHTML;
+            preco = apenasNumeros(parent.children[2].innerHTML);
+            pedido.push({ produto: titulo, quanti: parent.children[4].children[1].innerHTML, valor: preco })
             carrinho();
-            pedido.push({ produto: titulo, quanti: parent.children[4].children[1].innerHTML })
         }
 
         function apenasNumeros(string) {
@@ -802,17 +834,23 @@
             }
             parentPlus = element.parentElement;
             quantidade++;
-            carrinho();
             titulo = parentPlus.parentElement.children[1].children[0].innerHTML;
             preco = apenasNumeros(parentPlus.parentElement.children[2].innerHTML);
-            quanti = parentPlus.parentElement.children[4].children[1].innerHTML;
-            preco = (preco/quanti) + (preco);
-            parentPlus.parentElement.children[2].innerHTML = preco;
+            quanti = apenasNumeros(parentPlus.children[1].innerHTML);
+            preco += (preco / quanti);
+            parentPlus.parentElement.children[2].innerHTML = "R$" + preco.toString();
             parentPlus.children[1].innerHTML++;
-            pedido.push({ produto: titulo, quanti: parentPlus.children[1].innerHTML });
+            pedido.push({ produto: titulo, quanti: parentPlus.children[1].innerHTML, valor: preco });
+            carrinho();
         }
 
         function minusElem(element) {
+            preco = apenasNumeros(parentPlus.parentElement.children[2].innerHTML);
+            quanti = apenasNumeros(parentPlus.children[1].innerHTML);
+            preco -= (preco / quanti);
+            if (preco != 0) {
+                parentPlus.parentElement.children[2].innerHTML = "R$" + preco.toString();
+            }
             parentPlus = element.parentElement;
             parentAbsol = parentPlus.parentElement;
             parentPlus.children[1].innerHTML--;
@@ -821,20 +859,34 @@
                 parentAbsol.children[3].style.display = 'block';
             }
             quantidade--;
-            carrinho();
             titulo = parentPlus.parentElement.children[1].children[0].innerHTML;
 
             for (let i = 0; i < pedido.length; i++) {
                 const element = pedido[i];
                 if (element['produto'].includes(titulo)) {
-                    pedido.splice(i, 1);
-                    break;
+                    if (element['quanti'] == 1) {
+                        pedido.splice(i, 1);
+                        break;
+                    }
+                    else {
+                        element['quanti']--;
+                        element['valor'] = preco;
+                    }
                 }
             }
+            carrinho();
         }
 
         function carrinho() {
-            document.getElementsByTagName('header')[0].children[2].innerHTML = quantidade;
+            valorPedido = 0;
+
+            for (let i = 0; i < pedido.length; i++) {
+                valorPedido += pedido[i].valor
+            }
+            //document.getElementsByTagName('header')[0].children[2].innerHTML = quantidade;
+            document.getElementById('showerQuanti').innerHTML = quantidade;
+            document.getElementsByTagName('header')[0].children[1].innerHTML = `Pedido - R$${valorPedido},00`
+
             if (quantidade == 0) {
                 document.getElementsByTagName('header')[0].children[1].style.display = 'none';
                 document.getElementsByTagName('header')[0].children[2].style.display = 'none';
@@ -857,7 +909,7 @@
                             <div class="cardInfo"><p class="titulo">${element[2]}</p></div>`;
                     if (biscoito == 'true' || enviado == true) {
                         criaCard.innerHTML += `
-                                            <p class="price">R$${element[6]},00</p>
+                                            <p class="price">R$${element[6]}</p>
                                             <p onclick="showQuantity(this), gold()" class="buy">Eu quero!</p>
                                             <div style="display: none;" class="quantity">
                                             <div onclick="minusElem(this), gold()" class="minus">-</div>
@@ -922,10 +974,11 @@
             }
 
             var formdata = new FormData();
-            formdata.append("nome", "jhefferson manoel de araujo");
-            formdata.append("email", "teste@teste.com");
-            formdata.append("telefone", "11990199155");
-            formdata.append("valorpedido", "150");
+            formdata.append("nome", nomeCliente);
+            formdata.append("email", emailCliente);
+            formdata.append("telefone", telefoneCliente);
+            formdata.append("valorpedido", JSON.stringify(valorPedido));
+            formdata.append("situacao", "em aberto");
             formdata.append("produtos", JSON.stringify(pedido));
 
             var requestOptions = {
