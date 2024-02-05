@@ -154,6 +154,30 @@ function renderimg(id) {
 }
 
 function addvariation() {
-    criaInput = document.createElement('input');
-    document.getElementsByClassName('variations')[0].appendChild(criaInput);
+    criaInput = document.createElement("input");
+    document.getElementsByClassName("variations")[0].appendChild(criaInput);
+}
+
+function enviarProduto() {
+    formData = new FormData();
+
+    formData.append("referencia", document.getElementById("referencia").value);
+    formData.append("grupo", document.getElementById("categoria").value);
+    formData.append("ativo", "sim");
+    formData.append("action", "criar");
+
+    var requestOptions = {
+        method: "POST",
+        body: formData,
+        redirect: "follow",
+        mode: "no-cors",
+    };
+
+    fetch(
+        "https://script.google.com/macros/s/AKfycbwoEFRLiMEaWy13kM5X-HsMT5Ym2oJyIhVkejr_lmSEjRpLgnMZd5mP4Gm9NNaRN1aIoA/exec",
+        requestOptions
+    )
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.log("error", error));
 }

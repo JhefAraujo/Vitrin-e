@@ -64,7 +64,9 @@ h1 {
     position: absolute;
     top: 20px;
     left: 15vw;
+    font-size: 2em;
     cursor: pointer;
+    color: black !important;
 }
 
 .back:hover {

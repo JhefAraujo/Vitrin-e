@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos</title>
     <link rel="stylesheet" href="css/produtos.css">
+    <script src="https://kit.fontawesome.com/2a683e0d82.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
+    <video src="bgvid.mp4" autoplay muted loop></video>
     <header>
-        <a href="index.html"><img src="back.png" class="back" alt="voltar"></a>
+        <a href="index.html"><i class="fa-solid fa-chevron-left back" style="color: #000000;"></i></a>
         <h1>Vitrin-e</h1>
     </header>
     <main>
@@ -121,7 +123,7 @@
             <div class="createWrap">
                 <label for="categoria">Categoria</label>
                 <select name="categoria" id="categoria">
-                    <option value="Anel">Anel</option>
+                    <option value="0 ANEL">Anel</option>
                 </select>
             </div>
         </div>
@@ -143,7 +145,7 @@
             <input type="text" placeholder="Ex: Ródio">
             <div class="addBtn" onclick="addvariation()">Adicionar</div>
         </div>
-        <div class="salve">Salvar</div>
+        <div class="salve" onclick="enviarProduto()">Salvar</div>
     </section>
     <section class="formPost" id="formPost" style="display: none;">
         <form action="">

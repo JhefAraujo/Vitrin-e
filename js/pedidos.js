@@ -184,12 +184,12 @@ function alteradado(id) {
 
         const element = grupo[i];
 
-        formdata.append("coluna", parseInt(element.parentElement.children[1].innerHTML) + 1);
-        formdata.append("valor", id);
-        formdata.append("action", "menu")
+        formdata.append("id", parseInt(element.parentElement.children[1].innerHTML) + 1);
+        formdata.append("situacao", id);
+        formdata.append("acao", "altera")
 
         fetch(
-            "https://script.google.com/macros/s/AKfycbxiG42iCyis3fJqshWMW9zOuU2lrLxzFUr3H3JjoaTyMfFujRMScz6MdSvkEvu7rJ8KRA/exec",
+            "https://script.google.com/macros/s/AKfycbz_VewLk0XuW1lo3ihWmjzyFVosnWEnVhkLXpg2WSJdxKC0VRJh1ObX7lGd8hP1VadUQw/exec",
             requestOptions
         );
     }
