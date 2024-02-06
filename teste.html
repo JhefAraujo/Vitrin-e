@@ -172,15 +172,13 @@
 
         .titulo {
             position: absolute;
-            height: 4em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            height: 2.5em;
+            overflow: hidden;
             top: 14%;
             left: 3%;
             width: 65%;
             font-weight: 300;
-            font-weight: bold;
+            text-overflow: ellipsis;
         }
 
         .leftArrow {
@@ -282,7 +280,7 @@
         .buy {
             color: white;
             position: absolute;
-            top: 82%;
+            bottom: 1%;
             right: 1%;
             padding: 10px;
             background-color: goldenrod;
@@ -296,7 +294,7 @@
         .quantity {
             color: white;
             position: absolute;
-            top: 82%;
+            bottom: 1%;
             right: 1%;
             border-radius: 35px;
             width: 30%;
@@ -944,10 +942,10 @@
                     criaCard = document.createElement('div');
                     criaCard.setAttribute('class', 'card element');
                     criaCard.innerHTML = `<div class="carousel"><img src="${imagem[0]}"alt=""></div>
-                            <div class="cardInfo"><p class="titulo">${element[2]}</p></div>`;
+                            <div class="cardInfo"><p class="titulo">R$${element[6]} - ${element[2]}</p></div>`;
                     if (biscoito == 'true' || enviado == true) {
                         criaCard.innerHTML += `
-                                            <p class="price">R$${element[6]}</p>
+                                            <p class="price"></p>
                                             <p onclick="showQuantity(this), gold()" class="buy">Eu quero!</p>
                                             <div style="display: none;" class="quantity">
                                             <div onclick="minusElem(this), gold()" class="minus">-</div>
