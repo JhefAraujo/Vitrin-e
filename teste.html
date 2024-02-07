@@ -293,7 +293,7 @@
         .quantity {
             color: white;
             position: absolute;
-            bottom: 1%;
+            bottom: 5%;
             right: 1%;
             border-radius: 35px;
             width: 30%;
@@ -433,6 +433,19 @@
             position: absolute;
             top: 2vh;
             width: 100%;
+        }
+
+        .variation {
+            width: 65%;
+            height: 35%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            border-radius: 0 10px 10px 0;
+            transition: 0.3s all;
         }
 
         .cookies p {
@@ -685,7 +698,8 @@
     </section>
     <div class="cookies">
         <h2>Aviso de cookies</h2>
-        <p>Este site utiliza cookies para melhorar a sua experiência de navegação. Ao continuar, você concorda com as condições de uso.</p>
+        <p>Este site utiliza cookies para melhorar a sua experiência de navegação. Ao continuar, você concorda com as
+            condições de uso.</p>
         <span onclick="desaparece()" class="continuar">Ok, continuar</span>
         <span class="naoquero">Não quero</span>
     </div>
@@ -848,7 +862,6 @@
             preco = apenasNumeros(parentPlus.parentElement.children[2].innerHTML);
             quanti = apenasNumeros(parentPlus.children[1].innerHTML);
             preco += (preco / quanti);
-            parentPlus.parentElement.children[2].innerHTML = "R$" + preco.toString();
             parentPlus.children[1].innerHTML++;
             pedido.push({ produto: titulo, quanti: parentPlus.children[1].innerHTML, valor: preco });
             carrinho();
@@ -946,6 +959,11 @@
             for (let i = 0; i < brute.length; i++) {
                 const element = brute[i];
                 imagem = element[0].split(' ');
+                try {
+                    varia = element[5].split('-');
+                } catch (error) {
+                    console.log("500");
+                }
                 if (element[8] == "Verano") {
                     criaCard = document.createElement('div');
                     criaCard.setAttribute('class', 'card element');
@@ -961,6 +979,9 @@
                                             <div onclick="plusElem(this), gold()" class="plus">+</div>
                                             </div>
                                             <a target="_blank" href="blob:https://github.com/cccfc928-8be2-4dd5-b8b4-c16ec3373169"><i class="fa-solid fa-download down" style="color: #ffffff;"></i></a>`
+                        if (varia.length > 1) {
+                            criaCard.innerHTML += '<div class="variation"></div>'
+                        }
                     }
                     else {
                         titulos = document.getElementsByClassName('titulo');
