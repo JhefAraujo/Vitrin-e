@@ -450,13 +450,28 @@
             font-weight: bolder;
             padding: 10px;
             background-color: white;
-            width: 15vw;
+            width: 32vw;
             position: absolute;
             bottom: 2vh;
             border-radius: 3px;
-            left: 50%;
+            left: 30%;
             transform: translateX(-50%);
             cursor: pointer;
+            border: 2px solid white;
+        }
+
+        .naoquero {
+            width: 32vw;
+            position: absolute;
+            bottom: 2vh;
+            text-align: center;
+            color: white;
+            border: 2px solid white;
+            padding: 10px;
+            border-radius: 3px;
+            left: 70%;
+            transform: translateX(-50%);
+            font-weight: bold;
         }
 
         @keyframes surgir {
@@ -670,9 +685,9 @@
     </section>
     <div class="cookies">
         <h2>Aviso de cookies</h2>
-        <p>Este site utiliza cookies para melhorar a sua experiência de navegação. Ao continuar a utilizar este site,
-            você concorda com o nosso uso de cookies.</p>
-        <span onclick="desaparece()" class="continuar">Ok</span>
+        <p>Este site utiliza cookies para melhorar a sua experiência de navegação. Ao continuar, você concorda com as condições de uso.</p>
+        <span onclick="desaparece()" class="continuar">Ok, continuar</span>
+        <span class="naoquero">Não quero</span>
     </div>
     <div class="popinfo">
         <div class="pop">
@@ -845,12 +860,6 @@
             preco = apenasNumeros(parentPlus.parentElement.children[2].innerHTML);
             quanti = apenasNumeros(parentPlus.children[1].innerHTML);
             preco -= (preco / quanti);
-            if (preco != 0) {
-                parentPlus.parentElement.children[2].innerHTML = "R$" + preco.toString();
-            }
-            else {
-                console.log("era só isso");
-            }
             parentPlus.children[1].innerHTML--;
             if (parentPlus.children[1].innerHTML == 0) {
                 parentPlus.style.display = 'none';
