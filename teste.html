@@ -23,7 +23,7 @@
             box-sizing: border-box;
             scroll-behavior: smooth;
             font-family: 'Roboto', serif;
-            -webkit-tap-highlight-color: rgba(255,255,255,0);
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
         }
 
         *::selection {
@@ -439,10 +439,10 @@
 
         .variation {
             width: 0%;
-            height: 15%;
             background-color: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(5px);
             position: absolute;
+            row-gap: 15px;
             top: 50%;
             left: 0;
             transform: translateY(-50%);
@@ -452,11 +452,41 @@
             display: flex;
             align-items: center;
             justify-content: space-around;
+            flex-direction: column;
+        }
+
+        .varWrap {
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            position: relative;
+            height: 53px;
+            width: 100%;
+            transition: 0.3s all;
+        }
+
+        .varWrap p {
+            position: absolute;
+            left: 5px;
+        }
+
+        .numberVar {
+            position: initial !important;
         }
 
         .variation p {
-            opacity: 0;
             transition: all 0.3s;
+        }
+
+        .wrapQuanti {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 40px;
+            width: 95px;
+            position: absolute;
+            right: 5px;
         }
 
         .quanti {
@@ -467,9 +497,8 @@
             font-size: 2em;
             font-weight: bold;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            opacity: 0;
+            width: 40px;
+            height: 40px;
             transition: all 0.3s;
         }
 
@@ -855,8 +884,6 @@
             plus = parent.children[4].children[2];
             parent.children[3].style.display = 'none';
             parent.children[4].style.display = 'flex';
-            parent.children[4].children[1].innerHTML++;
-            quantidade++;
             document.getElementsByTagName('header')[0].children[1].style.display = 'block';
             document.getElementsByTagName('header')[0].children[2].style.display = 'flex';
             document.getElementsByTagName('header')[0].children[0].style.margin = '0';
@@ -864,16 +891,23 @@
             titulo = parent.children[1].children[0].innerHTML;
             preco = apenasNumeros(titulo.substring(0, 5));
             pedido.push({ produto: titulo, quanti: parent.children[4].children[1].innerHTML, valor: preco })
-            carrinho();
-            if (parent.children[6].classList == "variation") {
+
+            try {
+                if (parent.children[6].className == "variation") {
+                parent.children[6].style.padding = '10px';
                 parent.children[4].children[0].style.opacity = '0';
                 parent.children[4].children[2].style.opacity = '0';
-                parent.children[6].style.width = '65%';
+                parent.children[6].style.width = '80%';
                 setTimeout(() => {
                     parent.children[6].children[0].style.opacity = '1';
                     parent.children[6].children[1].style.opacity = '1';
                 }, 200);
+            } 
+            } catch (error) {
+                quantidade ++;
+                parent.children[4].children[1].innerHTML++;
             }
+            carrinho();
         }
 
         function apenasNumeros(string) {
@@ -895,18 +929,24 @@
             titulo = parentPlus.parentElement.children[1].children[0].innerHTML;
             preco = apenasNumeros(titulo.substring(0, 5));
             quanti = apenasNumeros(parentPlus.children[1].innerHTML);
-            preco += (preco / quanti);
             parentPlus.children[1].innerHTML++;
+            preco += (preco / quanti);
             pedido.push({ produto: titulo, quanti: parentPlus.children[1].innerHTML, valor: preco });
             carrinho();
         }
 
         function minusVariation(element) {
-            variacao = element.parentElement;
+            variacao = element.parentElement.parentElement.parentElement;
             card = variacao.parentElement;
-            card.children[4].children[1].innerHTML--;
-            quantidadeProduto = card.children[4].children[1].innerHTML;
-            if (quantidadeProduto == 0) {
+            botoes = element.parentElement;
+            quantidadeVar = botoes.children[1];
+            quantidadeVar.innerHTML --;
+            try {
+                
+            } catch (error) {
+                
+            }
+            if (quantidadeVar == '0') {
                 card.children[3].style.display = 'block';
                 card.children[4].style.display = 'none';
                 variacao.children[0].style.opacity = '0';
@@ -915,6 +955,9 @@
                 setTimeout(() => {
                     variacao.style.width = '0';
                 }, 200);
+                setTimeout(() => {
+                    variacao.style.padding = '0';
+                }, 400);
                 card.style.outline = '1px solid rgba(255, 255, 255, 0.534)';
             }
             quantidade--;
@@ -936,6 +979,18 @@
             carrinho();
         }
 
+        function plusVariation(element) {
+            botoes = element.parentElement;
+            wrapVar = botoes.parentElement;
+            variacao = wrapVar.parentElement;
+            card = variacao.parentElement;
+            card.children[4].children[1].innerHTML++;
+            quantidadeVar = botoes.children[1];
+            quantidadeVar.innerHTML ++;
+            quantidade++;
+            carrinho();
+        }
+
         function minusElem(element) {
             parentPlus = element.parentElement;
             titulo = parentPlus.parentElement.children[1].children[0].innerHTML;
@@ -945,16 +1000,14 @@
             preco -= (preco / quanti);
             parentPlus.children[1].innerHTML--;
             if (parentPlus.children[1].innerHTML == 0) {
-                // parentAbsol.children[3].style.display = 'block';
-                if (parentAbsol.children[6].classList == "variation") {
-                    parent.children[6].children[0].style.opacity = '0';
-                    parent.children[6].children[1].style.opacity = '0';
-                    setTimeout(() => {
-                        parentAbsol.children[6].style.width = '0';
-                    }, 200);
-                }
+
             }
             quantidade--;
+
+            if (quantidade == 0) {
+                parentAbsol.children[4].style.display = 'none';
+                parentAbsol.children[3].style.display = 'block';
+            }
 
             for (let i = 0; i < pedido.length; i++) {
                 const element = pedido[i];
@@ -1055,7 +1108,19 @@
                                             </div>
                                             <a target="_blank" href="blob:https://github.com/cccfc928-8be2-4dd5-b8b4-c16ec3373169"><i class="fa-solid fa-download down" style="color: #ffffff;"></i></a>`
                         if (varia.length > 1) {
-                            criaCard.innerHTML += `<div class="variation"><p>${varia[0]}</p><div class="quanti" onclick="minusVariation(this)">-</div></div>`
+                            criaCard.innerHTML += `<div class="variation"><div class="varWrap">
+                                <p>${varia[0]}</p><div class="wrapQuanti">
+                                    <div class="quanti" onclick="minusVariation(this)">-</div>
+                                    <p class="numberVar">0</p>
+                                    <div class="quanti plusquanti" onclick="plusVariation(this)">+</div>
+                                </div>
+                            </div>
+                            <div class="varWrap">
+                                <p>${varia[1]}</p><div class="wrapQuanti">
+                                    <div class="quanti" onclick="minusVariation(this)">-</div>
+                                    <p class="numberVar">0</p>
+                                    <div class="quanti plusquanti" onclick="plusVariation(this)">+</div>
+                            </div></div>`
                         }
                     }
                     else {
