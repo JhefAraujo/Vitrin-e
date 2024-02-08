@@ -894,18 +894,19 @@
 
             try {
                 if (parent.children[6].className == "variation") {
-                parent.children[6].style.padding = '10px';
-                parent.children[4].children[0].style.opacity = '0';
-                parent.children[4].children[2].style.opacity = '0';
-                parent.children[6].style.width = '80%';
-                setTimeout(() => {
-                    parent.children[6].children[0].style.opacity = '1';
-                    parent.children[6].children[1].style.opacity = '1';
-                }, 200);
-            } 
+                    parent.children[6].style.padding = '10px';
+                    parent.children[4].children[0].style.opacity = '0';
+                    parent.children[4].children[2].style.opacity = '0';
+                    parent.children[6].style.width = '80%';
+                    setTimeout(() => {
+                        parent.children[6].children[0].style.opacity = '1';
+                        parent.children[6].children[1].style.opacity = '1';
+                    }, 200);
+                }
             } catch (error) {
-                quantidade ++;
+                quantidade++;
                 parent.children[4].children[1].innerHTML++;
+                precototal += preco;
             }
             carrinho();
         }
@@ -914,6 +915,8 @@
             var numsStr = string.replace(/[^0-9]/g, '');
             return parseInt(numsStr);
         }
+
+        let precototal = 0;
 
         function plusElem(element) {
             element.parentElement.parentElement.children[2]
@@ -928,9 +931,9 @@
             quantidade++;
             titulo = parentPlus.parentElement.children[1].children[0].innerHTML;
             preco = apenasNumeros(titulo.substring(0, 5));
+            precototal += preco;
             quanti = apenasNumeros(parentPlus.children[1].innerHTML);
             parentPlus.children[1].innerHTML++;
-            preco += (preco / quanti);
             pedido.push({ produto: titulo, quanti: parentPlus.children[1].innerHTML, valor: preco });
             carrinho();
         }
@@ -940,11 +943,11 @@
             card = variacao.parentElement;
             botoes = element.parentElement;
             quantidadeVar = botoes.children[1];
-            quantidadeVar.innerHTML --;
+            quantidadeVar.innerHTML--;
             try {
-                
+
             } catch (error) {
-                
+
             }
             if (quantidadeVar == '0') {
                 card.children[3].style.display = 'block';
@@ -986,7 +989,7 @@
             card = variacao.parentElement;
             card.children[4].children[1].innerHTML++;
             quantidadeVar = botoes.children[1];
-            quantidadeVar.innerHTML ++;
+            quantidadeVar.innerHTML++;
             quantidade++;
             carrinho();
         }
@@ -997,11 +1000,8 @@
             parentAbsol = parentPlus.parentElement;
             preco = apenasNumeros(titulo.substring(0, 5));
             quanti = apenasNumeros(parentPlus.children[1].innerHTML);
-            preco -= (preco / quanti);
+            precototal -= preco;
             parentPlus.children[1].innerHTML--;
-            if (parentPlus.children[1].innerHTML == 0) {
-
-            }
             quantidade--;
 
             if (quantidade == 0) {
@@ -1029,7 +1029,7 @@
             valorPedido = 0;
 
             for (let i = 0; i < pedido.length; i++) {
-                valorPedido += pedido[i].valor
+                valorPedido += precototal;
             }
             //document.getElementsByTagName('header')[0].children[2].innerHTML = quantidade;
             document.getElementById('showerQuanti').innerHTML = quantidade;
