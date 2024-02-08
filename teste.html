@@ -436,8 +436,8 @@
         }
 
         .variation {
-            width: 65%;
-            height: 35%;
+            width: 0%;
+            height: 15%;
             background-color: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(5px);
             position: absolute;
@@ -837,9 +837,12 @@
             document.getElementsByTagName('header')[0].children[0].style.margin = '0';
             document.getElementsByTagName('header')[0].children[0].src = 'mono-02.svg';
             titulo = parent.children[1].children[0].innerHTML;
-            preco = apenasNumeros(parent.children[2].innerHTML);
+            preco = apenasNumeros(titulo.substring(0, 5));
             pedido.push({ produto: titulo, quanti: parent.children[4].children[1].innerHTML, valor: preco })
             carrinho();
+            if (parent.children[6].classList == "variation") {
+                parent.children[6].style.width = '65%';
+            }
         }
 
         function apenasNumeros(string) {
@@ -859,7 +862,7 @@
             parentPlus = element.parentElement;
             quantidade++;
             titulo = parentPlus.parentElement.children[1].children[0].innerHTML;
-            preco = apenasNumeros(parentPlus.parentElement.children[2].innerHTML);
+            preco = apenasNumeros(titulo.substring(0, 5));
             quanti = apenasNumeros(parentPlus.children[1].innerHTML);
             preco += (preco / quanti);
             parentPlus.children[1].innerHTML++;
@@ -869,17 +872,20 @@
 
         function minusElem(element) {
             parentPlus = element.parentElement;
+            titulo = parentPlus.parentElement.children[1].children[0].innerHTML;
             parentAbsol = parentPlus.parentElement;
-            preco = apenasNumeros(parentPlus.parentElement.children[2].innerHTML);
+            preco = apenasNumeros(titulo.substring(0, 5));
             quanti = apenasNumeros(parentPlus.children[1].innerHTML);
             preco -= (preco / quanti);
             parentPlus.children[1].innerHTML--;
             if (parentPlus.children[1].innerHTML == 0) {
                 parentPlus.style.display = 'none';
                 parentAbsol.children[3].style.display = 'block';
+                if (parentAbsol.children[6].classList == "variation") {
+                    parentAbsol.children[6].style.width = '0';
+                }
             }
             quantidade--;
-            titulo = parentPlus.parentElement.children[1].children[0].innerHTML;
 
             for (let i = 0; i < pedido.length; i++) {
                 const element = pedido[i];
