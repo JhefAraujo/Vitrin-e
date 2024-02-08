@@ -900,6 +900,36 @@
             carrinho();
         }
 
+        function minusVariation(element) {
+            variacao = element.parentElement;
+            card = variacao.parentElement;
+            card.children[4].children[1].innerHTML--;
+            quantidadeProduto = card.children[4].children[1].innerHTML;
+            if (quantidadeProduto == 0) {
+                card.children[3].style.display = 'flex';
+                card.children[4].style.display = 'none';
+                variacao.style.width = '0';
+                card.style.outline = '1px solid rgba(255, 255, 255, 0.534)';
+            }
+            quantidade--;
+
+            for (let i = 0; i < pedido.length; i++) {
+                const element = pedido[i];
+                if (element['produto'].includes(titulo)) {
+                    if (element['quanti'] == 1) {
+                        pedido.splice(i, 1);
+                        break;
+                    }
+                    else {
+                        element['quanti']--;
+                        element['valor'] = preco;
+                    }
+                }
+            }
+
+            carrinho();
+        }
+
         function minusElem(element) {
             parentPlus = element.parentElement;
             titulo = parentPlus.parentElement.children[1].children[0].innerHTML;
@@ -909,14 +939,13 @@
             preco -= (preco / quanti);
             parentPlus.children[1].innerHTML--;
             if (parentPlus.children[1].innerHTML == 0) {
-                parentAbsol.children[3].style.display = 'block';
+                // parentAbsol.children[3].style.display = 'block';
                 if (parentAbsol.children[6].classList == "variation") {
                     parent.children[6].children[0].style.opacity = '0';
                     parent.children[6].children[1].style.opacity = '0';
                     setTimeout(() => {
                         parentAbsol.children[6].style.width = '0';
                     }, 200);
-                    carrinho();
                 }
             }
             quantidade--;
@@ -1020,7 +1049,7 @@
                                             </div>
                                             <a target="_blank" href="blob:https://github.com/cccfc928-8be2-4dd5-b8b4-c16ec3373169"><i class="fa-solid fa-download down" style="color: #ffffff;"></i></a>`
                         if (varia.length > 1) {
-                            criaCard.innerHTML += `<div class="variation"><p>${varia[0]}</p><div class="quanti" onclick="minusElem(this.parentElement.parentElement.children[4].children[0])">-</div></div>`
+                            criaCard.innerHTML += `<div class="variation"><p>${varia[0]}</p><div class="quanti" onclick="minusVariation(this)">-</div></div>`
                         }
                     }
                     else {
