@@ -908,7 +908,11 @@
             if (quantidadeProduto == 0) {
                 card.children[3].style.display = 'block';
                 card.children[4].style.display = 'none';
-                variacao.style.width = '0';
+                variacao.children[0].style.opacity = '0';
+                variacao.children[1].style.opacity = '0';
+                setTimeout(() => {
+                    variacao.style.width = '0';
+                }, 200);
                 card.style.outline = '1px solid rgba(255, 255, 255, 0.534)';
             }
             quantidade--;
