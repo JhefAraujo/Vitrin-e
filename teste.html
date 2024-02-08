@@ -302,6 +302,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            transition: all 0.3s;
         }
 
         .plus {
@@ -445,7 +446,30 @@
             left: 0;
             transform: translateY(-50%);
             border-radius: 0 10px 10px 0;
-            transition: 0.3s all;
+            transition: 0.3s width;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .variation p {
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .quanti {
+            background-color: goldenrod;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            opacity: 0;
+            transition: all 0.3s;
         }
 
         .cookies p {
@@ -841,7 +865,13 @@
             pedido.push({ produto: titulo, quanti: parent.children[4].children[1].innerHTML, valor: preco })
             carrinho();
             if (parent.children[6].classList == "variation") {
+                parent.children[4].children[0].style.opacity = '0';
+                parent.children[4].children[2].style.opacity = '0';
                 parent.children[6].style.width = '65%';
+                setTimeout(() => {
+                    parent.children[6].children[0].style.opacity = '1';
+                    parent.children[6].children[1].style.opacity = '1';
+                }, 200);
             }
         }
 
@@ -879,10 +909,14 @@
             preco -= (preco / quanti);
             parentPlus.children[1].innerHTML--;
             if (parentPlus.children[1].innerHTML == 0) {
-                parentPlus.style.display = 'none';
                 parentAbsol.children[3].style.display = 'block';
                 if (parentAbsol.children[6].classList == "variation") {
-                    parentAbsol.children[6].style.width = '0';
+                    parent.children[6].children[0].style.opacity = '0';
+                    parent.children[6].children[1].style.opacity = '0';
+                    setTimeout(() => {
+                        parentAbsol.children[6].style.width = '0';
+                    }, 200);
+                    carrinho();
                 }
             }
             quantidade--;
@@ -986,7 +1020,7 @@
                                             </div>
                                             <a target="_blank" href="blob:https://github.com/cccfc928-8be2-4dd5-b8b4-c16ec3373169"><i class="fa-solid fa-download down" style="color: #ffffff;"></i></a>`
                         if (varia.length > 1) {
-                            criaCard.innerHTML += '<div class="variation"></div>'
+                            criaCard.innerHTML += `<div class="variation"><p>${varia[0]}</p><div class="quanti" onclick="minusElem(this.parentElement.parentElement.children[4].children[0])">-</div></div>`
                         }
                     }
                     else {
