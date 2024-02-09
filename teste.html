@@ -920,8 +920,12 @@
                         parent.children[6].children[1].style.opacity = '1';
                     }, 200);
                 }
+                else {
+                    quantidade++;
+                    parent.children[4].children[1].innerHTML++;
+                    precototal += preco;
+                }
             } catch (error) {
-                
                 pedido.push({ produto: titulo, quanti: parent.children[4].children[1].innerHTML, valor: preco })
                 quantidade++;
                 parent.children[4].children[1].innerHTML++;
@@ -960,6 +964,8 @@
 
         function minusVariation(element) {
             variacao = element.parentElement.parentElement.parentElement;
+            wrapum = variacao.children[0];
+            wrapdois = variacao.children[1];
             card = variacao.parentElement;
             botoes = element.parentElement;
             titulo = card.children[1].children[0].innerHTML;
@@ -973,7 +979,7 @@
                 quanti --;
                 card.children[4].children[1].innerHTML--;
             }
-            if (quantidadeVar.innerHTML == 0) {
+            if (wrapum.children[1].children[1].innerHTML == 0 & wrapdois.children[1].children[1].innerHTML == 0) {
                 card.style.outline = '1px solid rgba(255, 255, 255, 0.534)';
             }
 
