@@ -1003,6 +1003,21 @@
             carrinho();
         }
 
+        function closeVariation(element) {
+            element.style.opacity = '0';
+            card = element.parentElement;
+            card.children[3].style.display = 'block';
+            card.children[4].style.display = 'none';
+            card.children[6].children[0].style.opacity = '0';
+            card.children[6].children[1].style.opacity = '0';
+            setTimeout(() => {
+                card.children[6].style.width = '0';
+            }, 200);
+            setTimeout(() => {
+                card.children[6].style.padding = '0';
+            }, 300);
+        }
+
         function plusVariation(element) {
 
             botoes = element.parentElement;
@@ -1163,7 +1178,7 @@
                                     <p class="numberVar">0</p>
                                     <div class="quanti plusquanti" onclick="plusVariation(this)">+</div>
                             </div>`;
-                            criaCard.innerHTML += `</div><div class="closeVar">X</div>`
+                            criaCard.innerHTML += `</div><div class="closeVar" onclick="closeVariation(this)">X</div>`
                         }
                     }
                     else {
