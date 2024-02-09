@@ -965,26 +965,17 @@
             titulo = card.children[1].children[0].innerHTML;
             preco = apenasNumeros(titulo.substring(0, 5));
             quanti = apenasNumeros(card.children[1].innerHTML);
-            quanti --;
-            precototal -= preco;
             quantidadeVar = botoes.children[1];
-            quantidadeVar.innerHTML--;
+            if (quantidadeVar.innerHTML > 0) {
+                precototal -= preco;
+                quantidadeVar.innerHTML--;
+                quantidade--;
+                quanti --;
+                card.children[4].children[1].innerHTML--;
+            }
             if (quantidadeVar.innerHTML == 0) {
-                card.children[3].style.display = 'block';
-                card.children[4].style.display = 'none';
-                card.children[7].style.opacity = '0';
-                variacao.children[0].style.opacity = '0';
-                variacao.children[1].style.opacity = '0';
-                card.style.boxShadow = 'none';
-                setTimeout(() => {
-                    variacao.style.width = '0';
-                }, 200);
-                setTimeout(() => {
-                    variacao.style.padding = '0';
-                }, 400);
                 card.style.outline = '1px solid rgba(255, 255, 255, 0.534)';
             }
-            quantidade--;
 
             for (let i = 0; i < pedido.length; i++) {
                 const element = pedido[i];
@@ -1026,13 +1017,14 @@
             card = variacao.parentElement;
             card.children[4].children[1].innerHTML++;
             quantidadeVar = botoes.children[1];
+            card.style.outline = '2px solid goldenrod';
 
             titulo = card.children[1].children[0].innerHTML;
             preco = apenasNumeros(titulo.substring(0, 5));
 
             for (let i = 0; i < pedido.length; i++) {
                 const elemento = pedido[i];
-                if (elemento['produto'].includes(titulo)) {
+                if (elemento['produto'].includes(titulo + wrapVar.children[0].innerHTML)) {
                     pedido.splice(i, 1);
                     break;
                 }
@@ -1040,7 +1032,7 @@
 
             quantidadeVar.innerHTML++;
             quantidade++;
-            pedido.push({ produto: titulo, quanti: parent.children[4].children[1].innerHTML, valor: preco });
+            pedido.push({ produto: titulo + wrapVar.children[0].innerHTML, quanti: quantidadeVar.innerHTML, valor: preco, variacao: wrapVar.children[0].innerHTML });
             precototal += preco;
 
             document.getElementsByTagName('header')[0].children[1].style.display = 'block';
