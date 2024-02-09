@@ -509,6 +509,7 @@
 
         .quanti {
             background-color: goldenrod;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -915,6 +916,13 @@
                     parent.children[4].children[2].style.opacity = '0';
                     parent.children[6].style.width = '80%';
                     parent.children[7].style.opacity = '1';
+                    parent.children[4].children[1].style.backgroundColor = 'goldenrod';
+                    parent.children[4].children[1].style.borderRadius = '50%';
+                    parent.children[4].children[1].style.height = '40px';
+                    parent.children[4].children[1].style.width = '40px !important';
+                    parent.children[4].children[1].style.display = 'flex';
+                    parent.children[4].children[1].style.alignItems = 'center';
+                    parent.children[4].children[1].style.justifyContent = 'center';
 
                     setTimeout(() => {
                         parent.children[6].children[0].style.opacity = '1';
@@ -952,7 +960,7 @@
                 }
             }
             parentPlus = element.parentElement;
-            
+
             quantidade++;
             titulo = parentPlus.parentElement.children[1].children[0].innerHTML;
             preco = apenasNumeros(titulo.substring(0, 5));
@@ -977,7 +985,7 @@
                 precototal -= preco;
                 quantidadeVar.innerHTML--;
                 quantidade--;
-                quanti --;
+                quanti--;
                 card.children[4].children[1].innerHTML--;
             }
             if (wrapum.children[1].children[1].innerHTML == 0 & wrapdois.children[1].children[1].innerHTML == 0) {
@@ -1056,7 +1064,7 @@
             parentAbsol = parentPlus.parentElement;
             preco = apenasNumeros(titulo.substring(0, 5));
             quanti = apenasNumeros(parentPlus.children[1].innerHTML);
-            quanti --;
+            quanti--;
             precototal -= preco;
             parentPlus.children[1].innerHTML--;
             quantidade--;
