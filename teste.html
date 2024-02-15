@@ -1326,12 +1326,9 @@
                         titulos = document.getElementsByClassName('titulo');
                         for (let i = 0; i < titulos.length + 1; i++) {
                             const element = titulos[i];
-                            setTimeout(() => {
-                                element.style.top = '50%';
+                            element.style.top = '50%';
                             element.style.left = '50%';
                             element.style.transform = 'translate(-50%, -50%)';
-                            }, 5000);
-
                         }
                     }
                     document.getElementById('products').appendChild(criaCard);
@@ -1365,7 +1362,7 @@
         function carouselright(element) {
             card = element.parentElement;
             carrossel = card.children[0];
-            itens = carrossel.children.length -2;
+            itens = carrossel.children.length - 2;
             aSomar = apenasNumeros(element.parentElement.children[0].style.transform);
             aSomar = isNaN(aSomar) ? 0 : aSomar;
             if (aSomar <= itens * 87) {
