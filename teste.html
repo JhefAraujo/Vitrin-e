@@ -181,9 +181,24 @@
             text-overflow: ellipsis;
         }
 
+        .description {
+            height: 107vw;
+            width: 87vw !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: rgb(219, 219, 219);
+            color: black;
+        }
+
+        .description p {
+            width: 65%;
+        }
+
         .leftArrow {
             position: absolute;
-            top: 45%;
+            top: 70%;
             left: 0;
             transform: translateY(-50%);
             width: 50px;
@@ -207,7 +222,7 @@
 
         .rightArrow {
             position: absolute;
-            top: 45%;
+            top: 70%;
             right: 0;
             transform: translateY(-50%);
             width: 50px;
@@ -227,6 +242,11 @@
             transition-duration: 0.5s;
             transform: translateX(0);
             min-height: 100%;
+            width: max-content;
+        }
+
+        .carousel img {
+            width: 87vw;
         }
 
         .loader {
@@ -444,7 +464,7 @@
             border-radius: 50%;
             width: 50px;
             height: 50px;
-            top: 50%;
+            top: 40%;
             opacity: 0;
             transform: translateY(-50%);
             background-color: rgb(0, 0, 0, 0.7);
@@ -461,7 +481,7 @@
             backdrop-filter: blur(5px);
             position: absolute;
             row-gap: 15px;
-            top: 50%;
+            top: 40%;
             left: 0;
             transform: translateY(-50%);
             border-radius: 0 10px 10px 0;
@@ -643,8 +663,8 @@
             position: absolute;
             top: 2%;
             background-color: goldenrod;
-            left: 9%;
-            transform: translateX(-50%);
+            right: 9%;
+            transform: translateX(50%);
             height: 40px;
             width: 40px;
             display: flex;
@@ -889,7 +909,8 @@
         </div>
     </div>
     <div class="notAllowed" id="notallowed">
-        <p>Este site requer o uso de cookies para funcionar corretamente. Infelizmente, ao optar por não aceitar cookies, o site não pode ser disponibilizado. <br><br> Agradecemos pela compreensão.
+        <p>Este site requer o uso de cookies para funcionar corretamente. Infelizmente, ao optar por não aceitar
+            cookies, o site não pode ser disponibilizado. <br><br> Agradecemos pela compreensão.
         </p>
     </div>
     <script>
@@ -913,7 +934,7 @@
         function notAllow() {
             document.getElementById('notallowed').style.display = 'flex';
         }
-        
+
         function getCookie(nomeCookie) {
             var nome = nomeCookie + "=";
             var decodedCookie = decodeURIComponent(document.cookie);
@@ -1263,8 +1284,10 @@
                 imagem = element[0].split(' ');
                 try {
                     varia = element[5].split('-');
-                } catch (error) {
                 }
+                catch (error) {
+                }
+
                 if (element[8] == "Verano") {
                     criaCard = document.createElement('div');
                     criaCard.setAttribute('class', 'card element');
@@ -1307,13 +1330,12 @@
                         }
                     }
                     document.getElementById('products').appendChild(criaCard);
-                    if (imagem.length > 1) {
-                        criaCard.innerHTML += '<div class="leftArrow" onclick="carouselleft(this)"><i class="fa-solid fa-arrow-left fa-lg"></i></div><div class="rightArrow" onclick="carouselright(this)"><i class="fa-solid fa-arrow-right fa-lg"></i></div>'
-                        criaCard.children[0].innerHTML = `<div class="carousel">
-                <img src="${imagem[0]}"alt="">
-                <img src="${imagem[1]}"alt="">
-            </div>`
+                    criaCard.innerHTML += '<div class="leftArrow" onclick="carouselleft(this)"><i class="fa-solid fa-arrow-left fa-lg"></i></div><div class="rightArrow" onclick="carouselright(this)"><i class="fa-solid fa-arrow-right fa-lg"></i></div>'
+                    for (let i = 1; i < imagem.length; i++) {
+                        const element = imagem[i];
+                        criaCard.children[0].innerHTML += `<img src="${imagem[i]}"alt="">`
                     }
+                    criaCard.children[0].innerHTML += `<div class="description"><p>${element[2]}</p></div>`
                 }
             }
         }
@@ -1338,10 +1360,14 @@
             }
         });
         function carouselright(element) {
-            element.parentElement.children[0].style.transform = 'translateX(-100%)';
+            aSomar = apenasNumeros(element.parentElement.children[0].style.transform);
+            aSomar = isNaN(aSomar) ? 0 : aSomar;
+            element.parentElement.children[0].style.transform = `translateX(-${aSomar + 87}vw)`;
         }
         function carouselleft(element) {
-            element.parentElement.children[0].style.transform = 'translateX(0)';
+            aSomar = apenasNumeros(element.parentElement.children[0].style.transform);
+            aSomar = isNaN(aSomar) ? 0 : aSomar;
+            element.parentElement.children[0].style.transform = `translateX(-${aSomar - 87}vw)`;
         }
 
         function enviarPedido() {
