@@ -731,6 +731,90 @@
             border-radius: 50%;
             padding: 1px;
         }
+
+        .confirmar {
+            position: fixed;
+            top: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100vw;
+            backdrop-filter: blur(15px);
+            background-color: rgba(0, 0, 0, 0.3);
+            z-index: 999999999999999999999999;
+        }
+
+        .confirm {
+            width: 90vw;
+            height: 50vw;
+            background-color: black;
+            border-radius: 5px;
+            color: white;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .confirm .para {
+            position: absolute;
+            text-align: center;
+            top: 30%;
+            left: 50%;
+            width: 90%;
+            transform: translate(-50%, -50%);
+        }
+
+        .centerConfirm {
+            width: 90%;
+        }
+
+        .opcoes {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            width: 60%;
+        }
+
+        .opcao {
+            padding: 15px;
+            font-weight: bolder;
+            border-radius: 3px;
+        }
+
+        .sim {
+            background-color: white;
+            color: black;
+        }
+
+        .nao {
+            border: 2px solid white;
+        }
+
+        .notAllowed {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+            z-index: 999999999999999999999999999999999999;
+            color: white;
+        }
+
+        .notAllowed p {
+            text-align: center;
+            font-size: 1.1em;
+            width: 90%;
+        }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -748,7 +832,7 @@
         <img src="https://github.com/JhefAraujo/Clone-conecta/blob/main/logo%20escrito.png?raw=true"
             alt="Logo Mallorca">
         <p style="display: none;">enviar pedido -></p>
-        <div style="display: none;" class="send" onclick="enviarPedido()"><i class="fa-solid fa-cart-shopping"
+        <div style="display: none;" class="send" onclick="reverlarCheckout()"><i class="fa-solid fa-cart-shopping"
                 style="color: #ffffff;"></i>
             <p id="showerQuanti"></p>
         </div>
@@ -774,7 +858,7 @@
         <p>Este site utiliza cookies para melhorar a sua experiência de navegação. Ao continuar, você concorda com as
             condições de uso.</p>
         <span onclick="desaparece()" class="continuar">Ok, continuar</span>
-        <span class="naoquero">Não quero</span>
+        <span class="naoquero" onclick="notAllow()">Não quero</span>
     </div>
     <div class="popinfo">
         <div class="pop">
@@ -795,6 +879,19 @@
             <p>Este link expirou, solicite um novo!</p>
         </div>
     </div>
+    <div class="confirmar" id="confirm" class="confirm">
+        <div class="confirm">
+            <p class="para">Deseja enviar seu pedido para análise agora?</p>
+            <div class="opcoes">
+                <div class="sim opcao" onclick="enviarPedido()">Sim</div>
+                <div class="nao opcao" onclick="desapareceCheckout()">Não</div>
+            </div>
+        </div>
+    </div>
+    <div class="notAllowed" id="notallowed">
+        <p>Este site requer o uso de cookies para funcionar corretamente. Infelizmente, ao optar por não aceitar cookies, o site não pode ser disponibilizado. <br><br> Agradecemos pela compreensão.
+        </p>
+    </div>
     <script>
         var valorPedido = 0;
 
@@ -805,6 +902,18 @@
             }, 700);
         }
 
+        function reverlarCheckout() {
+            document.getElementById('confirm').style.display = 'flex';
+        }
+
+        function desapareceCheckout() {
+            document.getElementById('confirm').style.display = 'none';
+        }
+
+        function notAllow() {
+            document.getElementById('notallowed').style.display = 'flex';
+        }
+        
         function getCookie(nomeCookie) {
             var nome = nomeCookie + "=";
             var decodedCookie = decodeURIComponent(document.cookie);
@@ -823,6 +932,7 @@
 
         function revelarFotos() {
             document.getElementsByClassName('popinfo')[0].style.display = 'none';
+            document.getElementsByClassName('cookies')[0].style.display = 'none';
         }
 
         var identificado = false;
@@ -1189,9 +1299,10 @@
                     }
                     else {
                         titulos = document.getElementsByClassName('titulo');
-                        for (let i = 0; i < titulos.length; i++) {
+                        for (let i = 0; i < titulos.length + 1; i++) {
                             const element = titulos[i];
                             element.style.top = '50%';
+                            element.style.left = '50%';
                             element.style.transform = 'translate(-50%, -50%)';
                         }
                     }
@@ -1235,6 +1346,7 @@
 
         function enviarPedido() {
 
+            document.getElementsByClassName('confirm')[0].innerHTML = '<p class="centerConfirm">Obrigado! Seu pedido está sendo tratado e nosso time de vendas fará contato em breve</p>'
 
             for (let i = 0; i < pedido.length - 1; i++) {
                 const element = pedido[i];
@@ -1260,6 +1372,10 @@
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 5000);
         }
 
         function baixarImagem(url) {
