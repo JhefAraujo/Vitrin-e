@@ -951,6 +951,8 @@
             return "";
         }
 
+        fetchAndAppend();
+
         function revelarFotos() {
             document.getElementsByClassName('popinfo')[0].style.display = 'none';
             document.getElementsByClassName('cookies')[0].style.display = 'none';
@@ -1324,9 +1326,12 @@
                         titulos = document.getElementsByClassName('titulo');
                         for (let i = 0; i < titulos.length + 1; i++) {
                             const element = titulos[i];
-                            element.style.top = '50%';
+                            setTimeout(() => {
+                                element.style.top = '50%';
                             element.style.left = '50%';
                             element.style.transform = 'translate(-50%, -50%)';
+                            }, 5000);
+
                         }
                     }
                     document.getElementById('products').appendChild(criaCard);
@@ -1348,8 +1353,6 @@
             document.getElementsByClassName('cookies')[0].style.display = 'block';
         }, 3000);
 
-        fetchAndAppend();
-
         window.addEventListener('scroll', () => {
             produto = document.getElementsByClassName('card');
             for (let i = 0; i < produto.length; i++) {
@@ -1360,9 +1363,15 @@
             }
         });
         function carouselright(element) {
+            card = element.parentElement;
+            carrossel = card.children[0];
+            itens = carrossel.children.length -2;
             aSomar = apenasNumeros(element.parentElement.children[0].style.transform);
             aSomar = isNaN(aSomar) ? 0 : aSomar;
-            element.parentElement.children[0].style.transform = `translateX(-${aSomar + 87}vw)`;
+            if (aSomar <= itens * 87) {
+                element.parentElement.children[0].style.transform = `translateX(-${aSomar + 87}vw)`;
+                aSomar += 87;
+            }
         }
         function carouselleft(element) {
             aSomar = apenasNumeros(element.parentElement.children[0].style.transform);
