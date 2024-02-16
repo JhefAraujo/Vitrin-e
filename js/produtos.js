@@ -146,25 +146,73 @@ function createProduct() {
     document.getElementById("createProduct").style.display = "block";
 }
 
-function renderimg(id) {
-    criaImgCard = document.createElement("div");
-    criaImgCard.innerHTML = `<div class="imgCard"><p>${id}</p>
-    <div class="cardBtn">Remover</div></div>`;
-    document.getElementsByClassName("midiaBox")[0].appendChild(criaImgCard);
+function renderimg(input) {
+    var fileInput = input;
+
+    // Verifique se um arquivo foi selecionado
+    if (fileInput.files.length === 0) {
+        console.error("Nenhum arquivo selecionado");
+        return;
+    }
+
+    var file = fileInput.files[0];
+
+    var reader = new FileReader();
+
+    reader.onload = function () {
+        // Crie um novo elemento de imagem
+        var imgElement = document.createElement("img");
+        imgElement.src = reader.result;
+        imgElement.alt = "Imagem";
+
+        // Crie um novo elemento de div (contendo a imagem e o botão de remoção)
+        var imgCardDiv = document.createElement("div");
+        imgCardDiv.className = "imgCardTwo";
+        imgCardDiv.appendChild(imgElement);
+
+        // Adicione um botão de remoção
+        var cardBtnDiv = document.createElement("div");
+        cardBtnDiv.className = "cardBtn";
+        cardBtnDiv.textContent = "Remover";
+        cardBtnDiv.setAttribute('onclick', 'removerPai(this)')
+        imgCardDiv.appendChild(cardBtnDiv);
+
+        // Adicione a div completa à sua caixa de mídia
+        document.getElementsByClassName("secondCardWrapper")[0].appendChild(imgCardDiv);
+    };
+
+    // Converta o conteúdo do arquivo para base64
+    reader.readAsDataURL(file);
+}
+
+function removerPai(element) {
+    element.parentElement.remove();
 }
 
 function addvariation() {
     criaInput = document.createElement("input");
+    criaInput.setAttribute('class', 'varInput');
     document.getElementsByClassName("variations")[0].appendChild(criaInput);
+    document.getElementsByClassName('variations')[0].style.height = `${document.getElementsByClassName('variations')[0].offsetHeight + 50}px`;
 }
+
+var varias = '';
 
 function enviarProduto() {
     formData = new FormData();
+
+    var variacoes = document.getElementsByClassName('varInput');
+
+    for (let i = 0; i < variacoes.length; i++) {
+        const element = variacoes[i];
+        varias += element.value + "-";
+    }
 
     formData.append("referencia", document.getElementById("referencia").value);
     formData.append("grupo", document.getElementById("categoria").value);
     formData.append("ativo", "sim");
     formData.append("action", "criar");
+    formData.append("variacao", varias);
 
     var requestOptions = {
         method: "POST",
@@ -180,4 +228,69 @@ function enviarProduto() {
         .then((response) => response.text())
         .then((result) => console.log(result))
         .catch((error) => console.log("error", error));
+
+    enviarImagem();
 }
+
+function enviarImagem() {
+    const owner = "jhefAraujo";
+    const repo = "Clone-conecta";
+    const fileInput = document.getElementById('midia');
+    const pastaNoRepositorio = "imagensProdutos/"; // Caminho na pasta raiz
+    const commitMessage = "Adicionando novo arquivo";
+    const token = "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";
+
+    // Verifica se um arquivo foi selecionado
+    if (fileInput.files.length === 0) {
+        console.error("Nenhum arquivo selecionado");
+        return;
+    }
+
+    const file = fileInput.files[0];
+
+    // Concatena o caminho da pasta ao nome do arquivo
+    const caminhoDoArquivoNoRepositorio = pastaNoRepositorio + file.name;
+
+    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${caminhoDoArquivoNoRepositorio}`;
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = function () {
+        const fileContent = reader.result.split(',')[1]; // Obtém a parte do conteúdo após a vírgula (base64)
+
+        const requestData = {
+            message: commitMessage,
+            content: fileContent,
+        };
+
+        const requestOptions = {
+            method: "PUT",
+            headers: {
+                Authorization: `token ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestData),
+        };
+
+        fetch(apiUrl, requestOptions)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Erro ao adicionar arquivo: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log("Arquivo adicionado com sucesso:", data);
+            })
+            .catch((error) => {
+                console.error(error.message);
+            });
+    };
+
+    reader.onerror = function (error) {
+        console.error("Erro ao ler o arquivo:", error);
+    };
+}
+
+
