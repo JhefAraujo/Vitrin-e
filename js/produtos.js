@@ -205,7 +205,7 @@ function enviarProduto() {
 
     for (let i = 0; i < variacoes.length; i++) {
         const element = variacoes[i];
-        varias += element.value + "-";
+        varias += element.value + " - ";
     }
 
     formData.append("referencia", document.getElementById("referencia").value);
