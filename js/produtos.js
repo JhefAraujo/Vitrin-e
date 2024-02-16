@@ -238,7 +238,7 @@ function enviarImagem() {
     const fileInput = document.getElementById('midia');
     const pastaNoRepositorio = "imagensProdutos/"; // Caminho na pasta raiz
     const commitMessage = "Adicionando novo arquivo";
-    const token = "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";
+    const token = "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";
 
     // Verifica se um arquivo foi selecionado
     if (fileInput.files.length === 0) {
