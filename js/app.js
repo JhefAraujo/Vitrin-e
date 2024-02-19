@@ -16,10 +16,1553 @@ app.post('/generate-link', (req, res) => {
     const expirationTime = Date.now() + 48 * 60 * 60 * 1000; // 48 horas em milissegundos
     
     // Obtém o parâmetro do sistema a partir do corpo da requisição
-    const parametroDoSistema = req.body.parametroDoSistema || 'Default Content';
+    const parametroDoSistema = req.body.parametroDoSistema;
     
     // Modifique esta parte para incluir o conteúdo desejado com base no parâmetro
-    const htmlPage = `<html><body><h1>Conteúdo da Página ${linkId}</h1><p>${parametroDoSistema}</p></body></html>`;
+    const htmlPage = `<!DOCTYPE html>
+    <html lang="pt-br">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="theme-color" content="#000000">
+        <title>Catálogo</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display&display=swap');
+    
+            @font-face {
+                font-family: 'SuaFonte';
+                src: url('vogue.ttf');
+                src: url('vogue.ttf') format('truetype');
+                /* Adicione outros formatos (e.g., woff2, ttf) conforme necessário para compatibilidade com navegadores */
+            }
+    
+            * {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+                scroll-behavior: smooth;
+                font-family: 'Roboto', serif;
+                -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+            }
+    
+            *::selection {
+                background-color: rgba(0, 0, 0, 0.367);
+            }
+    
+            html,
+            body {
+                width: 100vw;
+                overflow-x: hidden;
+            }
+    
+            p {
+                font-weight: 100;
+            }
+    
+            main {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                height: 100vh;
+                overflow-x: hidden;
+                font-weight: 400;
+            }
+    
+            main h1 {
+                font-size: 300%;
+                text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.5);
+                font-weight: lighter;
+                font-family: 'Noto Serif Display', serif;
+            }
+    
+            main p {
+                position: absolute;
+                bottom: 10vh;
+                left: 50vw;
+                transform: translateX(-50%);
+            }
+    
+            .filter {
+                width: 100vw;
+                height: 100vh;
+                position: absolute;
+                z-index: -1;
+                top: 0;
+                left: 0;
+                filter: brightness(0.5);
+                background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%);
+            }
+    
+            .filter video {
+                position: absolute;
+                top: 0;
+                left: 0;
+                object-fit: cover;
+                object-position: center top;
+                height: 100vh;
+                width: 100vw;
+                z-index: -2;
+                background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%);
+            }
+    
+            .products {
+                background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%);
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                row-gap: 25px;
+                padding: 5vh;
+                min-height: 100vh;
+                width: 100vw;
+                flex-direction: column;
+                position: relative;
+                z-index: 0;
+            }
+    
+            .card {
+                border-radius: 1px;
+                height: 107vw;
+                width: 87vw;
+                overflow: hidden;
+                position: relative;
+                z-index: 1;
+                outline: 1px solid rgba(255, 255, 255, 0.534);
+                border-radius: 2px;
+            }
+    
+            .card img {
+                z-index: 0;
+                width: 100%;
+                min-height: 100%;
+                object-fit: cover;
+                transition-duration: 0.5s;
+            }
+    
+            .card img:hover {
+                transform: scale(1.1);
+            }
+    
+            .cardInfo {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                -webkit-backdrop-filter: blur(5px);
+                backdrop-filter: blur(5px);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 20%;
+            }
+    
+            .visible {
+                animation: reveal 1.5s;
+            }
+    
+            .element {
+                opacity: 0;
+            }
+    
+            @keyframes reveal {
+                0% {
+                    opacity: 0;
+                    filter: brightness(0);
+                }
+    
+                100% {
+                    opacity: 1;
+                    filter: brightness(1);
+                }
+            }
+    
+            a {
+                color: white;
+            }
+    
+            .price {
+                position: absolute;
+                bottom: 5px;
+                right: 20px;
+                font-weight: 300;
+            }
+    
+            .titulo {
+                position: absolute;
+                height: 2.5em;
+                overflow: hidden;
+                left: 3%;
+                width: 65%;
+                font-weight: 300;
+                text-overflow: ellipsis;
+            }
+    
+            .description {
+                height: 107vw;
+                width: 87vw !important;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                background-color: rgb(219, 219, 219);
+                color: black;
+            }
+    
+            .description p {
+                width: 65%;
+                font-size: 1.2em;
+            }
+    
+            .leftArrow {
+                position: absolute;
+                top: 70%;
+                left: 0;
+                transform: translateY(-50%);
+                width: 50px;
+                height: 50px;
+                background-color: rgba(0, 0, 0, 0.6);
+                -webkit-backdrop-filter: blur(5px);
+                backdrop-filter: blur(5px);
+                border-radius: 0 10px 10px 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
+    
+            .cadastre {
+                position: absolute;
+                top: 7%;
+                width: 85%;
+                margin: auto;
+            }
+    
+            .rightArrow {
+                position: absolute;
+                top: 70%;
+                right: 0;
+                transform: translateY(-50%);
+                width: 50px;
+                height: 50px;
+                background-color: rgba(0, 0, 0, 0.6);
+                -webkit-backdrop-filter: blur(5px);
+                backdrop-filter: blur(5px);
+                border-radius: 10px 0px 0px 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
+    
+            .carousel {
+                display: flex;
+                transition-duration: 0.5s;
+                transform: translateX(0);
+                min-height: 100%;
+                width: max-content;
+            }
+    
+            .carousel img {
+                width: 87vw;
+            }
+    
+            .loader {
+                background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 999999999999999999999999;
+                height: 100vh;
+                width: 100vw;
+                transition-duration: 1s;
+            }
+    
+            header {
+                position: fixed;
+                z-index: 10;
+                top: 1vh;
+                height: 10vh;
+                width: 85vw;
+                background-color: rgba(0, 0, 0, 0.6);
+                -webkit-backdrop-filter: blur(15px);
+                backdrop-filter: blur(15px);
+                left: 50%;
+                transform: translateX(-50%);
+                border-radius: 10vh;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                color: white;
+                border: 1px solid rgba(7, 7, 7, 0.7);
+            }
+    
+            .base {
+                width: 15vw;
+                height: 15vw;
+                background-color: rgba(0, 0, 0, 0.6);
+                -webkit-backdrop-filter: blur(15px);
+                backdrop-filter: blur(15px);
+                border-radius: 0px 0px 7px 7px;
+                position: fixed;
+                top: 11vh;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 10;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-around;
+                transition-duration: 0.3s;
+            }
+    
+            .downArrow {
+                color: white;
+                font-size: 1.3em;
+            }
+    
+            .fecharmenu {
+                color: white;
+                font-size: 1.3em;
+                position: absolute;
+                bottom: 5px;
+            }
+    
+            header img {
+                height: 10vh;
+                width: 10vh;
+                padding-top: 1vh;
+                padding-bottom: 1vh;
+                filter: drop-shadow(3px 3px 2px rgba(5, 5, 5, 1));
+                z-index: 10;
+                margin: auto;
+                transition: all 0.5s;
+            }
+    
+            .loader img {
+                width: 80vw;
+            }
+    
+            .buy {
+                color: white;
+                position: absolute;
+                bottom: 5%;
+                right: 1%;
+                padding: 10px;
+                background-color: goldenrod;
+                border-radius: 35px;
+                width: 30%;
+                text-align: center;
+                height: 40px;
+                cursor: pointer;
+            }
+    
+            .quantity {
+                color: white;
+                position: absolute;
+                bottom: 5%;
+                right: 1%;
+                border-radius: 35px;
+                width: 30%;
+                text-align: center;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                transition: all 0.3s;
+            }
+    
+            .plus {
+                background-color: goldenrod;
+                border-radius: 50%;
+                height: 100%;
+                aspect-ratio: 1 / 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
+    
+            .plus::selection {
+                background-color: transparent;
+            }
+    
+            .minus {
+                background-color: goldenrod;
+                border-radius: 50%;
+                height: 100%;
+                aspect-ratio: 1 / 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
+    
+            .minus::selection {
+                background-color: transparent;
+            }
+    
+            .send {
+                height: 8vh;
+                width: 8vh;
+                background-color: goldenrod;
+                border-radius: 50%;
+                animation: walk 0.5s ease-in-out;
+                align-items: center;
+                justify-content: center;
+                transform: translateX(-1vh);
+                cursor: pointer;
+            }
+    
+            @keyframes walk {
+                0% {
+                    opacity: 0;
+                    transform: translateX(-50px);
+                }
+    
+                100% {
+                    opacity: 1;
+                    transform: translateX(-1vh);
+                }
+            }
+    
+            @keyframes reverseWalk {
+                0% {
+                    transform: translateX(0);
+                }
+    
+                100% {
+                    transform: translateX(-100%);
+                }
+            }
+    
+            @media screen and (max-width: 650px) {
+                .pop {
+                    width: 80vw !important;
+                    height: 45vh !important;
+                }
+    
+                .master {
+                    width: 90% !important;
+                }
+    
+                .master input {
+                    width: 90% !important;
+                    height: 70px !important;
+                }
+            }
+    
+            @media screen and (min-width: 650px) {
+                ::-webkit-scrollbar {
+                    display: none;
+                }
+    
+                .pop {
+                    width: 250px !important;
+                }
+    
+                .card {
+                    width: 27vw !important;
+                    height: 450px !important;
+                    margin: auto;
+                }
+    
+                #products {
+                    display: grid;
+                    margin: auto !important;
+                    grid-template-columns: 1fr 1fr 1fr;
+                }
+    
+                header {
+                    width: 26vw !important;
+                }
+    
+                .loader img {
+                    width: 45vw !important;
+                }
+            }
+    
+            .cookies {
+                position: fixed;
+                bottom: 0;
+                height: 30vh;
+                width: 100vw;
+                background-color: rgba(0, 0, 0, 0.8);
+                color: white;
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                border: 1px solid black;
+                animation: surgir 0.7s ease-out;
+                display: none;
+            }
+    
+            .cookies h2 {
+                text-align: center;
+                position: absolute;
+                top: 2vh;
+                width: 100%;
+            }
+    
+            .closeVar {
+                position: absolute;
+                cursor: pointer;
+                right: 2%;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                top: 40%;
+                opacity: 0;
+                transform: translateY(-50%);
+                background-color: rgb(0, 0, 0, 0.7);
+                backdrop-filter: blur(5px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s;
+            }
+    
+            .variation {
+                width: 0%;
+                background-color: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(5px);
+                position: absolute;
+                row-gap: 15px;
+                top: 40%;
+                left: 0;
+                transform: translateY(-50%);
+                border-radius: 0 10px 10px 0;
+                transition: 0.3s width;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                flex-direction: column;
+            }
+    
+            .varWrap {
+                opacity: 0;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                position: relative;
+                height: 53px;
+                width: 100%;
+                transition: 0.3s all;
+            }
+    
+            .varWrap p {
+                position: absolute;
+                left: 5px;
+            }
+    
+            .numberVar {
+                position: initial !important;
+            }
+    
+            .variation p {
+                transition: all 0.3s;
+            }
+    
+            .wrapQuanti {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                height: 40px;
+                width: 95px;
+                position: absolute;
+                right: 5px;
+            }
+    
+            .quanti {
+                background-color: goldenrod;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 2em;
+                font-weight: bold;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                transition: all 0.3s;
+            }
+    
+            .cookies p {
+                width: 90%;
+                margin: auto;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+    
+            .continuar {
+                text-align: center;
+                color: black;
+                font-weight: bolder;
+                padding: 10px;
+                background-color: white;
+                width: 32vw;
+                position: absolute;
+                bottom: 2vh;
+                border-radius: 3px;
+                left: 30%;
+                transform: translateX(-50%);
+                cursor: pointer;
+                border: 2px solid white;
+            }
+    
+            .naoquero {
+                width: 32vw;
+                position: absolute;
+                bottom: 2vh;
+                text-align: center;
+                color: white;
+                border: 2px solid white;
+                padding: 10px;
+                border-radius: 3px;
+                left: 70%;
+                transform: translateX(-50%);
+                font-weight: bold;
+            }
+    
+            @keyframes surgir {
+                0% {
+                    transform: translateY(100%);
+                }
+    
+                100% {
+                    transform: translate(0);
+                }
+            }
+    
+            @keyframes desaparecer {
+                0% {
+                    transform: translateY(0%);
+                }
+    
+                100% {
+                    transform: translateY(100%);
+                }
+            }
+    
+            .popinfo {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 100vw;
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                z-index: 999999999;
+                display: none;
+                align-items: center;
+                justify-content: center;
+            }
+    
+            .pop {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                background-color: rgb(0, 0, 0);
+                height: 40vh;
+                width: 60vw;
+                color: white;
+                border-radius: 8px;
+                position: relative;
+            }
+    
+            .submit {
+                background-color: goldenrod;
+                padding: 5px;
+                border-radius: 5px;
+                position: absolute;
+                bottom: 10px;
+                cursor: pointer;
+            }
+    
+            .wrap {
+                width: min-content;
+            }
+    
+            .master {
+                height: 50%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                row-gap: 10px;
+                position: absolute;
+                bottom: 17%;
+            }
+    
+            .master input {
+                height: 25px;
+                padding: 5px;
+                font-weight: bold;
+                border: none;
+                border-radius: 5px;
+            }
+    
+            .card .down {
+                position: absolute;
+                top: 2%;
+                background-color: goldenrod;
+                right: 9%;
+                transform: translateX(50%);
+                height: 40px;
+                width: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.445);
+            }
+    
+            .acesso {
+                display: none;
+                align-items: center;
+                justify-content: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 99;
+                height: 100vh;
+                background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%);
+                width: 100vw;
+            }
+    
+            .alerta {
+                padding: 5px;
+                font-weight: bolder;
+                color: white;
+            }
+    
+            .nocadastro {
+                position: fixed;
+                bottom: 5%;
+                color: white;
+                background-color: black;
+                width: 80%;
+                font-size: small;
+                border: 15px solid black;
+                border-radius: 5px;
+                text-align: center;
+            }
+    
+            .menu {
+                height: 100%;
+                aspect-ratio: 1 / 1;
+                background-color: white;
+                display: none;
+            }
+    
+            .burguer {
+                position: absolute;
+                top: 100%;
+                background-color: rgba(0, 0, 0, 0.637);
+                height: 50px;
+                border-radius: 0 0 15px 15px;
+                width: 80%;
+                left: 50%;
+                transform: translateX(-50%);
+                display: none;
+            }
+    
+            .headwrap {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                border-radius: 10vh;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+            }
+    
+            #showerQuanti {
+                position: absolute;
+                top: 80%;
+                left: 70%;
+                z-index: 999999999999999999999;
+                transform: translate(-60%, -60%);
+                color: white;
+                font-weight: bold;
+                background: black;
+                width: -webkit-fill-available;
+                aspect-ratio: 1/1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                padding: 1px;
+            }
+    
+            .confirmar {
+                position: fixed;
+                top: 0;
+                display: none;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                width: 100vw;
+                backdrop-filter: blur(15px);
+                background-color: rgba(0, 0, 0, 0.3);
+                z-index: 999999999999999999999999;
+            }
+    
+            .confirm {
+                width: 90vw;
+                height: 50vw;
+                background-color: black;
+                border-radius: 5px;
+                color: white;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+    
+            .confirm .para {
+                position: absolute;
+                text-align: center;
+                top: 30%;
+                left: 50%;
+                width: 90%;
+                transform: translate(-50%, -50%);
+            }
+    
+            .centerConfirm {
+                width: 90%;
+            }
+    
+            .opcoes {
+                position: absolute;
+                top: 70%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                width: 60%;
+            }
+    
+            .opcao {
+                padding: 15px;
+                font-weight: bolder;
+                border-radius: 3px;
+            }
+    
+            .sim {
+                background-color: white;
+                color: black;
+            }
+    
+            .nao {
+                border: 2px solid white;
+            }
+    
+            .notAllowed {
+                display: none;
+                align-items: center;
+                justify-content: center;
+                background-color: black;
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 100vw;
+                z-index: 999999999999999999999999999999999999;
+                color: white;
+            }
+    
+            .notAllowed p {
+                text-align: center;
+                font-size: 1.1em;
+                width: 90%;
+            }
+    
+            .texto {
+                color: white;
+                font-size: 1.3em;
+            }
+        </style>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;1,300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/2a683e0d82.js" crossorigin="anonymous"></script>
+    </head>
+    
+    <body>
+        <div class="loader">
+            <img class="logo" src="https://github.com/JhefAraujo/Clone-conecta/blob/main/logo%20escrito.png?raw=true alt="
+                Logo Mallorca">
+        </div>
+        <header>
+            <img src="https://github.com/JhefAraujo/Clone-conecta/blob/main/logo%20escrito.png?raw=true"
+                alt="Logo Mallorca">
+            <p style="display: none;">enviar pedido -></p>
+            <div style="display: none;" class="send" onclick="reverlarCheckout()"><i class="fa-solid fa-cart-shopping"
+                    style="color: #ffffff;"></i>
+                <p id="showerQuanti"></p>
+            </div>
+            <div class="burguer">
+                <div class="elem">
+                    <p>A</p>
+                </div>
+        </header>
+        <div class="base" onclick="expandirBase(this)"><i class="fa-solid fa-arrow-down downArrow"></i></div>
+        <main>
+            <h1>Verano</h1>
+            <a href="#products">
+                <p>Clique para explorar</p>
+            </a>
+            <div class="filter">
+                <video src="" playsinline autoplay muted loop></video>
+            </div>
+        </main>
+        <section class="products" id="products">
+        </section>
+        <div class="cookies">
+            <h2>Aviso de cookies</h2>
+            <p>Este site utiliza cookies para melhorar a sua experiência de navegação. Ao continuar, você concorda com as
+                condições de uso.</p>
+            <span onclick="desaparece()" class="continuar">Ok, continuar</span>
+            <span class="naoquero" onclick="notAllow()">Não quero</span>
+        </div>
+        <div class="popinfo">
+            <div class="pop">
+                <p class="cadastre">cadastre-se aqui para acesso completo
+                </p>
+                <div class="master">
+                    <input autocomplete="off" type="text" placeholder="Nome" id="nome" name="nome">
+                    <input autocomplete="off" type="text" placeholder="Telefone" id="tel" name="tel">
+                    <input autocomplete="off" type="text" placeholder="E-mail" id="email" name="email">
+                </div>
+                <div class="submit" onclick="enviarCliente()">Enviar</div>
+            </div>
+            <p class="nocadastro" onclick="revelarFotos()">ou clique aqui para acesso limitado
+            <p>
+        </div>
+        <div class="acesso" id="expira">
+            <div class="alerta">
+                <p>Este link expirou, solicite um novo!</p>
+            </div>
+        </div>
+        <div class="confirmar" id="confirm" class="confirm">
+            <div class="confirm">
+                <p class="para">Deseja enviar seu pedido para análise agora?</p>
+                <div class="opcoes">
+                    <div class="sim opcao" onclick="enviarPedido()">Sim</div>
+                    <div class="nao opcao" onclick="desapareceCheckout()">Não</div>
+                </div>
+            </div>
+        </div>
+        <div class="notAllowed" id="notallowed">
+            <p>Este site requer o uso de cookies para funcionar corretamente. Infelizmente, ao optar por não aceitar
+                cookies, o site não pode ser disponibilizado. <br><br> Agradecemos pela compreensão.
+            </p>
+        </div>
+        <script>
+            var valorPedido = 0;
+            var catalogos = [];
+            var catalogo = "${parametroDoSistema}";
+            var objetoEncontrado = null;
+    
+            async function getCatalogos() {
+                url = 'https://script.google.com/macros/s/AKfycbwQzj3r_puiz-WSxr4R-MHA4DhQUHEY0l1tOpP_mGQ2Fmt1DlcyN4_O8u10Cd5X0k2Y/exec';
+                response = await fetch(url);
+                parsed = await response.json();
+    
+                for (let i = 0; i < parsed.length; i++) {
+                    const element = parsed[i];
+                    catalogos.push(element);
+                }
+    
+                // Percorra o array de objetos
+                for (const catalogoAtual of catalogos) {
+                    // Verifique se o item 0 do objeto é igual à string fornecida
+                    if (catalogoAtual[0] === catalogo) {
+                        // Se for igual, salve o objeto e interrompa o loop
+                        objetoEncontrado = catalogoAtual;
+                        break;
+                    }
+                }
+    
+                if (objetoEncontrado[3] == 'espec') {
+                    document.getElementsByClassName('base')[0].style.display = 'none';
+                }
+                document.getElementsByTagName('h1')[0].innerHTML = catalogo;
+    
+                document.getElementsByTagName('video')[0].src = "videos/" + objetoEncontrado[2];
+            }
+    
+            getCatalogos()
+    
+            function desaparece() {
+                document.getElementsByClassName('cookies')[0].style.animation = 'desaparecer 0.7s ease-out';
+                setTimeout(() => {
+                    document.getElementsByClassName('cookies')[0].style.display = 'none';
+                }, 700);
+            }
+    
+            function expandirBase(element) {
+                element.style.width = '50vw'
+                element.style.height = '60vw'
+                element.innerHTML = '<i class="fa-solid fa-x fecharmenu"></i>';
+                for (let i = 0; i < catalogos.length; i++) {
+                    const elemento = catalogos[i];
+                    if (elemento[3] == 'base') {
+                        element.innerHTML += \`<p class="texto">\${elemento[0]}</p>\`
+                    }
+                }
+                element.style.paddingBottom = '30px';
+                element.removeEventListener('click', expandirBase); // Remova o evento de expandirBase
+                element.addEventListener('click', function () { fecharmenu(this); }); // Adicione o evento de expandirBase
+            }
+    
+            function fecharmenu(element) {
+                element.innerHTML = '<i class="fa-solid fa-arrow-down downArrow">';
+                element.style.width = '15vw';
+                element.style.height = '15vw';
+                element.style.paddingBottom = '0';
+                element.removeEventListener('click', fecharmenu); // Remova o evento de expandirBase
+                element.addEventListener('click', function () { expandirBase(this); }); // Adicione o evento de expandirBase
+            }
+    
+            function reverlarCheckout() {
+                document.getElementById('confirm').style.display = 'flex';
+            }
+    
+            function desapareceCheckout() {
+                document.getElementById('confirm').style.display = 'none';
+            }
+    
+            function notAllow() {
+                document.getElementById('notallowed').style.display = 'flex';
+            }
+    
+            function getCookie(nomeCookie) {
+                var nome = nomeCookie + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var cookies = decodedCookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i];
+                    while (cookie.charAt(0) == ' ') {
+                        cookie = cookie.substring(1);
+                    }
+                    if (cookie.indexOf(nome) == 0) {
+                        return cookie.substring(nome.length, cookie.length);
+                    }
+                }
+                return "";
+            }
+    
+            function revelarFotos() {
+                document.getElementsByClassName('popinfo')[0].style.display = 'none';
+                document.getElementsByClassName('cookies')[0].style.display = 'none';
+                fetchAndAppend();
+            }
+    
+            fetchAndAppend();
+    
+            var identificado = false;
+            var expirado = false;
+            var pedido = [];
+            var quantidade = 0;
+            data = new Date();
+            biscoito = getCookie('identificado');
+            enviado = false;
+    
+    
+    
+            if (expirado == true) {
+                document.getElementById('expira').style.display = 'flex';
+            }
+    
+            if (biscoito != 'false') {
+                document.getElementsByClassName('popinfo')[0].style.display = 'flex';
+            }
+    
+            if (biscoito == 'true') {
+                document.getElementsByClassName('popinfo')[0].style.display = 'none';
+            }
+    
+            var nomeCliente;
+            var telefoneCliente;
+            var emailCliente;
+    
+            function enviarCliente() {
+                nome = document.getElementById('nome').value;
+                telefone = document.getElementById('tel').value;
+                email = document.getElementById('email').value;
+    
+                nomeCliente = document.getElementById('nome').value;
+                telefoneCliente = document.getElementById('tel').value;
+                emailCliente = document.getElementById('email').value;
+    
+                formData = new FormData();
+                formData.append("nome", nome);
+                formData.append("telefone", telefone);
+                formData.append("email", email);
+    
+                let dataAtualUTC = new Date();
+                let dataDaqui48HorasUTC = new Date(dataAtualUTC.getTime() + (48 * 60 * 60 * 1000));
+                let dataDaqui48AnosUTC = new Date(dataAtualUTC.getTime() + (12 * 30 * 24 * 60 * 60 * 1000));
+                let dataString = dataDaqui48HorasUTC.toISOString();
+                document.cookie = \`dataExpiracao=\${dataString}; path=/\`;
+    
+                document.cookie = \`nome=\${nome}; identificado=true; expires=\${dataDaqui48AnosUTC.toUTCString()}; SameSite=None; Secure\`;
+                document.cookie = \`identificado=true; expires=\${dataDaqui48AnosUTC.toUTCString()}; SameSite=None; Secure\`;
+                document.cookie = \`telefone=\${telefone}; expires= \${dataDaqui48AnosUTC.toUTCString()}; SameSite=None; Secure\`;
+    
+                document.getElementById('products').innerHTML = '';
+                enviado = true;
+                fetchAndAppend();
+    
+                var requestOptions = {
+                    method: 'POST',
+                    body: formData,
+                    redirect: 'follow',
+                    mode: 'no-cors'
+                };
+    
+                fetch("https://script.google.com/macros/s/AKfycbxYQIIta6UcMIFWPD-bT11dAzWtsnwXWkO7qR_DGGcNuCia_TMNUwRJQRRHualePY4e2g/exec", requestOptions)
+                    .then(response => response.text())
+                    .then(result => console.log(result))
+                    .catch(error => console.log('error', error));
+    
+                setTimeout(() => {
+                    document.getElementsByClassName('popinfo')[0].style.display = 'none';
+                    document.getElementsByClassName('cookies')[0].style.display = 'block';
+                }, 1500);
+            }
+    
+            function showQuantity(element) {
+                parent = element.parentElement;
+                minus = parent.children[4].children[0];
+                plus = parent.children[4].children[2];
+                parent.children[3].style.display = 'none';
+                parent.children[4].style.display = 'flex';
+                document.getElementsByTagName('header')[0].children[1].style.display = 'block';
+                document.getElementsByTagName('header')[0].children[2].style.display = 'flex';
+                document.getElementsByTagName('header')[0].children[0].style.margin = '0';
+                document.getElementsByTagName('header')[0].children[0].src = 'mono-02.svg';
+                titulo = parent.children[1].children[0].innerHTML;
+                preco = apenasNumeros(titulo.substring(0, 5));
+    
+                try {
+                    if (parent.children[6].className == "variation") {
+                        parent.children[6].style.padding = '10px';
+                        parent.children[4].children[0].style.opacity = '0';
+                        parent.children[4].children[2].style.opacity = '0';
+                        parent.children[6].style.width = '80%';
+                        parent.children[7].style.opacity = '1';
+                        parent.children[4].children[1].style.borderRadius = '50%';
+                        parent.children[4].children[1].style.height = '40px';
+                        parent.children[4].children[1].style.width = '40px !important';
+                        parent.children[4].children[1].style.display = 'flex';
+                        parent.children[4].children[1].style.alignItems = 'center';
+                        parent.children[4].children[1].style.justifyContent = 'center';
+    
+                        setTimeout(() => {
+                            parent.children[6].children[0].style.opacity = '1';
+                            parent.children[6].children[1].style.opacity = '1';
+                        }, 200);
+                    }
+                    else {
+                        quantidade++;
+                        parent.children[4].children[1].innerHTML++;
+                        precototal += preco;
+                    }
+                } catch (error) {
+                    pedido.push({ produto: titulo, quanti: parent.children[4].children[1].innerHTML, valor: preco })
+                    quantidade++;
+                    parent.children[4].children[1].innerHTML++;
+                    precototal += preco;
+                }
+                carrinho();
+            }
+    
+            function apenasNumeros(string) {
+                var numsStr = string.replace(/[^0-9]/g, '');
+                return parseInt(numsStr);
+            }
+    
+            let precototal = 0;
+    
+            function plusElem(element) {
+                element.parentElement.parentElement.children[2]
+                for (let i = 0; i < pedido.length; i++) {
+                    const elemento = pedido[i];
+                    if (elemento['produto'].includes(titulo)) {
+                        pedido.splice(i, 1);
+                        break;
+                    }
+                }
+                parentPlus = element.parentElement;
+    
+                quantidade++;
+                titulo = parentPlus.parentElement.children[1].children[0].innerHTML;
+                preco = apenasNumeros(titulo.substring(0, 5));
+                precototal += preco;
+                quanti = apenasNumeros(parentPlus.children[1].innerHTML);
+                parentPlus.children[1].innerHTML++;
+                pedido.push({ produto: titulo, quanti: parentPlus.children[1].innerHTML, valor: preco });
+                carrinho();
+            }
+    
+            function minusVariation(element) {
+                variacao = element.parentElement.parentElement.parentElement;
+                wrapum = variacao.children[0];
+                wrapdois = variacao.children[1];
+                card = variacao.parentElement;
+                botoes = element.parentElement;
+                titulo = card.children[1].children[0].innerHTML;
+                preco = apenasNumeros(titulo.substring(0, 5));
+                quanti = apenasNumeros(card.children[1].innerHTML);
+                quantidadeVar = botoes.children[1];
+                if (quantidadeVar.innerHTML > 0) {
+                    precototal -= preco;
+                    quantidadeVar.innerHTML--;
+                    quantidade--;
+                    quanti--;
+                    card.children[4].children[1].innerHTML--;
+                }
+                if (wrapum.children[1].children[1].innerHTML == 0 & wrapdois.children[1].children[1].innerHTML == 0) {
+                    card.style.outline = '1px solid rgba(255, 255, 255, 0.534)';
+                }
+    
+                for (let i = 0; i < pedido.length; i++) {
+                    const element = pedido[i];
+                    if (element['produto'].includes(titulo)) {
+                        if (element['quanti'] == 1) {
+                            pedido.splice(i, 1);
+                            break;
+                        }
+                        else {
+                            element['quanti']--;
+                            element['valor'] = preco;
+                        }
+                    }
+                }
+    
+                carrinho();
+            }
+    
+            function closeVariation(element) {
+                element.style.opacity = '0';
+                card = element.parentElement;
+                card.children[3].style.display = 'block';
+                card.children[4].style.display = 'none';
+                card.children[6].children[0].style.opacity = '0';
+                card.children[6].children[1].style.opacity = '0';
+                setTimeout(() => {
+                    card.children[6].style.width = '0';
+                }, 200);
+                setTimeout(() => {
+                    card.children[6].style.padding = '0';
+                }, 300);
+            }
+    
+            function plusVariation(element) {
+    
+                botoes = element.parentElement;
+                wrapVar = botoes.parentElement;
+                variacao = wrapVar.parentElement;
+                card = variacao.parentElement;
+                card.children[4].children[1].innerHTML++;
+                quantidadeVar = botoes.children[1];
+                card.style.outline = '2px solid goldenrod';
+    
+                titulo = card.children[1].children[0].innerHTML;
+                preco = apenasNumeros(titulo.substring(0, 5));
+    
+                for (let i = 0; i < pedido.length; i++) {
+                    const elemento = pedido[i];
+                    if (elemento['produto'].includes(titulo + wrapVar.children[0].innerHTML)) {
+                        pedido.splice(i, 1);
+                        break;
+                    }
+                }
+    
+                quantidadeVar.innerHTML++;
+                quantidade++;
+                pedido.push({ produto: titulo + wrapVar.children[0].innerHTML, quanti: quantidadeVar.innerHTML, valor: preco, variacao: wrapVar.children[0].innerHTML });
+                precototal += preco;
+    
+                document.getElementsByTagName('header')[0].children[1].style.display = 'block';
+                document.getElementsByTagName('header')[0].children[2].style.display = 'flex';
+                document.getElementsByTagName('header')[0].children[0].style.margin = '0';
+                document.getElementsByTagName('header')[0].children[0].src = 'mono-02.svg';
+    
+                carrinho();
+            }
+    
+            function minusElem(element) {
+                parentPlus = element.parentElement;
+                titulo = parentPlus.parentElement.children[1].children[0].innerHTML;
+                parentAbsol = parentPlus.parentElement;
+                preco = apenasNumeros(titulo.substring(0, 5));
+                quanti = apenasNumeros(parentPlus.children[1].innerHTML);
+                quanti--;
+                precototal -= preco;
+                parentPlus.children[1].innerHTML--;
+                quantidade--;
+    
+                if (quanti == 0) {
+                    parentAbsol.children[4].style.display = 'none';
+                    parentAbsol.children[3].style.display = 'block';
+                }
+    
+                for (let i = 0; i < pedido.length; i++) {
+                    const element = pedido[i];
+                    if (element['produto'].includes(titulo)) {
+                        if (element['quanti'] == 1) {
+                            pedido.splice(i, 1);
+                            break;
+                        }
+                        else {
+                            element['quanti']--;
+                            element['valor'] = preco;
+                        }
+                    }
+                }
+                carrinho();
+            }
+    
+            function carrinho() {
+                valorPedido = 0;
+    
+                for (let i = 0; i < pedido.length; i++) {
+                    valorPedido += precototal;
+                }
+                //document.getElementsByTagName('header')[0].children[2].innerHTML = quantidade;
+                document.getElementById('showerQuanti').innerHTML = quantidade;
+                document.getElementsByTagName('header')[0].children[1].innerHTML = \`Pedido - R$\${precototal},00\`
+    
+                if (quantidade == 0) {
+                    document.getElementsByTagName('header')[0].children[1].style.display = 'none';
+                    document.getElementsByTagName('header')[0].children[2].style.display = 'none';
+                    document.getElementsByTagName('header')[0].children[0].style.margin = 'auto';
+                    document.getElementsByTagName('header')[0].children[0].src = 'https://github.com/JhefAraujo/Clone-conecta/blob/main/logo%20escrito.png?raw=true';
+                }
+            }
+            identificado = false;
+    
+            function downloadImg(elem) {
+                // URL da imagem no GitHub
+                const imageUrl = 'https://raw.githubusercontent.com/JhefAraujo/Clone-conecta/main/img/341c5c81-6d95-484a-9717-c8e67f0bbf5d.png';
+    
+                // Fetch para obter a imagem como um blob
+                fetch(imageUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(\`Erro no fetch: \${response.status} - \${response.statusText}\`);
+                        }
+                        return response.blob();
+                    })
+                    .then(blob => {
+                        // Criar um objeto URL para a blob
+                        const blobUrl = URL.createObjectURL(blob);
+    
+                        // Criar um link para download
+                        const link = document.createElement('a');
+                        link.href = blobUrl;
+                        link.download = \`imagem.jpg\`;
+    
+                        // Adicionar o link ao corpo do documento e clicar automaticamente para iniciar o download
+                        document.body.appendChild(link);
+                        link.click();
+    
+                        // Remover o link do corpo do documento
+                        document.body.removeChild(link);
+    
+                        // Liberar o objeto URL
+                        URL.revokeObjectURL(blobUrl);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+    
+            async function fetchAndAppend() {
+                url = 'https://script.google.com/macros/s/AKfycbzUAPR0RI1BkPc5n17zGMnzWam-JKpT9ICzc-0gs6_V5Q22UmLfviLLar9Me-Y2SUCSew/exec';
+                response = await fetch(url);
+                brute = await response.json();
+                for (let i = 0; i < brute.length; i++) {
+                    const element = brute[i];
+                    imagem = element[0].split(' ');
+                    try {
+                        varia = element[5].split('-');
+                    }
+                    catch (error) {
+                    }
+    
+                    if (element[8] == catalogo) {
+                        criaCard = document.createElement('div');
+                        criaCard.setAttribute('class', 'card element');
+                        criaCard.innerHTML = \`<div class="carousel"><img src="\${imagem[0]}"alt=""></div>
+                                <div class="cardInfo"><p class="titulo">R$\${element[6]} - \${element[2]}</p></div>\`;
+                        if (biscoito == 'true' || enviado == true) {
+                            criaCard.innerHTML += \`
+                                                <p class="price"></p>
+                                                <p onclick="showQuantity(this), gold()" class="buy">Eu quero!</p>
+                                                <div style="display: none;" class="quantity">
+                                                <div onclick="minusElem(this), gold()" class="minus">-</div>
+                                                <p class="numb"></p>
+                                                <div onclick="plusElem(this), gold()" class="plus">+</div>
+                                                </div>
+                                                <a target="_blank" href="blob:https://github.com/cccfc928-8be2-4dd5-b8b4-c16ec3373169"><i class="fa-solid fa-download down" style="color: #ffffff;"></i></a>\`
+                            if (varia.length > 1) {
+                                criaCard.innerHTML += \`<div class="variation"><div class="varWrap">
+                                    <p>\${varia[0]}</p><div class="wrapQuanti">
+                                        <div class="quanti" onclick="minusVariation(this)">-</div>
+                                        <p class="numberVar">0</p>
+                                        <div class="quanti plusquanti" onclick="plusVariation(this)">+</div>
+                                    </div>
+                                </div>
+                                <div class="varWrap">
+                                    <p>\${varia[1]}</p><div class="wrapQuanti">
+                                        <div class="quanti" onclick="minusVariation(this)">-</div>
+                                        <p class="numberVar">0</p>
+                                        <div class="quanti plusquanti" onclick="plusVariation(this)">+</div>
+                                </div>\`;
+                                criaCard.innerHTML += \`</div><div class="closeVar" onclick="closeVariation(this)">X</div>\`
+                            }
+                        }
+                        else {
+                            try {
+                                titulos = document.getElementsByClassName('titulo');
+                                for (let i = 0; i < titulos.length + 1; i++) {
+                                    const element = titulos[i];
+                                    element.style.top = '50%';
+                                    element.style.left = '50%';
+                                    element.style.transform = 'translate(-50%, -50%)';
+                                }
+                            } catch (error) {
+                                console.log('bug aqui');
+                            }
+                        }
+                        document.getElementById('products').appendChild(criaCard);
+                        criaCard.innerHTML += '<div class="leftArrow" onclick="carouselleft(this)"><i class="fa-solid fa-arrow-left fa-lg"></i></div><div class="rightArrow" onclick="carouselright(this)"><i class="fa-solid fa-arrow-right fa-lg"></i></div>'
+                        for (let i = 1; i < imagem.length; i++) {
+                            const element = imagem[i];
+                            criaCard.children[0].innerHTML += \`<img src="\${imagem[i]}"alt="">\`
+                        }
+                        criaCard.children[0].innerHTML += \`<div class="description"><p>\${element[2]}</p></div>\`
+                    }
+                }
+            }
+    
+            setTimeout(() => {
+                document.getElementsByClassName('loader')[0].style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementsByClassName('loader')[0].style.display = 'none';
+                }, 1000);
+            }, 3000);
+    
+            window.addEventListener('scroll', () => {
+                produto = document.getElementsByClassName('card');
+                for (let i = 0; i < produto.length; i++) {
+                    const element = produto[i];
+                    if (element.getBoundingClientRect().y < 600) {
+                        element.setAttribute("class", "visible card");
+                    }
+                }
+            });
+            function carouselright(element) {
+                card = element.parentElement;
+                carrossel = card.children[0];
+                itens = carrossel.children.length - 2;
+                aSomar = apenasNumeros(element.parentElement.children[0].style.transform);
+                aSomar = isNaN(aSomar) ? 0 : aSomar;
+                if (aSomar <= itens * 87) {
+                    element.parentElement.children[0].style.transform = \`translateX(-\${aSomar + 87}vw)\`;
+                    aSomar += 87;
+                }
+            }
+            function carouselleft(element) {
+                aSomar = apenasNumeros(element.parentElement.children[0].style.transform);
+                aSomar = isNaN(aSomar) ? 0 : aSomar;
+                element.parentElement.children[0].style.transform = \`translateX(-\${aSomar - 87}vw)\`;
+            }
+    
+            function enviarPedido() {
+    
+                document.getElementsByClassName('confirm')[0].innerHTML = '<p class="centerConfirm">Obrigado! Seu pedido está sendo tratado e nosso time de vendas fará contato em breve</p>'
+    
+                for (let i = 0; i < pedido.length - 1; i++) {
+                    const element = pedido[i];
+                    var pedidoString = " " + element.produto
+                }
+    
+                var formdata = new FormData();
+                formdata.append("nome", nomeCliente);
+                formdata.append("email", emailCliente);
+                formdata.append("telefone", telefoneCliente);
+                formdata.append("valorpedido", JSON.stringify(valorPedido));
+                formdata.append("situacao", "em aberto");
+                formdata.append("produtos", JSON.stringify(pedido));
+    
+                var requestOptions = {
+                    method: 'POST',
+                    body: formdata,
+                    redirect: 'follow',
+                    mode: 'no-cors',
+                };
+    
+                fetch("https://script.google.com/macros/s/AKfycby8UCVgOuKamlDT-MRw2azfKHYo4rO7yVx7f7buQTg8qpWIrWyc2U_tW5fVWMjv8P97vA/exec", requestOptions)
+                    .then(response => response.text())
+                    .then(result => console.log(result))
+                    .catch(error => console.log('error', error));
+    
+                setTimeout(() => {
+                    window.location.reload();
+                }, 5000);
+            }
+    
+            function baixarImagem(url) {
+                fetch(url)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        const url = URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = 'imagem.webp';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        URL.revokeObjectURL(url);
+                    })
+                    .catch(error => {
+                        console.error('Erro ao baixar a imagem:', error);
+                    });
+            }
+    
+            function gold() {
+                for (let i = 0; i < document.getElementsByClassName('card').length; i++) {
+                    const element = document.getElementsByClassName('card')[i];
+                    if (document.getElementsByClassName('numb')[i].innerHTML > 0) {
+                        document.getElementsByClassName('card')[i].style.outline = '2px solid goldenrod';
+                    }
+                    else {
+                        document.getElementsByClassName('card')[i].style.outline = '1px solid rgba(255, 255, 255, 0.534)';
+                    }
+                }
+            }
+        </script>
+    </body>
+    
+    </html>`;
 
     // Armazena o conteúdo da página junto com o tempo de expiração
     pageDictionary[linkId] = {
