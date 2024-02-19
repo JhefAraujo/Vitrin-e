@@ -296,6 +296,7 @@
             transform: translateX(-50%);
             z-index: 10;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: space-around;
             transition-duration: 0.3s;
@@ -904,7 +905,7 @@
             <p>Clique para explorar</p>
         </a>
         <div class="filter">
-            <video src="bgvideo.mp4" playsinline autoplay muted loop></video>
+            <video src="" playsinline autoplay muted loop></video>
         </div>
     </main>
     <section class="products" id="products">
@@ -953,19 +954,34 @@
         var valorPedido = 0;
         var catalogos = [];
         var catalogo = "Verano";
+        var objetoEncontrado = null;
 
         async function getCatalogos() {
             url = 'https://script.google.com/macros/s/AKfycbwQzj3r_puiz-WSxr4R-MHA4DhQUHEY0l1tOpP_mGQ2Fmt1DlcyN4_O8u10Cd5X0k2Y/exec';
             response = await fetch(url);
             parsed = await response.json();
+
             for (let i = 0; i < parsed.length; i++) {
                 const element = parsed[i];
                 catalogos.push(element);
             }
-            if (catalogos[0][3] == 'espec') {
+
+            // Percorra o array de objetos
+            for (const catalogoAtual of catalogos) {
+                // Verifique se o item 0 do objeto é igual à string fornecida
+                if (catalogoAtual[0] === catalogo) {
+                    // Se for igual, salve o objeto e interrompa o loop
+                    objetoEncontrado = catalogoAtual;
+                    break;
+                }
+            }
+
+            if (objetoEncontrado[3] == 'espec') {
                 document.getElementsByClassName('base')[0].style.display = 'none';
             }
             document.getElementsByTagName('h1')[0].innerHTML = catalogo;
+
+            document.getElementsByTagName('video')[0].src = "videos/" + objetoEncontrado[2];
         }
 
         getCatalogos()
@@ -989,7 +1005,7 @@
             }
             element.style.paddingBottom = '30px';
             element.removeEventListener('click', expandirBase); // Remova o evento de expandirBase
-            element.addEventListener('click', function() { fecharmenu(this); }); // Adicione o evento de expandirBase
+            element.addEventListener('click', function () { fecharmenu(this); }); // Adicione o evento de expandirBase
         }
 
         function fecharmenu(element) {
@@ -998,7 +1014,7 @@
             element.style.height = '15vw';
             element.style.paddingBottom = '0';
             element.removeEventListener('click', fecharmenu); // Remova o evento de expandirBase
-            element.addEventListener('click', function() { expandirBase(this); }); // Adicione o evento de expandirBase
+            element.addEventListener('click', function () { expandirBase(this); }); // Adicione o evento de expandirBase
         }
 
         function reverlarCheckout() {
