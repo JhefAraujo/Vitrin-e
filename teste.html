@@ -866,6 +866,11 @@
             font-size: 1.1em;
             width: 90%;
         }
+
+        .texto {
+            color: white;
+            font-size: 1.3em;
+        }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -946,6 +951,24 @@
     </div>
     <script>
         var valorPedido = 0;
+        var catalogos = [];
+        var catalogo = "Verano";
+
+        async function getCatalogos() {
+            url = 'https://script.google.com/macros/s/AKfycbwQzj3r_puiz-WSxr4R-MHA4DhQUHEY0l1tOpP_mGQ2Fmt1DlcyN4_O8u10Cd5X0k2Y/exec';
+            response = await fetch(url);
+            parsed = await response.json();
+            for (let i = 0; i < parsed.length; i++) {
+                const element = parsed[i];
+                catalogos.push(element);
+            }
+            if (catalogos[0][3] == 'espec') {
+                document.getElementsByClassName('base')[0].style.display = 'none';
+            }
+            document.getElementsByTagName('h1')[0].innerHTML = catalogo;
+        }
+
+        getCatalogos()
 
         function desaparece() {
             document.getElementsByClassName('cookies')[0].style.animation = 'desaparecer 0.7s ease-out';
@@ -958,6 +981,12 @@
             element.style.width = '50vw'
             element.style.height = '60vw'
             element.innerHTML = '<i class="fa-solid fa-x fecharmenu"></i>';
+            for (let i = 0; i < catalogos.length; i++) {
+                const elemento = catalogos[i];
+                if (elemento[3] == 'base') {
+                    element.innerHTML += `<p class="texto">${elemento[0]}</p>`
+                }
+            }
             element.style.paddingBottom = '30px';
             element.removeEventListener('click', expandirBase); // Remova o evento de expandirBase
             element.addEventListener('click', function() { fecharmenu(this); }); // Adicione o evento de expandirBase
@@ -1341,7 +1370,7 @@
                 catch (error) {
                 }
 
-                if (element[8] == "Verano") {
+                if (element[8] == catalogo) {
                     criaCard = document.createElement('div');
                     criaCard.setAttribute('class', 'card element');
                     criaCard.innerHTML = `<div class="carousel"><img src="${imagem[0]}"alt=""></div>
