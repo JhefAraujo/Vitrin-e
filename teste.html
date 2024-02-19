@@ -194,6 +194,7 @@
 
         .description p {
             width: 65%;
+            font-size: 1.2em;
         }
 
         .leftArrow {
@@ -956,6 +957,7 @@
         function revelarFotos() {
             document.getElementsByClassName('popinfo')[0].style.display = 'none';
             document.getElementsByClassName('cookies')[0].style.display = 'none';
+            fetchAndAppend();
         }
 
         var identificado = false;
@@ -1323,12 +1325,16 @@
                         }
                     }
                     else {
-                        titulos = document.getElementsByClassName('titulo');
+                        try {
+                            titulos = document.getElementsByClassName('titulo');
                         for (let i = 0; i < titulos.length + 1; i++) {
                             const element = titulos[i];
                             element.style.top = '50%';
                             element.style.left = '50%';
                             element.style.transform = 'translate(-50%, -50%)';
+                        }
+                        } catch (error) {
+                            console.log('bug aqui');
                         }
                     }
                     document.getElementById('products').appendChild(criaCard);
