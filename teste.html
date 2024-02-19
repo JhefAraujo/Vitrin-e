@@ -283,6 +283,36 @@
             border: 1px solid rgba(7, 7, 7, 0.7);
         }
 
+        .base {
+            width: 15vw;
+            height: 15vw;
+            background-color: rgba(0, 0, 0, 0.6);
+            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px);
+            border-radius: 0px 0px 7px 7px;
+            position: fixed;
+            top: 11vh;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            transition-duration: 0.3s;
+        }
+
+        .downArrow {
+            color: white;
+            font-size: 1.3em;
+        }
+
+        .fecharmenu {
+            color: white;
+            font-size: 1.3em;
+            position: absolute;
+            bottom: 5px;
+        }
+
         header img {
             height: 10vh;
             width: 10vh;
@@ -862,7 +892,7 @@
                 <p>A</p>
             </div>
     </header>
-
+    <div class="base" onclick="expandirBase(this)"><i class="fa-solid fa-arrow-down downArrow"></i></div>
     <main>
         <h1>Verano</h1>
         <a href="#products">
@@ -922,6 +952,24 @@
             setTimeout(() => {
                 document.getElementsByClassName('cookies')[0].style.display = 'none';
             }, 700);
+        }
+
+        function expandirBase(element) {
+            element.style.width = '50vw'
+            element.style.height = '60vw'
+            element.innerHTML = '<i class="fa-solid fa-x fecharmenu"></i>';
+            element.style.paddingBottom = '30px';
+            element.removeEventListener('click', expandirBase); // Remova o evento de expandirBase
+            element.addEventListener('click', function() { fecharmenu(this); }); // Adicione o evento de expandirBase
+        }
+
+        function fecharmenu(element) {
+            element.innerHTML = '<i class="fa-solid fa-arrow-down downArrow">';
+            element.style.width = '15vw';
+            element.style.height = '15vw';
+            element.style.paddingBottom = '0';
+            element.removeEventListener('click', fecharmenu); // Remova o evento de expandirBase
+            element.addEventListener('click', function() { expandirBase(this); }); // Adicione o evento de expandirBase
         }
 
         function reverlarCheckout() {
@@ -1326,12 +1374,12 @@
                     else {
                         try {
                             titulos = document.getElementsByClassName('titulo');
-                        for (let i = 0; i < titulos.length + 1; i++) {
-                            const element = titulos[i];
-                            element.style.top = '50%';
-                            element.style.left = '50%';
-                            element.style.transform = 'translate(-50%, -50%)';
-                        }
+                            for (let i = 0; i < titulos.length + 1; i++) {
+                                const element = titulos[i];
+                                element.style.top = '50%';
+                                element.style.left = '50%';
+                                element.style.transform = 'translate(-50%, -50%)';
+                            }
                         } catch (error) {
                             console.log('bug aqui');
                         }
