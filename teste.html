@@ -1337,41 +1337,25 @@
         }
         identificado = false;
 
-        function downloadImg(elem) {
+        function downloadImg() {
             // URL da imagem no GitHub
-            const imageUrl = 'https://raw.githubusercontent.com/JhefAraujo/Clone-conecta/main/img/341c5c81-6d95-484a-9717-c8e67f0bbf5d.png';
+            const imageUrl = 'img/341c5c81-6d95-484a-9717-c8e67f0bbf5d.png';
 
-            // Fetch para obter a imagem como um blob
-            fetch(imageUrl)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Erro no fetch: ${response.status} - ${response.statusText}`);
-                    }
-                    return response.blob();
-                })
-                .then(blob => {
-                    // Criar um objeto URL para a blob
-                    const blobUrl = URL.createObjectURL(blob);
+            // Criar um link para download
+            const link = document.createElement('a');
+            link.href = imageUrl;
 
-                    // Criar um link para download
-                    const link = document.createElement('a');
-                    link.href = blobUrl;
-                    link.download = `imagem.jpg`;
+            // Adicionar o link ao corpo do documento
+            document.body.appendChild(link);
 
-                    // Adicionar o link ao corpo do documento e clicar automaticamente para iniciar o download
-                    document.body.appendChild(link);
-                    link.click();
+            // Clicar automaticamente para iniciar o download
+            link.click();
 
-                    // Remover o link do corpo do documento
-                    document.body.removeChild(link);
-
-                    // Liberar o objeto URL
-                    URL.revokeObjectURL(blobUrl);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
+            // Remover o link do corpo do documento
+            document.body.removeChild(link);
         }
+
+        var elementu = [];
 
         async function fetchAndAppend() {
             url = 'https://script.google.com/macros/s/AKfycbzUAPR0RI1BkPc5n17zGMnzWam-JKpT9ICzc-0gs6_V5Q22UmLfviLLar9Me-Y2SUCSew/exec';
@@ -1387,6 +1371,7 @@
                 }
 
                 if (element[8] == catalogo) {
+                    elementu.push(brute[i]);
                     criaCard = document.createElement('div');
                     criaCard.setAttribute('class', 'card element');
                     criaCard.innerHTML = `<div class="carousel"><img src="${imagem[0]}"alt=""></div>
@@ -1400,7 +1385,7 @@
                                             <p class="numb"></p>
                                             <div onclick="plusElem(this), gold()" class="plus">+</div>
                                             </div>
-                                            <a target="_blank" href="blob:https://github.com/cccfc928-8be2-4dd5-b8b4-c16ec3373169"><i class="fa-solid fa-download down" style="color: #ffffff;"></i></a>`
+                                            <a download="${element[0]}" href="${element[0]}"><i class="fa-solid fa-download down" style="color: #ffffff;"></i></a>`
                         if (varia.length > 1) {
                             criaCard.innerHTML += `<div class="variation"><div class="varWrap">
                                 <p>${varia[0]}</p><div class="wrapQuanti">
@@ -1507,24 +1492,6 @@
             setTimeout(() => {
                 window.location.reload();
             }, 5000);
-        }
-
-        function baixarImagem(url) {
-            fetch(url)
-                .then(response => response.blob())
-                .then(blob => {
-                    const url = URL.createObjectURL(blob);
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.download = 'imagem.webp';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    URL.revokeObjectURL(url);
-                })
-                .catch(error => {
-                    console.error('Erro ao baixar a imagem:', error);
-                });
         }
 
         function gold() {

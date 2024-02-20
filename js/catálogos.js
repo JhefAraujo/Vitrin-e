@@ -104,15 +104,63 @@ async function renderCatalogos() {
         <p>${element[0]}</p>
     </div>
     <div class="btns">
-        <div class="link">copiar link</div>
+        <div class="link" onclick="copyLink(this)">copiar link</div>
         <div class="whatsapp"><img src="whatsapp.png" alt="whatsapp"></div>
         <div class="telegram"><img src="telegram.png" alt="telegram"></div>
     </div>`;
         document.getElementsByClassName("container")[0].appendChild(criaCard);
     }
+    for (let i = 0; i < document.getElementsByClassName("link").length; i++) {
+        const element = document.getElementsByClassName("link")[i];
+        element.addEventListener("click", function (event) {
+            console.log("Clique no Filho");
+            element.parentElement.parentElement.removeEventListener(
+                "click",
+                revelarCatalogo
+            );
+
+            // Evita que o evento de clique no filho propague para o pai
+            event.stopPropagation();
+        });
+    }
 }
 //criar funcionalidade
 renderCatalogos();
+
+function copyLink(element) {
+    const formdata = new FormData();
+    formdata.append(
+        "parametroDoSistema",
+        element.parentElement.parentElement.children[2].children[0].innerHTML
+    );
+
+    const requestOptions = {
+        method: "POST",
+        body: formdata,
+        redirect: "follow",
+    };
+
+    fetch("http://localhost:3000/generate-link/", requestOptions)
+        .then((response) => response.text())
+        .then((data) => {
+            // Criar um elemento textarea para armazenar os dados
+            const textarea = document.createElement("textarea");
+            textarea.value = JSON.parse(data).link;
+
+            // Adicionar o textarea à página
+            document.body.appendChild(textarea);
+
+            // Selecionar e copiar o texto
+            textarea.select();
+            document.execCommand("copy");
+
+            // Remover o textarea da página (opcional)
+            document.body.removeChild(textarea);
+
+            // Exibir uma mensagem (opcional)
+            alert("Dados copiados para a área de transferência!");
+        });
+}
 
 function criaCatalogo() {
     document.getElementById("createCatalog").style.display = "block";
@@ -122,10 +170,8 @@ function criaCatalogo() {
 function enviarNovoCatalogo() {
     var formdata = new FormData();
     formdata.append("nome", document.getElementById("nomeEnviar").value);
-    formdata.append(
-        "datavalidade",
-        document.getElementById("enviarData").value
-    );
+    formdata.append("datavalidade", document.getElementById("enviarData").value.split('T')[0].split('-').reverse().join('/'));
+    formdata.append("video", document.getElementById('video').value.split("\\")[2]);
 
     var requestOptions = {
         method: "POST",
@@ -154,37 +200,31 @@ function popupExcluir(catalogo) {
     exclusao = catalogo;
 }
 
-var marcadorExclusao;
-
 function excluir() {
     catalogoExcluido =
-        exclusao.parentElement.parentElement.parentElement.children[2]
-            .children[0].innerHTML;
+        exclusao.parentElement.parentElement.parentElement.children[2].children[0].innerHTML;
     for (let i = 0; i < brute.length; i++) {
         const element = brute[i];
         if (element.includes(catalogoExcluido)) {
             formdata = new FormData();
 
             formdata.append("action", "excluir");
-            formdata.append("row", i);
+            formdata.append("row", i + 2);
 
             var requestOptions = {
                 method: "POST",
                 body: formdata,
                 redirect: "follow",
+                mode: "no-cors"
             };
 
             fetch(
-                "https://script.google.com/macros/s/AKfycbwQzj3r_puiz-WSxr4R-MHA4DhQUHEY0l1tOpP_mGQ2Fmt1DlcyN4_O8u10Cd5X0k2Y/exec",
+                "https://script.google.com/macros/s/AKfycbwM9bo7RYZXtHt_97-tV1sLSvN3k8SCc0dC678qKGcoMz1L0ECheQZm_y4YMuCWRnYI/exec",
                 requestOptions
             )
                 .then((response) => response.text())
                 .then((result) => console.log(result))
                 .catch((error) => console.log("error", error));
-
-            setTimeout(() => {
-                window.location.reload();
-            }, 2000);
         }
     }
 }

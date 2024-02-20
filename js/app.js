@@ -1,15 +1,20 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const shortid = require('shortid');
+const cors = require('cors');
 const app = express();
 const port = 3000;
+const multer = require('multer');
+const upload = multer();
+app.use('/videos', express.static('videos'));
+app.use(cors());
 
 const pageDictionary = {};
 
 // Adiciona o middleware bodyParser para interpretar o corpo da requisição como JSON
 app.use(bodyParser.json());
 
-app.post('/generate-link', (req, res) => {
+app.post('/generate-link/', upload.none(), (req, res) => {
     const linkId = shortid.generate();
 
     // Adicione um carimbo de data e hora de expiração (48 horas)
@@ -306,7 +311,7 @@ app.post('/generate-link', (req, res) => {
     
             .base {
                 width: 15vw;
-                height: 15vw;
+                height: 10vw;
                 background-color: rgba(0, 0, 0, 0.6);
                 -webkit-backdrop-filter: blur(15px);
                 backdrop-filter: blur(15px);
@@ -1002,7 +1007,7 @@ app.post('/generate-link', (req, res) => {
                 }
                 document.getElementsByTagName('h1')[0].innerHTML = catalogo;
     
-                document.getElementsByTagName('video')[0].src = "videos/" + objetoEncontrado[2];
+                document.getElementsByTagName('video')[0].src = "/videos/" + objetoEncontrado[2];
             }
     
             getCatalogos()
@@ -1032,7 +1037,7 @@ app.post('/generate-link', (req, res) => {
             function fecharmenu(element) {
                 element.innerHTML = '<i class="fa-solid fa-arrow-down downArrow">';
                 element.style.width = '15vw';
-                element.style.height = '15vw';
+                element.style.height = '10vw';
                 element.style.paddingBottom = '0';
                 element.removeEventListener('click', fecharmenu); // Remova o evento de expandirBase
                 element.addEventListener('click', function () { expandirBase(this); }); // Adicione o evento de expandirBase
@@ -1155,7 +1160,7 @@ app.post('/generate-link', (req, res) => {
                 document.getElementsByTagName('header')[0].children[1].style.display = 'block';
                 document.getElementsByTagName('header')[0].children[2].style.display = 'flex';
                 document.getElementsByTagName('header')[0].children[0].style.margin = '0';
-                document.getElementsByTagName('header')[0].children[0].src = 'mono-02.svg';
+                document.getElementsByTagName('header')[0].children[0].src = 'videos/mono-02.svg';
                 titulo = parent.children[1].children[0].innerHTML;
                 preco = apenasNumeros(titulo.substring(0, 5));
     
@@ -1302,7 +1307,7 @@ app.post('/generate-link', (req, res) => {
                 document.getElementsByTagName('header')[0].children[1].style.display = 'block';
                 document.getElementsByTagName('header')[0].children[2].style.display = 'flex';
                 document.getElementsByTagName('header')[0].children[0].style.margin = '0';
-                document.getElementsByTagName('header')[0].children[0].src = 'mono-02.svg';
+                document.getElementsByTagName('header')[0].children[0].src = 'videos/mono-02.svg';
     
                 carrinho();
             }
@@ -1570,25 +1575,27 @@ app.post('/generate-link', (req, res) => {
         expirationTime,
     };
 
-    res.json({ link: `http://localhost:${port}/${linkId}` });
+    res.json({ link: `http://localhost:${port}/${linkId}`});
 });
 
 app.get('/:linkId', (req, res) => {
     const linkId = req.params.linkId;
 
+    // Verifique se o linkId existe no pageDictionary
     if (pageDictionary[linkId]) {
         const { htmlPage, expirationTime } = pageDictionary[linkId];
 
-        // Verifica se o link expirou
+        // Verifique se a página ainda está válida (não expirou)
         if (Date.now() < expirationTime) {
             res.send(htmlPage);
-        } else {
-            res.status(410).send('Link expirado'); // 410 - Gone (Recurso Removido)
+            return;
         }
-    } else {
-        res.status(404).send('Página não encontrada');
     }
+
+    // Se o linkId não existir ou a página expirou, retorne um erro 404
+    res.status(404).send('Link inválido');
 });
+
 
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);

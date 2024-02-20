@@ -290,6 +290,8 @@ h1 {
     column-gap: 2px;
 }
 
+
+
 .close {
     filter: brightness(0.7);
 }
@@ -308,6 +310,10 @@ h1 {
 .subinfo {
     font-size: smaller;
     color: #b4b4b4;
+}
+
+#video {
+    display: none;
 }
 
 .firstCat {
