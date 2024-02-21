@@ -259,7 +259,7 @@ function enviarNovoCatalogo() {
 }
 
 function editarProdutosNovo() {
-    container = document.getElementsByClassName("productContainer")[0];
+    container = document.getElementsByClassName("productContainer")[1];
     for (let i = 0; i < container.children.length; i++) {
         const element = container.children[i];
         const formdata = new FormData();
@@ -274,7 +274,7 @@ function editarProdutosNovo() {
         };
 
         fetch(
-            "https://script.google.com/macros/s/AKfycbyNfCPkEyZE6tZdFqui84SliwJ88cjz0UOXXo78qKLeIOl9D9h63Vm8sXw8qDEyIf2YQg/exec",
+            "https://script.google.com/macros/s/AKfycbwtSFPe1UjLAwqy8H9DPKuWow0dM7iLUeZ1BtlzhIM-agx4Rr9Nc_BTiVoYX096e2b0/exec",
             requestOptions
         )
             .then((response) => response.text())
