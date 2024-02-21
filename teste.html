@@ -248,6 +248,7 @@
 
         .carousel img {
             width: 87vw;
+            height: 100%;
         }
 
         .loader {
@@ -449,8 +450,17 @@
 
             .card {
                 width: 27vw !important;
-                height: 450px !important;
+                height: 35vw !important;
                 margin: auto;
+            }
+
+            .carousel img {
+                width: 27vw !important;
+                height: 100%;
+            }
+
+            .carousel {
+                height: 100%;
             }
 
             #products {
@@ -1449,15 +1459,27 @@
             itens = carrossel.children.length - 2;
             aSomar = apenasNumeros(element.parentElement.children[0].style.transform);
             aSomar = isNaN(aSomar) ? 0 : aSomar;
-            if (aSomar <= itens * 87) {
-                element.parentElement.children[0].style.transform = `translateX(-${aSomar + 87}vw)`;
-                aSomar += 87;
+            if (innerWidth <= 650) {
+                if (aSomar <= itens * 87) {
+                    element.parentElement.children[0].style.transform = `translateX(-${aSomar + 87}vw)`;
+                    aSomar += 87;
+                }
+            }
+            else {
+                if (aSomar <= itens * 27) {
+                    element.parentElement.children[0].style.transform = `translateX(-${aSomar + 27}vw)`;
+                    aSomar += 27;
+                }
             }
         }
         function carouselleft(element) {
             aSomar = apenasNumeros(element.parentElement.children[0].style.transform);
             aSomar = isNaN(aSomar) ? 0 : aSomar;
-            element.parentElement.children[0].style.transform = `translateX(-${aSomar - 87}vw)`;
+            if (innerWidth <= 650) {
+                element.parentElement.children[0].style.transform = `translateX(-${aSomar - 87}vw)`;
+            } else {
+                element.parentElement.children[0].style.transform = `translateX(-${aSomar - 27}vw)`;
+            }
         }
 
         function enviarPedido() {

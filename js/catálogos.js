@@ -140,7 +140,7 @@ function copyLink(element) {
         redirect: "follow",
     };
 
-    fetch("http://localhost:3000/generate-link/", requestOptions)
+    fetch("https://firebasebackend-1yte8cxfi-jhefferson-araujos-projects.vercel.app/generate-link/generate-link/", requestOptions)
         .then((response) => response.text())
         .then((data) => {
             // Criar um elemento textarea para armazenar os dados

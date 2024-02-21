@@ -17,13 +17,10 @@ app.use(bodyParser.json());
 app.post('/generate-link/', upload.none(), (req, res) => {
     const linkId = shortid.generate();
 
-    // Adicione um carimbo de data e hora de expiração (48 horas)
     const expirationTime = Date.now() + 48 * 60 * 60 * 1000; // 48 horas em milissegundos
     
-    // Obtém o parâmetro do sistema a partir do corpo da requisição
     const parametroDoSistema = req.body.parametroDoSistema;
     
-    // Modifique esta parte para incluir o conteúdo desejado com base no parâmetro
     const htmlPage = `<!DOCTYPE html>
     <html lang="pt-br">
     
@@ -209,7 +206,7 @@ app.post('/generate-link/', upload.none(), (req, res) => {
     
             .description {
                 height: 107vw;
-                width: 87vw !important;
+                width: 87vw;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -274,6 +271,7 @@ app.post('/generate-link/', upload.none(), (req, res) => {
     
             .carousel img {
                 width: 87vw;
+                height: 100%;
             }
     
             .loader {
@@ -475,8 +473,22 @@ app.post('/generate-link/', upload.none(), (req, res) => {
     
                 .card {
                     width: 27vw !important;
-                    height: 450px !important;
+                    height: 35vw !important;
                     margin: auto;
+                }
+    
+                .carousel img {
+                    width: 27vw !important;
+                    height: 100%;
+                }
+
+                .description {
+                    width: 27vw !important;
+                    height: 100%;
+                }
+    
+                .carousel {
+                    height: 100%;
                 }
     
                 #products {
