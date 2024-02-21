@@ -59,7 +59,7 @@
                 <input style="display: none;" type="file" name="video" id="video">
         </div>
         <div class="productHeader">Produtos
-            <div class="addproduct">
+            <div onclick="addProduct()" class="addproduct">
                 Adicionar
             </div>
         </div>
@@ -93,7 +93,7 @@
                 <input type="file" name="video" id="video">
         </div>
         <div class="productHeader">Produtos
-            <div class="addproduct">
+            <div onclick="addProduct()" class="addproduct">
                 Adicionar
             </div>
         </div>
@@ -118,6 +118,13 @@
                 <div onclick="excluir(exclusao)" class="excluir">Excluir</div>
                 <div class="cancelar">Cancelar</div>
             </div>
+        </div>
+    </div>
+    <div class="popupCriar">
+        <div class="popCriar">
+            <input oninput="pesquisar(this.value)" class="inputCriar" type="text" placeholder="Pesquisar produto...">
+            <div class="popupImageCard"></div>
+            <div class="submitCriar">Enviar</div>
         </div>
     </div>
 </body>

@@ -40,11 +40,19 @@ function revelarCatalogo(element) {
     return nome;
 }
 
+var bruto;
+var response;
+
 async function fetchdata() {
     response = await fetch(
         "https://script.google.com/macros/s/AKfycbzUAPR0RI1BkPc5n17zGMnzWam-JKpT9ICzc-0gs6_V5Q22UmLfviLLar9Me-Y2SUCSew/exec"
     );
     bruto = await response.json();
+}
+
+fetchdata();
+
+function renderdata() {
     for (let i = 0; i < bruto.length; i++) {
         if (bruto[i]["8"] == nome) {
             firstimg = bruto[i][0].split(" ");
@@ -62,6 +70,51 @@ async function fetchdata() {
             criaInfo.innerHTML = `<p>${bruto[i][1]}</p><div class="removerProduto" onClick="removeProduct(this.parentElement.parentElement)">Remover do catálogo</div>`;
             criaCard.appendChild(criaInfo);
         }
+    }
+}
+
+function adiProduct(element) {
+    document.getElementsByClassName("popupCriar")[0].style.display = "none";
+    criaCard = document.createElement("div");
+    criaCard.setAttribute("class", "productCard");
+    criaImage = document.createElement("div");
+    criaImage.setAttribute("class", "productImg");
+    criaImage.innerHTML = `<img onClick="showImage(this)" src="${element.children[0].src}" alt="imagem do produto">`;
+    container = document.getElementsByClassName("productContainer")[1];
+    container.appendChild(criaCard);
+    criaCard.appendChild(criaImage);
+
+    criaInfo = document.createElement("div");
+    criaInfo.setAttribute("class", "productInfo");
+    criaInfo.innerHTML = `<p>${element.children[1].getAttribute(
+        "data"
+    )}</p><div class="removerProduto" onClick="removeProduct(this.parentElement.parentElement)">Remover do catálogo</div>`;
+    criaCard.appendChild(criaInfo);
+}
+
+function pesquisar(value) {
+    var popupImageCard = document.getElementsByClassName("popupImageCard")[0];
+    popupImageCard.innerHTML = "";
+
+    var contador = 0;
+    var valorLowerCase = value.toLowerCase(); // Converter valor de pesquisa para minúsculas
+
+    for (let i = 0; i < bruto.length && contador < 5; i++) {
+        const element = bruto[i];
+        var elementoLowerCase = element[2].toLowerCase(); // Converter elemento do array para minúsculas
+
+        if (elementoLowerCase.includes(valorLowerCase)) {
+            popupImageCard.innerHTML += `<div onclick="adiProduct(this)"  class="selectSearch"><img src="${
+                element[0]
+            }" alt=""><p data="${element[2]}">${element[2].substring(
+                0,
+                40
+            )}...</p></div>`;
+            contador++;
+        }
+    }
+    if (value == 0) {
+        popupImageCard.innerHTML = "";
     }
 }
 
@@ -91,7 +144,7 @@ async function renderCatalogos() {
         const element = brute[i];
         criaCard = document.createElement("div");
         criaCard.setAttribute("class", "card");
-        criaCard.setAttribute("onclick", "revelarCatalogo(this), fetchdata()");
+        criaCard.setAttribute("onclick", "revelarCatalogo(this), renderdata()");
         criaCard.innerHTML = `<div class="line">
         <div class="views"><img src="view.png" class="view" alt="views">${element[4]}</div>
         <div class="settings">
@@ -140,7 +193,10 @@ function copyLink(element) {
         redirect: "follow",
     };
 
-    fetch("https://firebasebackend-git-main-jhefferson-araujos-projects.vercel.app/generate-link/", requestOptions)
+    fetch(
+        "https://firebasebackend-git-main-jhefferson-araujos-projects.vercel.app/generate-link/",
+        requestOptions
+    )
         .then((response) => response.text())
         .then((data) => {
             // Criar um elemento textarea para armazenar os dados
@@ -170,8 +226,19 @@ function criaCatalogo() {
 function enviarNovoCatalogo() {
     var formdata = new FormData();
     formdata.append("nome", document.getElementById("nomeEnviar").value);
-    formdata.append("datavalidade", document.getElementById("enviarData").value.split('T')[0].split('-').reverse().join('/'));
-    formdata.append("video", document.getElementById('video').value.split("\\")[2]);
+    formdata.append(
+        "datavalidade",
+        document
+            .getElementById("enviarData")
+            .value.split("T")[0]
+            .split("-")
+            .reverse()
+            .join("/")
+    );
+    formdata.append(
+        "video",
+        document.getElementById("video").value.split("\\")[2]
+    );
 
     var requestOptions = {
         method: "POST",
@@ -188,9 +255,40 @@ function enviarNovoCatalogo() {
         .then((result) => console.log(result))
         .catch((error) => console.log("error", error));
 
+    editarProdutosNovo();
+}
+
+function editarProdutosNovo() {
+    container = document.getElementsByClassName("productContainer")[0];
+    for (let i = 0; i < container.children.length; i++) {
+        const element = container.children[i];
+        const formdata = new FormData();
+        formdata.append("nome", document.getElementById('nomeEnviar').value);
+        formdata.append("produto", element.children[1].children[0].innerHTML);
+        formdata.append("action", "editarCatalogo");
+
+        const requestOptions = {
+            method: "POST",
+            body: formdata,
+            redirect: "follow",
+        };
+
+        fetch(
+            "https://script.google.com/macros/s/AKfycbyNfCPkEyZE6tZdFqui84SliwJ88cjz0UOXXo78qKLeIOl9D9h63Vm8sXw8qDEyIf2YQg/exec",
+            requestOptions
+        )
+            .then((response) => response.text())
+            .then((result) => console.log(result))
+            .catch((error) => console.error(error));
+    }
+
     setTimeout(() => {
         window.location.reload();
     }, 2000);
+}
+
+function addProduct() {
+    document.getElementsByClassName("popupCriar")[0].style.display = "flex";
 }
 
 var exclusao;
@@ -202,7 +300,8 @@ function popupExcluir(catalogo) {
 
 function excluir() {
     catalogoExcluido =
-        exclusao.parentElement.parentElement.parentElement.children[2].children[0].innerHTML;
+        exclusao.parentElement.parentElement.parentElement.children[2]
+            .children[0].innerHTML;
     for (let i = 0; i < brute.length; i++) {
         const element = brute[i];
         if (element.includes(catalogoExcluido)) {
@@ -215,7 +314,7 @@ function excluir() {
                 method: "POST",
                 body: formdata,
                 redirect: "follow",
-                mode: "no-cors"
+                mode: "no-cors",
             };
 
             fetch(

@@ -178,6 +178,56 @@ h1 {
     cursor: pointer;
 }
 
+.popupCriar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(15px);
+    z-index: 9999999999999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.popCriar {
+    background-color: white;
+    border-radius: 10px;
+    width: 35vw;
+    height: 17vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.218);
+    position: relative;
+}
+
+.inputCriar {
+    height: 3em;
+    width: 50%;
+    position: absolute;
+    top: 10px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.submitCriar {
+    background-color: black;
+    color: white;
+    padding: 15px 25px 15px 25px;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 10px;
+    cursor: pointer;
+}
+
+.inputCriar:focus {
+    border: 2px solid black;
+}
+
 .container {
     display: grid;
     align-items: center;
@@ -581,6 +631,54 @@ h1 {
 #popupImage img {
     width: 68vh;
     height: 68vh;
+}
+
+.popupImageCard {
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    top: 27%;
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 99999999999999999999999999999999999;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.218);
+}
+
+.popupImageCard img {
+    height: 90%;
+    position: absolute;
+    left: 5px;
+    border-radius: 2px;
+}
+
+.selectSearch {
+    height: 3.5em;
+    border-bottom: 1px solid #cccccc;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 5px;
+    position: relative;
+}
+
+.selectSearch p {
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.selectSearch:last-child {
+    border: none;
+}
+
+.selectSearch:hover {
+    background-color: #cccccc;
 }
 
 .filter {

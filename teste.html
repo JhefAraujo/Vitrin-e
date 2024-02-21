@@ -895,7 +895,7 @@
     <script src="https://kit.fontawesome.com/2a683e0d82.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body onload="disappearLoader()">
     <div class="loader">
         <img class="logo" src="https://github.com/JhefAraujo/Clone-conecta/blob/main/logo%20escrito.png?raw=true alt="
             Logo Mallorca">
@@ -1442,13 +1442,6 @@
             }
         }
 
-        setTimeout(() => {
-            document.getElementsByClassName('loader')[0].style.opacity = '0';
-            setTimeout(() => {
-                document.getElementsByClassName('loader')[0].style.display = 'none';
-            }, 1000);
-        }, 3000);
-
         window.addEventListener('scroll', () => {
             produto = document.getElementsByClassName('card');
             for (let i = 0; i < produto.length; i++) {
@@ -1458,6 +1451,16 @@
                 }
             }
         });
+
+        function disappearLoader() {
+            setTimeout(() => {
+            document.getElementsByClassName('loader')[0].style.opacity = '0';
+            setTimeout(() => {
+                document.getElementsByClassName('loader')[0].style.display = 'none';
+            }, 1000);
+        }, 3000);
+
+        }
         function carouselright(element) {
             card = element.parentElement;
             carrossel = card.children[0];
