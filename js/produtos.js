@@ -108,19 +108,18 @@ function settings(teste) {
     id = teste.classList[1].slice(4);
     document.getElementById("productSettings").style.display = "flex";
     document.getElementById("list").style.display = "none";
-    document.getElementById("ref").value = teste.children[1].innerHTML;
-    document.getElementById("desc").value = brute[id][2].slice(13);
-    document.getElementById("cod").value = brute[id][2].slice(0, 10);
+    document.getElementById("editReferencia").value = teste.children[1].innerHTML;
+    document.getElementById("editDesc").value = brute[id][2].slice(13);
     document.getElementsByTagName("a")[0].href = "produtos.html";
 
     arrayImg = brute[id][0].split(" ");
     for (let i = 0; i < arrayImg.length; i++) {
         const element = arrayImg[i];
         criaImgCard = document.createElement("div");
-        criaImgCard.innerHTML = `<div class="imgCard"><img src="${element}" alt="">
+        criaImgCard.innerHTML = `<div class="imgCardTwo"><img src="${element}" alt="">
         <div class="cardBtn">Remover</div></div>`;
         document
-            .getElementsByClassName("imgCardContainer")[0]
+            .getElementsByClassName("firstCardWrapper")[0]
             .appendChild(criaImgCard);
     }
 
@@ -146,6 +145,8 @@ function createProduct() {
     document.getElementById("createProduct").style.display = "block";
 }
 
+var filer;
+
 function renderimg(input) {
     var fileInput = input;
 
@@ -161,6 +162,7 @@ function renderimg(input) {
 
     reader.onload = function () {
         // Crie um novo elemento de imagem
+        console.log("1");
         var imgElement = document.createElement("img");
         imgElement.src = reader.result;
         imgElement.alt = "Imagem";
@@ -174,26 +176,29 @@ function renderimg(input) {
         var cardBtnDiv = document.createElement("div");
         cardBtnDiv.className = "cardBtn";
         cardBtnDiv.textContent = "Remover";
-        cardBtnDiv.setAttribute('onclick', 'removerPai(this)')
+        cardBtnDiv.setAttribute('onclick', 'removerPai(this)');
         imgCardDiv.appendChild(cardBtnDiv);
 
         // Adicione a div completa à sua caixa de mídia
-        document.getElementsByClassName("secondCardWrapper")[0].appendChild(imgCardDiv);
+        input.parentElement.children[2].appendChild(imgCardDiv);
+        console.log("2");
     };
 
     // Converta o conteúdo do arquivo para base64
     reader.readAsDataURL(file);
+    filer = input;
 }
 
 function removerPai(element) {
     element.parentElement.remove();
 }
 
-function addvariation() {
+function addvariation(element) {
+    variations = element.parentElement;
     criaInput = document.createElement("input");
     criaInput.setAttribute('class', 'varInput');
-    document.getElementsByClassName("variations")[0].appendChild(criaInput);
-    document.getElementsByClassName('variations')[0].style.height = `${document.getElementsByClassName('variations')[0].offsetHeight + 50}px`;
+    variations.appendChild(criaInput);
+    variations.style.height = `${variations.offsetHeight + 50}px`;
 }
 
 var varias = '';
@@ -203,16 +208,23 @@ function enviarProduto() {
 
     var variacoes = document.getElementsByClassName('varInput');
 
-    for (let i = 0; i < variacoes.length; i++) {
+    for (let i = 1; i < variacoes.length; i++) {
         const element = variacoes[i];
+        if (i == variacoes.length -1) {
+            varias += element.value;
+            break;
+        }
         varias += element.value + " - ";
     }
 
     formData.append("referencia", document.getElementById("referencia").value);
     formData.append("grupo", document.getElementById("categoria").value);
+    formData.append("descricao", document.getElementById("createDesc").value)
     formData.append("ativo", "sim");
     formData.append("action", "criar");
     formData.append("variacao", varias);
+    formData.append("precos", document.getElementById('price').value);
+    formData.append("imagem", document.getElementById('midia').value.split("\\")[2]);
 
     var requestOptions = {
         method: "POST",
@@ -232,13 +244,56 @@ function enviarProduto() {
     enviarImagem();
 }
 
-function enviarImagem() {
+var varias = '';
+
+function editarProduto() {
+    formData = new FormData();
+
+    var variacoes = document.getElementsByClassName('varInput');
+
+    for (let i = 1; i < variacoes.length; i++) {
+        const element = variacoes[i];
+        if (i == variacoes.length -1) {
+            varias += element.value;
+            break;
+        }
+        varias += element.value + " - ";
+    }
+
+    formData.append("referencia", document.getElementById("editReferencia").value);
+    formData.append("grupo", document.getElementById("categoria").value);
+    formData.append("descricao", document.getElementById("createDesc").value)
+    formData.append("ativo", "sim");
+    formData.append("action", "edit");
+    formData.append("variacao", varias);
+    formData.append("precos", document.getElementById('price').value);
+    formData.append("imagem", document.getElementById('midia').value.split("\\")[2]);
+
+    var requestOptions = {
+        method: "POST",
+        body: formData,
+        redirect: "follow",
+        mode: "no-cors",
+    };
+
+    fetch(
+        "https://script.google.com/macros/s/AKfycbwoEFRLiMEaWy13kM5X-HsMT5Ym2oJyIhVkejr_lmSEjRpLgnMZd5mP4Gm9NNaRN1aIoA/exec",
+        requestOptions
+    )
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.log("error", error));
+
+    enviarImagem("criar");
+}
+
+function enviarImagem(action) {
     const owner = "jhefAraujo";
     const repo = "Clone-conecta";
     const fileInput = document.getElementById('midia');
     const pastaNoRepositorio = "imagensProdutos/"; // Caminho na pasta raiz
     const commitMessage = "Adicionando novo arquivo";
-    const token = "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";
+    const token = "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";
 
     // Verifica se um arquivo foi selecionado
     if (fileInput.files.length === 0) {

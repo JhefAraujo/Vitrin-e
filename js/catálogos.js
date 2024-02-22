@@ -239,6 +239,12 @@ function enviarNovoCatalogo() {
         "video",
         document.getElementById("video").value.split("\\")[2]
     );
+    if (document.getElementById('baseCriar').checked == true) {
+        formdata.append("baseespec", "espec");
+    }
+    else {
+        formdata.append("baseespec", "base");
+    }
 
     var requestOptions = {
         method: "POST",

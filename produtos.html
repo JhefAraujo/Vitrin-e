@@ -52,63 +52,40 @@
     </section>
     <section id="productSettings" style="display: none;">
         <div class="menu">
-            <h2 class="edit">Editar produto</h2>
-            <div class="wrapActive">
-                <label for="ativo">Ativo?</label>
-                <input type="checkbox" name="ativo" id="ativo">
-            </div>
+            <h2>Editar produto</h2>
         </div>
-        <div class="first">
-            <div class="wrapper">
-                <label for="ref">Nome do produto</label>
-                <input type="text" name="ref" id="ref">
+        <div class="createProductWrapper">
+            <div class="firstCreate">
+                <div class="createWrap">
+                    <label for="referencia">Nome</label>
+                    <input type="text" name="referencia" id="editReferencia">
+                </div>
+                <div class="createWrap">
+                    <label for="categoria">Categoria</label>
+                    <select name="editCategoria" id="editCategoria">
+                        <option value="0 ANEL">Anel</option>
+                    </select>
+                </div>
             </div>
-            <div class="wrapper">
-                <label for="cat">Categoria</label>
-                <select name="cat" id="cat">
-                    <option value="Teste">Teste</option>
-                </select>
+            <div class="secondCreate">
+                <label for="editDesc">Descrição</label>
+                <input type="text" id="editDesc" name="editDesc">
             </div>
-        </div>
-        <div class="second">
-            <div class="wrapper">
-                <label for="peso">Peso em gramas</label>
-                <input type="number" class="peso" id="peso" name="peso">
+            <div class="txtSpace">
+                <h3>Mídias do produto</h3>
+                <p>Tamanho recomendado: 800px x 800px JPG,PNG ou WEBP</p>
             </div>
-            <div class="wrapper">
-                <label for="quantidadeMin">Quantidade mínima para compra</label>
-                <input type="number" class="quantidadeMin" id="quantidadeMin" name="quantidadeMin">
+            <div id="mediabox" class="midiaBox">
+                <label class="midiaBtn" for="editMidia">Adicionar midia</label>
+                <input oninput="renderimg(this)" type="file" name="editMidia" id="editMidia" style="display: none;">
+                <div class="firstCardWrapper"></div>
             </div>
-            <div class="wrapper">
-                <label for="obs">Cliente pode inserir observações?</label>
-                <select name="obs" id="obs">
-                    <option value="sim">Sim</option>
-                    <option value="nao">Não</option>
-                </select>
+            <div class="variations">
+                <h3>Variações</h3>
+                <input type="text" class="varInput" placeholder="Ex: Ródio">
+                <div class="addBtn" onclick="addvariation(this)">Adicionar</div>
             </div>
-            <div class="wrapper">
-                <label for="mult">Multiplicador</label>
-                <input type="number" name="mult" id="mult">
-            </div>
-        </div>
-        <div class="description">
-            <div class="wrapper">
-                <label for="desc">Descrição</label>
-                <textarea name="desc" id="desc" cols="30" rows="4"></textarea>
-            </div>
-        </div>
-        <div class="wrapper2">
-            <label class="codigo" for="cod">Código</label>
-            <input type="text" name="cod" id="cod">
-        </div>
-        <div class="save">Salvar</div>
-        <h2 class="imagensTxt">Imagens</h2>
-        <div class="imgCardContainer">
-            <div class="imgCard" style="display: none;">
-                <img src="https://conecta-vendas.s3.amazonaws.com/mallorca_joias/fd2a2ada72f707bae3eb1d8cc449c7ed.jpeg"
-                    alt="">
-                <div class="cardBtn">Remover</div>
-            </div>
+            <div class="salve" onclick="editarProduto()">Salvar</div>
         </div>
     </section>
     <section id="createProduct" style="display: none;">
@@ -132,6 +109,10 @@
                 <label for="createDesc">Descrição</label>
                 <input type="text" id="createDesc" name="createDesc">
             </div>
+            <div class="thirdCreate">
+                <label for="price">Preço</label>
+                <input type="text" name="price" id="price">
+            </div>
             <div class="txtSpace">
                 <h3>Mídias do produto</h3>
                 <p>Tamanho recomendado: 800px x 800px JPG,PNG ou WEBP</p>
@@ -144,7 +125,7 @@
             <div class="variations">
                 <h3>Variações</h3>
                 <input type="text" class="varInput" placeholder="Ex: Ródio">
-                <div class="addBtn" onclick="addvariation()">Adicionar</div>
+                <div class="addBtn" onclick="addvariation(this)">Adicionar</div>
             </div>
             <div class="salve" onclick="enviarProduto()">Salvar</div>
         </div>

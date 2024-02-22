@@ -379,7 +379,6 @@ video {
     flex-direction: column;
     position: relative;
     z-index: 1;
-    background-color: white;
     padding-bottom: 20px;
 }
 
@@ -516,6 +515,15 @@ option:checked {
     border: 1px solid #cfcfcf;
 }
 
+#editDesc {
+    width: 50vw;
+    height: 90px;
+    padding: 10px;
+    font-size: large;
+    border-radius: 5px;
+    border: 1px solid #cfcfcf;
+}
+
 .secondCreate {
     row-gap: 5px;
     margin-top: 35px;
@@ -525,6 +533,25 @@ option:checked {
     width: 65vw;
     margin-left: auto;
     margin-right: auto;
+}
+
+.thirdCreate {
+    row-gap: 5px;
+    margin-top: 35px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 65vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.thirdCreate input {
+    width: 25vw;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #cfcfcf;
+    padding: 5px;
 }
 
 .midiaBox {
@@ -744,6 +771,11 @@ option:checked {
 }
 
 .secondCardWrapper {
+    display: flex;
+    column-gap: 10px;
+}
+
+.firstCardWrapper {
     display: flex;
     column-gap: 10px;
 }
