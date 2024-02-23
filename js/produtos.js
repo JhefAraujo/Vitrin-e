@@ -245,6 +245,7 @@ function enviarProduto() {
 }
 
 var varias = '';
+var original;
 
 function editarProduto() {
     formData = new FormData();
@@ -261,10 +262,11 @@ function editarProduto() {
     }
 
     formData.append("referencia", document.getElementById("editReferencia").value);
-    formData.append("grupo", document.getElementById("categoria").value);
-    formData.append("descricao", document.getElementById("createDesc").value)
+    formData.append("original", original)
+    formData.append("grupo", document.getElementById("editCategoria").value);
+    formData.append("descricao", document.getElementById("editDesc").value)
     formData.append("ativo", "sim");
-    formData.append("action", "edit");
+    formData.append("action", "editarCatalogo");
     formData.append("variacao", varias);
     formData.append("precos", document.getElementById('price').value);
     formData.append("imagem", document.getElementById('midia').value.split("\\")[2]);
@@ -277,7 +279,7 @@ function editarProduto() {
     };
 
     fetch(
-        "https://script.google.com/macros/s/AKfycbwoEFRLiMEaWy13kM5X-HsMT5Ym2oJyIhVkejr_lmSEjRpLgnMZd5mP4Gm9NNaRN1aIoA/exec",
+        "https://script.google.com/macros/s/AKfycbwQf4C2mwUW5RJANXol-VZ5ku6h2o2wOVBYJT0rHwmc-M6SMGUOXCTzEaClyQ_IQ2UYtg/exec",
         requestOptions
     )
         .then((response) => response.text())
