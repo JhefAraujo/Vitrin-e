@@ -1,20 +1,3 @@
-fetch('.env')
-  .then(response => response.text())
-  .then(envFileContent => {
-    const envLines = envFileContent.split('\n');
-    envLines.forEach(line => {
-      const [key, value] = line.split('=');
-      if (key && value) {
-        process.env[key.trim()] = value.trim();
-      }
-    });
-    // Agora as variáveis de ambiente estão disponíveis no objeto process.env
-    console.log('Variáveis de ambiente carregadas:', process.env);
-  })
-  .catch(error => {
-    console.error('Erro ao carregar variáveis de ambiente:', error);
-  });
-
 async function renderCatalogos() {
     url =
         "https://script.google.com/macros/s/AKfycbxA31_rhJv9HQV2kxFTPqO4FizbKDvP0YkxRLJ2VhCUbe4ndYM-11SfpybGW1x2X8zxCQ/exec";
