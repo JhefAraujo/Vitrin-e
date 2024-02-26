@@ -224,7 +224,7 @@ function enviarProduto() {
     formData.append("action", "criar");
     formData.append("variacao", varias);
     formData.append("precos", document.getElementById('price').value);
-    formData.append("imagem", document.getElementById('midia').value.split("\\")[2]);
+    formData.append("imagem", "https://raw.githubusercontent.com/JhefAraujo/Clone-conecta/main/imagensProdutos/" + document.getElementById('midia').value.split("\\")[2]);
 
     var requestOptions = {
         method: "POST",
