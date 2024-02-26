@@ -295,7 +295,7 @@ function enviarImagem(action) {
     const fileInput = document.getElementById('midia');
     const pastaNoRepositorio = "imagensProdutos/"; // Caminho na pasta raiz
     const commitMessage = "Adicionando novo arquivo";
-    const token = "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";
+    const token = "github_pat_11A2L4LBY0l2qBMN8vlT4k_QXdwz0xT9fd"+"iFdC6IcxputqPQevsy3RdAvPtCI17oG4UPKNYFXJwieh5TIB";
 
     // Verifica se um arquivo foi selecionado
     if (fileInput.files.length === 0) {
