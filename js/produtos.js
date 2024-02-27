@@ -70,7 +70,7 @@ async function render(category) {
                 criaDiv.appendChild(criaPara);
                 criaPara.innerHTML = brute[i]["1"];
                 criaImage.innerHTML = `<img src="${
-                    brute[i]["0"].split(" ")[0]
+                    brute[i]["0"].split(" - ")[0]
                 }" alt="${brute[i]["1"]}">`;
             }
         }
@@ -93,6 +93,7 @@ async function render(category) {
             }
         }
     }
+    document.getElementById("loader").style.display = "none";
 }
 
 async function postForm() {
@@ -343,54 +344,69 @@ function enviarImagem(action) {
         return;
     }
 
-    for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        // Concatena o caminho da pasta ao nome do arquivo
-        const caminhoDoArquivoNoRepositorio = pastaNoRepositorio + file.name;
+    function enviarArquivo(index) {
+        if (index < files.length) {
+            const file = files[index];
+            const caminhoDoArquivoNoRepositorio =
+                pastaNoRepositorio + file.name;
+            const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${caminhoDoArquivoNoRepositorio}`;
 
-        const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${caminhoDoArquivoNoRepositorio}`;
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
 
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
+            return new Promise((resolve, reject) => {
+                reader.onload = function () {
+                    const fileContent = reader.result.split(",")[1];
 
-        reader.onload = function () {
-            const fileContent = reader.result.split(",")[1]; // Obtém a parte do conteúdo após a vírgula (base64)
+                    const requestData = {
+                        message: commitMessage,
+                        content: fileContent,
+                    };
 
-            const requestData = {
-                message: commitMessage,
-                content: fileContent,
-            };
+                    const requestOptions = {
+                        method: "PUT",
+                        headers: {
+                            Authorization: `token ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(requestData),
+                    };
 
-            const requestOptions = {
-                method: "PUT",
-                headers: {
-                    Authorization: `token ${token}`,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(requestData),
-            };
+                    fetch(apiUrl, requestOptions)
+                        .then((response) => {
+                            if (!response.ok) {
+                                throw new Error(
+                                    `Erro ao adicionar arquivo: ${response.statusText}`
+                                );
+                            }
+                            return response.json();
+                        })
+                        .then((data) => {
+                            console.log(
+                                "Arquivo adicionado com sucesso:",
+                                data
+                            );
+                            resolve();
+                        })
+                        .catch((error) => {
+                            console.error(error.message);
+                            reject(error);
+                        });
+                };
 
-            fetch(apiUrl, requestOptions)
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error(
-                            `Erro ao adicionar arquivo: ${response.statusText}`
-                        );
-                    }
-                    return response.json();
-                })
-                .then((data) => {
-                    setTimeout(() => {
-                        console.log("Arquivo adicionado com sucesso:", data);
-                    }, 3000);
-                })
-                .catch((error) => {
-                    console.error(error.message);
-                });
-        };
+                reader.onerror = function (error) {
+                    console.error("Erro ao ler o arquivo:", error);
+                    reject(error);
+                };
+            }).then(() => enviarArquivo(index + 1)); // Chama a próxima iteração
+        }
 
-        reader.onerror = function (error) {
-            console.error("Erro ao ler o arquivo:", error);
-        };
+        return Promise.resolve(); // Resolva a promise quando todas as iterações estiverem concluídas
     }
+
+    // Inicia o envio chamando a função para o primeiro arquivo
+    enviarArquivo(0);
+    setTimeout(() => {
+        window.location.reload();
+    }, 5000);
 }
