@@ -130,8 +130,8 @@ function settings(teste) {
     document.getElementById("editDesc").value = brute[id][2].slice(13);
     document.getElementsByTagName("a")[0].href = "produtos.html";
 
-    arrayImg = brute[id][0].split(" ");
-    for (let i = 0; i < arrayImg.length; i++) {
+    arrayImg = brute[id][0].split(" - ");
+    for (let i = 0; i < arrayImg.length - 1; i++) {
         const element = arrayImg[i];
         criaImgCard = document.createElement("div");
         criaImgCard.innerHTML = `<div class="imgCardTwo"><img src="${element}" alt="">
