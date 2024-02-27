@@ -19,7 +19,7 @@
         <div class="wrap">
             <div class="create" onclick="criaCatalogo()">Criar novo catálogo</div>
             <div class="search">
-                <input id="texto" type="text" placeholder="Filtrar catálogos">
+                <input id="texto" name="filtrar" type="text" autocomplete="off" placeholder="Filtrar catálogos">
                 <div class="pesquisa">Pesquisar</div>
             </div>
             <div class="order">
@@ -46,7 +46,7 @@
         </div>
         <div class="firstCat cat">
             <label for="nomeCatalogo">Título</label>
-            <input type="text" id="nomeCatalogo">
+            <input type="text" name="nomeDoCatalogo" autocomplete="off" id="nomeCatalogo">
         </div>
         <div class="secondCat cat">
             <div class="wrapper">
@@ -88,7 +88,7 @@
         </div>
         <div class="firstCat cat">
             <label for="nomeEnviar">Título</label>
-            <input type="text" id="nomeEnviar">
+            <input type="text" name="enviarONome" autocomplete="off" id="nomeEnviar">
         </div>
         <div class="secondCat cat">
             <div class="wrapper">
@@ -130,7 +130,7 @@
     </div>
     <div class="popupCriar">
         <div class="popCriar">
-            <input oninput="pesquisar(this.value)" class="inputCriar" type="text" placeholder="Pesquisar produto...">
+            <input oninput="pesquisar(this.value)" class="inputCriar" type="text" name="pesquisarProduto" autocomplete="off" placeholder="Pesquisar produto...">
             <div class="popupImageCard"></div>
             <div class="submitCriar">Enviar</div>
         </div>

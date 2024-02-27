@@ -12,6 +12,23 @@ async function renderCatalogos() {
         document.getElementsByClassName("container")[0].appendChild(criaDiv);
         criaDiv.setAttribute("onclick", `display(), render("${element[0]}")`);
     }
+    for (
+        let i = 0;
+        i < document.getElementsByClassName("categoria").length;
+        i++
+    ) {
+        const element = document.getElementsByClassName("categoria")[i];
+        for (let i = 0; i < obj.length; i++) {
+            const element = obj[i];
+            document.getElementsByClassName(
+                "categoria"
+            )[0].innerHTML += `<option value="${element[0]}">${element[0]}</option>`;
+            document.getElementsByClassName(
+                "categoria"
+            )[1].innerHTML += `<option value="${element[0]}">${element[0]}</option>`;
+        }
+    }
+    document.getElementById("loader").style.display = "none";
 }
 
 renderCatalogos();
@@ -76,7 +93,6 @@ async function render(category) {
             }
         }
     }
-    document.getElementById("loader").style.display = "none";
 }
 
 async function postForm() {
@@ -147,9 +163,15 @@ function createProduct() {
 }
 
 var filer;
+var fakepath = [];
+var files = [];
 
 function renderimg(input) {
     var fileInput = input;
+    if (input.value.substring(0, 2) == "C:") {
+        fakepath.push(input.value);
+        files.push(input.files[0]);
+    }
 
     // Verifique se um arquivo foi selecionado
     if (fileInput.files.length === 0) {
@@ -225,11 +247,15 @@ function enviarProduto() {
     formData.append("action", "criar");
     formData.append("variacao", varias);
     formData.append("precos", document.getElementById("price").value);
-    formData.append(
-        "imagem",
-        "https://raw.githubusercontent.com/JhefAraujo/Clone-conecta/main/imagensProdutos/" +
-            document.getElementById("midia").value.split("\\")[2]
-    );
+    let imagens = "";
+    for (let i = 0; i < fakepath.length; i++) {
+        const element = fakepath[i];
+        imagens +=
+            "https://raw.githubusercontent.com/JhefAraujo/Clone-conecta/main/imagensProdutos/" +
+            element.split("\\")[2] +
+            " - ";
+    }
+    formData.append("imagem", imagens);
 
     var requestOptions = {
         method: "POST",
@@ -305,7 +331,6 @@ var arquivos;
 function enviarImagem(action) {
     const owner = "jhefAraujo";
     const repo = "Clone-conecta";
-    const fileInput = document.getElementById("midia");
     const pastaNoRepositorio = "imagensProdutos/"; // Caminho na pasta raiz
     const commitMessage = "Adicionando novo arquivo";
     const token =
@@ -313,61 +338,59 @@ function enviarImagem(action) {
         "iFdC6IcxputqPQevsy3RdAvPtCI17oG4UPKNYFXJwieh5TIB";
 
     // Verifica se um arquivo foi selecionado
-    if (fileInput.files.length === 0) {
+    if (files.length === 0) {
         window.alert("Nenhum arquivo selecionado");
         return;
     }
 
-    arquivos = fileInput;
-    const file = fileInput.files[0];
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        // Concatena o caminho da pasta ao nome do arquivo
+        const caminhoDoArquivoNoRepositorio = pastaNoRepositorio + file.name;
 
-    // Concatena o caminho da pasta ao nome do arquivo
-    const caminhoDoArquivoNoRepositorio = pastaNoRepositorio + file.name;
+        const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${caminhoDoArquivoNoRepositorio}`;
 
-    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${caminhoDoArquivoNoRepositorio}`;
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
 
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
+        reader.onload = function () {
+            const fileContent = reader.result.split(",")[1]; // Obtém a parte do conteúdo após a vírgula (base64)
 
-    reader.onload = function () {
-        const fileContent = reader.result.split(",")[1]; // Obtém a parte do conteúdo após a vírgula (base64)
+            const requestData = {
+                message: commitMessage,
+                content: fileContent,
+            };
 
-        const requestData = {
-            message: commitMessage,
-            content: fileContent,
+            const requestOptions = {
+                method: "PUT",
+                headers: {
+                    Authorization: `token ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(requestData),
+            };
+
+            fetch(apiUrl, requestOptions)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(
+                            `Erro ao adicionar arquivo: ${response.statusText}`
+                        );
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    setTimeout(() => {
+                        console.log("Arquivo adicionado com sucesso:", data);
+                    }, 3000);
+                })
+                .catch((error) => {
+                    console.error(error.message);
+                });
         };
 
-        const requestOptions = {
-            method: "PUT",
-            headers: {
-                Authorization: `token ${token}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(requestData),
+        reader.onerror = function (error) {
+            console.error("Erro ao ler o arquivo:", error);
         };
-
-        fetch(apiUrl, requestOptions)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(
-                        `Erro ao adicionar arquivo: ${response.statusText}`
-                    );
-                }
-                return response.json();
-            })
-            .then((data) => {
-                console.log("Arquivo adicionado com sucesso:", data);
-            })
-            .catch((error) => {
-                console.error(error.message);
-            });
-
-        setTimeout(() => {
-            //window.location.reload();
-        }, 3000);
-    };
-
-    reader.onerror = function (error) {
-        console.error("Erro ao ler o arquivo:", error);
-    };
+    }
 }
