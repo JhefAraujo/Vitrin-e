@@ -51,6 +51,12 @@ async function renderProducts() {
 }
 
 async function render(category) {
+    for (let i = 0; i < document.getElementById("editCategoria").children.length; i++) {
+        const element = document.getElementById("editCategoria").children[i];
+        if (element.value == category) {
+            element.setAttribute("selected", "selected");
+        }
+    }
     document.getElementsByClassName("containertwo")[0].innerHTML = "";
     document.getElementById("loader").style.display = "block";
     document.getElementById("nomeCat").innerHTML = category;
@@ -95,6 +101,7 @@ async function render(category) {
         }
     }
     document.getElementById("loader").style.display = "none";
+    original = document.getElementById("editReferencia").value;
 }
 
 async function postForm() {
@@ -135,8 +142,9 @@ function settings(teste) {
     for (let i = 0; i < arrayImg.length - 1; i++) {
         const element = arrayImg[i];
         criaImgCard = document.createElement("div");
-        criaImgCard.innerHTML = `<div class="imgCardTwo"><img src="${element}" alt="">
-        <div class="cardBtn">Remover</div></div>`;
+        criaImgCard.setAttribute("class", "imgCardTwo");
+        criaImgCard.innerHTML = `<img src="${element}" alt="">
+        <div class="cardBtn">Remover</div>`;
         document
             .getElementsByClassName("firstCardWrapper")[0]
             .appendChild(criaImgCard);
@@ -229,6 +237,7 @@ function addvariation(element) {
 var varias = "";
 
 function enviarProduto() {
+    document.getElementById("enviarSalve").innerHTML = '<span id="load" class="load"></span>'
     formData = new FormData();
 
     var variacoes = document.getElementsByClassName("varInput");
@@ -300,15 +309,28 @@ function editarProduto() {
     );
     formData.append("original", original);
     formData.append("grupo", document.getElementById("editCategoria").value);
+    formData.append("referencia", document.getElementById("editReferencia").value);
     formData.append("descricao", document.getElementById("editDesc").value);
     formData.append("ativo", "sim");
     formData.append("action", "editarCatalogo");
     formData.append("variacao", varias);
     formData.append("precos", document.getElementById("price").value);
-    formData.append(
-        "imagem",
-        document.getElementById("midia").value.split("\\")[2]
-    );
+    let imagens = "";
+    let toPush = "";
+    for (let i = 1; i < document.getElementsByClassName("firstCardWrapper")[0].children.length; i++) {
+        const elementi = document.getElementsByClassName("firstCardWrapper")[0].children[i];
+        imagemFilho = elementi.children[0].src;
+        toPush += imagemFilho.split("/")[7];
+        fakepath.push("C:\\\\fakepath\\\\" + toPush);
+    }
+    for (let i = 0; i < fakepath.length; i++) {
+        const element = fakepath[i];
+        imagens +=
+            "https://raw.githubusercontent.com/JhefAraujo/Clone-conecta/main/imagensProdutos/" +
+            element.split("\\")[2] +
+            " - ";
+    }
+    formData.append("imagem", imagens);
 
     var requestOptions = {
         method: "POST",
@@ -318,14 +340,14 @@ function editarProduto() {
     };
 
     fetch(
-        "https://script.google.com/macros/s/AKfycbwQf4C2mwUW5RJANXol-VZ5ku6h2o2wOVBYJT0rHwmc-M6SMGUOXCTzEaClyQ_IQ2UYtg/exec",
+        "https://script.google.com/macros/s/AKfycbwCxQPMK8k45e6XhG3RD0c_ZUA6ShJN1WpWzsQJc3Jfb_0k9nAfVMsVI4ZlD1zGrNmMMg/exec",
         requestOptions
     )
         .then((response) => response.text())
         .then((result) => console.log(result))
         .catch((error) => console.log("error", error));
 
-    enviarImagem("criar");
+    //enviarImagem("criar");
 }
 
 var arquivos;
@@ -408,6 +430,6 @@ function enviarImagem(action) {
     // Inicia o envio chamando a função para o primeiro arquivo
     enviarArquivo(0);
     setTimeout(() => {
-        window.location.reload();
+        //window.location.reload();
     }, 5000);
 }
