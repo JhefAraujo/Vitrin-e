@@ -17,15 +17,9 @@ async function renderCatalogos() {
         i < document.getElementsByClassName("categoria").length;
         i++
     ) {
-        const element = document.getElementsByClassName("categoria")[i];
         for (let i = 0; i < obj.length; i++) {
             const element = obj[i];
-            document.getElementsByClassName(
-                "categoria"
-            )[0].innerHTML += `<option value="${element[0]}">${element[0]}</option>`;
-            document.getElementsByClassName(
-                "categoria"
-            )[1].innerHTML += `<option value="${element[0]}">${element[0]}</option>`;
+            document.getElementById("editCategoria").innerHTML += `<option value="${element[0]}">${element[0]}</option>`;
         }
     }
     document.getElementById("loader").style.display = "none";
@@ -135,8 +129,7 @@ function settings(teste) {
     id = teste.classList[1].slice(4);
     document.getElementById("productSettings").style.display = "flex";
     document.getElementById("list").style.display = "none";
-    document.getElementById("editReferencia").value =
-        teste.children[1].innerHTML;
+    document.getElementById("editReferencia").value = teste.children[1].innerHTML;
     document.getElementById("editDesc").value = brute[id][2].slice(13);
     document.getElementsByTagName("a")[0].href = "produtos.html";
 
@@ -154,19 +147,6 @@ function settings(teste) {
 
     document.getElementsByClassName("imgCard")[1].style.border =
         "1px solid #FF6E28";
-
-    for (let i = 0; i < obj.length; i++) {
-        const element = obj[i][0];
-        criaOpt = document.createElement("option");
-        criaOpt.innerHTML = element;
-        criaOpt.value = element;
-        document.getElementById("cat").appendChild(criaOpt);
-        if (document.getElementsByTagName("option")[i].value == brute[id][4]) {
-            document
-                .getElementsByTagName("option")
-                [i].setAttribute("selected", "true");
-        }
-    }
 }
 
 function createProduct() {
@@ -323,7 +303,7 @@ function editarProduto() {
         const elementi = document.getElementsByClassName("firstCardWrapper")[0].children[i];
         imagemFilho = elementi.children[0].src;
         toPush += imagemFilho.split("/")[7];
-        fakepath.push("C:\\\\fakepath\\\\" + toPush);
+        fakepath.push("C:\\fakepath\\" + toPush);
     }
     for (let i = 0; i < fakepath.length; i++) {
         const element = fakepath[i];
@@ -342,14 +322,14 @@ function editarProduto() {
     };
 
     fetch(
-        "https://script.google.com/macros/s/AKfycbwCxQPMK8k45e6XhG3RD0c_ZUA6ShJN1WpWzsQJc3Jfb_0k9nAfVMsVI4ZlD1zGrNmMMg/exec",
+        "https://script.google.com/macros/s/AKfycbyi1h0RIF0pzhfmMYW_vCzXPvkv4zy50frUmIIaSgqpmRI3ryuv-tZdI_rAsT6PMhpKRA/exec",
         requestOptions
     )
         .then((response) => response.text())
         .then((result) => console.log(result))
         .catch((error) => console.log("error", error));
 
-    //enviarImagem("criar");
+    enviarImagem("criar");
 }
 
 var arquivos;
