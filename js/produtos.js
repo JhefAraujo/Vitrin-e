@@ -36,6 +36,8 @@ renderCatalogos();
 function display(id) {
     document.getElementById("list").style.display = "block";
     document.getElementsByTagName("main")[0].style.display = "none";
+    document.getElementById("voltar").setAttribute("onclick", "window.location.reload()");
+    document.getElementById("voltar").href = "#";
 }
 
 function seta(id) {
