@@ -53,6 +53,7 @@ async function renderProducts() {
 async function render(category) {
     document.getElementsByClassName("containertwo")[0].innerHTML = "";
     document.getElementById("loader").style.display = "block";
+    document.getElementById("nomeCat").innerHTML = category;
     brute = await renderProducts();
     if (document.getElementById("identificadas").className == "opt active") {
         for (let i = 0; i < brute.length; i++) {
