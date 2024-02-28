@@ -312,7 +312,7 @@ function editarProduto() {
             element.split("\\")[2] +
             " - ";
     }
-    formData.append("imagem", imagens);
+    formData.append("imagem", imagens.slice(0, -1));
 
     var requestOptions = {
         method: "POST",
