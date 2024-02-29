@@ -19,7 +19,9 @@ async function renderCatalogos() {
     ) {
         for (let i = 0; i < obj.length; i++) {
             const element = obj[i];
-            document.getElementById("editCategoria").innerHTML += `<option value="${element[0]}">${element[0]}</option>`;
+            document.getElementById(
+                "editCategoria"
+            ).innerHTML += `<option value="${element[0]}">${element[0]}</option>`;
         }
     }
     document.getElementById("loader").style.display = "none";
@@ -30,7 +32,9 @@ renderCatalogos();
 function display(id) {
     document.getElementById("list").style.display = "block";
     document.getElementsByTagName("main")[0].style.display = "none";
-    document.getElementById("voltar").setAttribute("onclick", "window.location.reload()");
+    document
+        .getElementById("voltar")
+        .setAttribute("onclick", "window.location.reload()");
     document.getElementById("voltar").href = "#";
 }
 
@@ -47,7 +51,11 @@ async function renderProducts() {
 }
 
 async function render(category) {
-    for (let i = 0; i < document.getElementById("editCategoria").children.length; i++) {
+    for (
+        let i = 0;
+        i < document.getElementById("editCategoria").children.length;
+        i++
+    ) {
         const element = document.getElementById("editCategoria").children[i];
         if (element.value == category) {
             element.setAttribute("selected", "selected");
@@ -73,7 +81,7 @@ async function render(category) {
                 criaDiv.appendChild(criaPara);
                 criaPara.innerHTML = brute[i]["1"];
                 criaImage.innerHTML = `<img src="${
-                    brute[i]["0"].split(" - ")[0]
+                    brute[i]["0"].split(" ¨ ")[0]
                 }" alt="${brute[i]["1"]}">`;
             }
         }
@@ -97,7 +105,6 @@ async function render(category) {
         }
     }
     document.getElementById("loader").style.display = "none";
-    original = document.getElementById("editReferencia").value;
 }
 
 async function postForm() {
@@ -130,10 +137,10 @@ function settings(teste) {
     document.getElementById("productSettings").style.display = "flex";
     document.getElementById("list").style.display = "none";
     document.getElementById("editReferencia").value = teste.children[1].innerHTML;
-    document.getElementById("editDesc").value = brute[id][2].slice(13);
+    document.getElementById("editDesc").value = brute[id][2];
     document.getElementsByTagName("a")[0].href = "produtos.html";
 
-    arrayImg = brute[id][0].split(" - ");
+    arrayImg = brute[id][0].split(" ¨ ");
     for (let i = 0; i < arrayImg.length - 1; i++) {
         const element = arrayImg[i];
         criaImgCard = document.createElement("div");
@@ -144,9 +151,12 @@ function settings(teste) {
             .getElementsByClassName("firstCardWrapper")[0]
             .appendChild(criaImgCard);
     }
-
-    document.getElementsByClassName("imgCard")[1].style.border =
-        "1px solid #FF6E28";
+    original = document.getElementById("editReferencia").value;
+    for (let i = 0; i < brute[id][5].split(" - ").length -1; i++) {
+        const element = brute[id][5].split(" - ")[i];
+        document.getElementsByClassName("varInput")[i].value = element;
+        editvariation(document.getElementsByClassName("addBtn")[0]);
+    }
 }
 
 function createProduct() {
@@ -214,22 +224,30 @@ function addvariation(element) {
     criaInput.setAttribute("class", "varInput");
     variations.appendChild(criaInput);
     variations.style.height = `${variations.offsetHeight + 50}px`;
+    varias = element.parentElement.children[1].value += " - ";
+}
+
+function editvariation(element) {
+    variations = element.parentElement;
+    criaInput = document.createElement("input");
+    criaInput.setAttribute("class", "varInput");
+    variations.appendChild(criaInput);
+    variations.style.height = `${variations.offsetHeight + 50}px`;
+    //varias = element.parentElement.children[1].value += " - ";
 }
 
 var varias = "";
 
 function enviarProduto() {
-    document.getElementById("enviarSalve").innerHTML = '<span id="load" class="load"></span>'
+    document.getElementById("enviarSalve").innerHTML =
+        '<span id="load" class="load"></span>';
     formData = new FormData();
 
     var variacoes = document.getElementsByClassName("varInput");
 
     for (let i = 1; i < variacoes.length; i++) {
         const element = variacoes[i];
-        if (i == variacoes.length - 1) {
-            varias += element.value;
-            break;
-        }
+        varias += element.value;
         varias += element.value + " - ";
     }
 
@@ -246,7 +264,7 @@ function enviarProduto() {
         imagens +=
             "https://raw.githubusercontent.com/JhefAraujo/Clone-conecta/main/imagensProdutos/" +
             element.split("\\")[2] +
-            " - ";
+            " ¨ ";
     }
     formData.append("imagem", imagens);
 
@@ -276,7 +294,7 @@ function editarProduto() {
 
     var variacoes = document.getElementsByClassName("varInput");
 
-    for (let i = 1; i < variacoes.length; i++) {
+    for (let i = 0; i < variacoes.length - 1; i++) {
         const element = variacoes[i];
         if (i == variacoes.length - 1) {
             varias += element.value;
@@ -291,7 +309,10 @@ function editarProduto() {
     );
     formData.append("original", original);
     formData.append("grupo", document.getElementById("editCategoria").value);
-    formData.append("referencia", document.getElementById("editReferencia").value);
+    formData.append(
+        "referencia",
+        document.getElementById("editReferencia").value
+    );
     formData.append("descricao", document.getElementById("editDesc").value);
     formData.append("ativo", "sim");
     formData.append("action", "editarCatalogo");
@@ -299,8 +320,14 @@ function editarProduto() {
     formData.append("precos", document.getElementById("price").value);
     let imagens = "";
     let toPush = "";
-    for (let i = 1; i < document.getElementsByClassName("firstCardWrapper")[0].children.length; i++) {
-        const elementi = document.getElementsByClassName("firstCardWrapper")[0].children[i];
+    for (
+        let i = 1;
+        i <
+        document.getElementsByClassName("firstCardWrapper")[0].children.length;
+        i++
+    ) {
+        const elementi =
+            document.getElementsByClassName("firstCardWrapper")[0].children[i];
         imagemFilho = elementi.children[0].src;
         toPush += imagemFilho.split("/")[7];
         fakepath.push("C:\\fakepath\\" + toPush);
@@ -310,7 +337,7 @@ function editarProduto() {
         imagens +=
             "https://raw.githubusercontent.com/JhefAraujo/Clone-conecta/main/imagensProdutos/" +
             element.split("\\")[2] +
-            " - ";
+            " ¨ ";
     }
     formData.append("imagem", imagens.slice(0, -1));
 
@@ -322,7 +349,7 @@ function editarProduto() {
     };
 
     fetch(
-        "https://script.google.com/macros/s/AKfycbyi1h0RIF0pzhfmMYW_vCzXPvkv4zy50frUmIIaSgqpmRI3ryuv-tZdI_rAsT6PMhpKRA/exec",
+        "https://script.google.com/macros/s/AKfycbwkStCrEAFEsBSHIvQlso0GXnO56tWWguBW9zi-MS9gMpuHoRykhcrVCLkebL6peWWC/exec",
         requestOptions
     )
         .then((response) => response.text())
