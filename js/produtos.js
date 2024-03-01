@@ -13,12 +13,14 @@ async function renderCatalogos() {
         criaDiv.setAttribute("onclick", `display(), render("${element[0]}")`);
     }
 
-        for (let i = 0; i < obj.length; i++) {
-            const element = obj[i];
-            document.getElementById(
-                "editCategoria"
-            ).innerHTML += `<option value="${element[0]}">${element[0]}</option>`;
-        }
+    for (let i = 0; i < obj.length; i++) {
+        const element = obj[i];
+        document.getElementById(
+            "editCategoria"
+        ).innerHTML += `<option value="${element[0]}">${element[0]}</option>`;
+    }
+
+
     document.getElementById("loader").style.display = "none";
 }
 
@@ -46,6 +48,7 @@ async function renderProducts() {
 }
 
 async function render(category) {
+    cat = category;
     for (
         let i = 0;
         i < document.getElementById("editCategoria").children.length;
@@ -131,13 +134,14 @@ function settings(teste) {
     id = teste.classList[1].slice(4);
     document.getElementById("productSettings").style.display = "flex";
     document.getElementById("list").style.display = "none";
-    document.getElementById("editReferencia").value = teste.children[1].innerHTML;
+    document.getElementById("editReferencia").value =
+        teste.children[1].innerHTML;
     document.getElementById("editDesc").value = brute[id][2];
     document.getElementById("priceEdit").value = brute[id][6];
     document.getElementsByTagName("a")[0].href = "produtos.html";
 
     arrayImg = brute[id][0].split(" ¨ ");
-    for (let i = 0; i < arrayImg.length -1; i++) {
+    for (let i = 0; i < arrayImg.length - 1; i++) {
         const element = arrayImg[i];
         tratado = element.replaceAll("¨", "");
         criaImgCard = document.createElement("div");
@@ -149,7 +153,7 @@ function settings(teste) {
             .appendChild(criaImgCard);
     }
     original = document.getElementById("editReferencia").value;
-    for (let i = 0; i < brute[id][5].split(" - ").length -1; i++) {
+    for (let i = 0; i < brute[id][5].split(" - ").length - 1; i++) {
         const element = brute[id][5].split(" - ")[i];
         document.getElementsByClassName("varInput")[i].value = element;
         editvariation(document.getElementsByClassName("addBtn")[0]);
@@ -162,8 +166,19 @@ function settings(teste) {
 function createProduct() {
     document.getElementById("list").style.display = "none";
     document.getElementById("createProduct").style.display = "block";
+    for (let i = 0; i < obj.length; i++) {
+        const element = obj[i];
+        let validate;
+        if (element[0] == cat) {
+            document.getElementById("categoria").innerHTML += `<option selected="selected" value="${element[0]}">${element[0]}</option>`;
+        }
+        else {
+            document.getElementById("categoria").innerHTML += `<option value="${element[0]}">${element[0]}</option>`;
+        }
+    }
 }
 
+var cat = ";"
 var filer;
 var fakepath = [];
 var files = [];
