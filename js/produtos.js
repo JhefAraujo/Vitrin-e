@@ -20,7 +20,6 @@ async function renderCatalogos() {
         ).innerHTML += `<option value="${element[0]}">${element[0]}</option>`;
     }
 
-
     document.getElementById("loader").style.display = "none";
 }
 
@@ -170,15 +169,18 @@ function createProduct() {
         const element = obj[i];
         let validate;
         if (element[0] == cat) {
-            document.getElementById("categoria").innerHTML += `<option selected="selected" value="${element[0]}">${element[0]}</option>`;
-        }
-        else {
-            document.getElementById("categoria").innerHTML += `<option value="${element[0]}">${element[0]}</option>`;
+            document.getElementById(
+                "categoria"
+            ).innerHTML += `<option selected="selected" value="${element[0]}">${element[0]}</option>`;
+        } else {
+            document.getElementById(
+                "categoria"
+            ).innerHTML += `<option value="${element[0]}">${element[0]}</option>`;
         }
     }
 }
 
-var cat = ";"
+var cat = ";";
 var filer;
 var fakepath = [];
 var files = [];
@@ -231,6 +233,30 @@ function renderimg(input) {
 
 function removerPai(element) {
     element.parentElement.remove();
+}
+
+function removerCatalogo() {
+    formdata = new FormData();
+    formdata.append("action", "excluir");
+    formdata.append("catalogo", cat);
+
+    const requestOptions = {
+        method: "POST",
+        body: formdata,
+        redirect: "follow",
+    };
+
+    fetch(
+        "https://script.google.com/macros/s/AKfycbzp5qsU6MouvhjKGVkqjVnGJoldKxxSdeSg-_xBpzwTrB7W2mdbWkBI3m2T5BwTFcVK/exec",
+        requestOptions
+    )
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error));
+
+    setTimeout(() => {
+        window.location.reload();
+    }, 3000);
 }
 
 function addvariation(element) {
