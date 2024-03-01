@@ -138,6 +138,7 @@ function settings(teste) {
     document.getElementById("list").style.display = "none";
     document.getElementById("editReferencia").value = teste.children[1].innerHTML;
     document.getElementById("editDesc").value = brute[id][2];
+    document.getElementById("priceEdit").value = brute[id][6];
     document.getElementsByTagName("a")[0].href = "produtos.html";
 
     arrayImg = brute[id][0].split(" ¨ ");
@@ -321,7 +322,7 @@ function editarProduto() {
     formData.append("ativo", "sim");
     formData.append("action", "editarCatalogo");
     formData.append("variacao", varias);
-    formData.append("precos", document.getElementById("price").value);
+    formData.append("precos", document.getElementById("priceEdit").value);
     for (let i = 0; i < fakepath.length; i++) {
         const element = fakepath[i];
         imagens +=
