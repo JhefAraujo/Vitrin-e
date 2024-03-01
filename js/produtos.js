@@ -141,11 +141,12 @@ function settings(teste) {
     document.getElementsByTagName("a")[0].href = "produtos.html";
 
     arrayImg = brute[id][0].split(" ¨ ");
-    for (let i = 0; i < arrayImg.length - 1; i++) {
+    for (let i = 0; i < arrayImg.length; i++) {
         const element = arrayImg[i];
+        tratado = element.replaceAll("¨", "");
         criaImgCard = document.createElement("div");
         criaImgCard.setAttribute("class", "imgCardTwo");
-        criaImgCard.innerHTML = `<img src="${element}" alt="">
+        criaImgCard.innerHTML = `<img src="${tratado}" alt="">
         <div class="cardBtn">Remover</div>`;
         document
             .getElementsByClassName("firstCardWrapper")[0]
@@ -156,6 +157,9 @@ function settings(teste) {
         const element = brute[id][5].split(" - ")[i];
         document.getElementsByClassName("varInput")[i].value = element;
         editvariation(document.getElementsByClassName("addBtn")[0]);
+    }
+    if (brute[id][0].length > 0) {
+        imagens = brute[id][0] + " ¨ ";
     }
 }
 
@@ -237,6 +241,7 @@ function editvariation(element) {
 }
 
 var varias = "";
+let imagens = "";
 
 function enviarProduto() {
     document.getElementById("enviarSalve").innerHTML =
@@ -258,7 +263,6 @@ function enviarProduto() {
     formData.append("action", "criar");
     formData.append("variacao", varias);
     formData.append("precos", document.getElementById("price").value);
-    let imagens = "";
     for (let i = 0; i < fakepath.length; i++) {
         const element = fakepath[i];
         imagens +=
@@ -318,20 +322,6 @@ function editarProduto() {
     formData.append("action", "editarCatalogo");
     formData.append("variacao", varias);
     formData.append("precos", document.getElementById("price").value);
-    let imagens = "";
-    let toPush = "";
-    for (
-        let i = 1;
-        i <
-        document.getElementsByClassName("firstCardWrapper")[0].children.length;
-        i++
-    ) {
-        const elementi =
-            document.getElementsByClassName("firstCardWrapper")[0].children[i];
-        imagemFilho = elementi.children[0].src;
-        toPush += imagemFilho.split("/")[7];
-        fakepath.push("C:\\fakepath\\" + toPush);
-    }
     for (let i = 0; i < fakepath.length; i++) {
         const element = fakepath[i];
         imagens +=
@@ -371,7 +361,7 @@ function enviarImagem(action) {
         "iFdC6IcxputqPQevsy3RdAvPtCI17oG4UPKNYFXJwieh5TIB";
 
     // Verifica se um arquivo foi selecionado
-    if (files.length === 0) {
+    if (imagens.length === 0) {
         window.alert("Nenhum arquivo selecionado");
         return;
     }
@@ -439,6 +429,6 @@ function enviarImagem(action) {
     // Inicia o envio chamando a função para o primeiro arquivo
     enviarArquivo(0);
     setTimeout(() => {
-        //window.location.reload();
-    }, 5000);
+        window.location.reload();
+    }, 4000);
 }
