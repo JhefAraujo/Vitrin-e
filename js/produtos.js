@@ -12,18 +12,13 @@ async function renderCatalogos() {
         document.getElementsByClassName("container")[0].appendChild(criaDiv);
         criaDiv.setAttribute("onclick", `display(), render("${element[0]}")`);
     }
-    for (
-        let i = 0;
-        i < document.getElementsByClassName("categoria").length;
-        i++
-    ) {
+
         for (let i = 0; i < obj.length; i++) {
             const element = obj[i];
             document.getElementById(
                 "editCategoria"
             ).innerHTML += `<option value="${element[0]}">${element[0]}</option>`;
         }
-    }
     document.getElementById("loader").style.display = "none";
 }
 
@@ -142,7 +137,7 @@ function settings(teste) {
     document.getElementsByTagName("a")[0].href = "produtos.html";
 
     arrayImg = brute[id][0].split(" ¨ ");
-    for (let i = 0; i < arrayImg.length; i++) {
+    for (let i = 0; i < arrayImg.length -1; i++) {
         const element = arrayImg[i];
         tratado = element.replaceAll("¨", "");
         criaImgCard = document.createElement("div");
