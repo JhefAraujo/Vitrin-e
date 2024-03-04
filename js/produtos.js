@@ -400,7 +400,6 @@ function enviarImagem(action) {
     // Verifica se um arquivo foi selecionado
     if (imagens.length === 0) {
         window.alert("Nenhum arquivo selecionado");
-        return;
     }
 
     function enviarArquivo(index) {
