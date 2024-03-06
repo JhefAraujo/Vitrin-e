@@ -146,7 +146,7 @@ function settings(teste) {
         criaImgCard = document.createElement("div");
         criaImgCard.setAttribute("class", "imgCardTwo");
         criaImgCard.innerHTML = `<img src="${tratado}" alt="">
-        <div class="cardBtn">Remover</div>`;
+        <div class="cardBtn" onclick="removerPai(this)">Remover</div>`;
         document
             .getElementsByClassName("firstCardWrapper")[0]
             .appendChild(criaImgCard);
