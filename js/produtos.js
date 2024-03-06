@@ -337,11 +337,12 @@ function editarProduto() {
 
     for (let i = 0; i < variacoes.length - 1; i++) {
         const element = variacoes[i];
-        if (i == variacoes.length - 1) {
+        if (i == variacoes.length - 2) {
             varias += element.value;
             break;
+        } else {
+            varias += element.value + " - ";
         }
-        varias += element.value + " - ";
     }
 
     formData.append(
