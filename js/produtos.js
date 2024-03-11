@@ -233,6 +233,13 @@ function renderimg(input) {
 
 function removerPai(element) {
     element.parentElement.remove();
+    for (let i = 0; i < imagens.split(" ¨ ").length; i++) {
+        const index = imagens.split(" ¨ ")[i];
+        if (element.parentElement.children[0].src == index) {
+            console.log(element.parentElement.children[0].src);
+            imagens.split(" ¨ ").splice(i, i);
+        }
+    }
 }
 
 function removerCatalogo() {
