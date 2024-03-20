@@ -102,21 +102,6 @@ async function render(category) {
         }
     }
     document.getElementById("loader").style.display = "none";
-    try {
-        for (let i = 0; i < brute.length; i++) {
-            const element = brute[i];
-            for (let i = 0; i < JSON.parse(element[5]).length; i++) {
-                const elemento = JSON.parse(element[5]);
-                let index = elemento.indexOf("");
-                if (index !== -1) { // Se o elemento vazio for encontrado
-                    varias = elemento; // Remove o elemento vazio do array
-                }
-            }
-        }
-    }
-    catch (error) {
-        console.error(error);
-    }
 }
 
 async function postForm() {
@@ -168,11 +153,17 @@ function settings(teste) {
     }
     original = document.getElementById("editReferencia").value;
     for (let i = 0; i < JSON.parse(brute[id][5]).length; i++) {
-        if (i != 0) {
+        const element = JSON.parse(brute[id][5]);
+        console.log(element[i]);
+        varias = element;
+    }
+
+    for (let i = 0; i < varias.length; i++) {
+        const element = varias[i];
+        document.getElementsByClassName("varInput")[i].value = varias[i];
+        if (i !== varias.length - 1) {
             editvariation(document.getElementsByClassName("addBtn")[0]);
         }
-        const element = JSON.parse(brute[id][5])[i];
-        document.getElementsByClassName("varInput")[i].value = element;
     }
 }
 
@@ -250,11 +241,11 @@ function renderimg(input) {
 
 function removerPai(element) {
     element.parentElement.remove();
-    for (let i = 0; i < imagens.split(" ¨ ").length; i++) {
-        const index = imagens.split(" ¨ ")[i];
+    for (let i = 0; i < imagens.length; i++) {
+        const index = imagens[i];
         if (element.parentElement.children[0].src == index) {
             console.log(element.parentElement.children[0].src);
-            imagens.split(" ¨ ").splice(i, i);
+            imagens.splice(i, i);
         }
     }
 }
@@ -307,13 +298,6 @@ function enviarProduto() {
         '<span id="load" class="load"></span>';
     formData = new FormData();
 
-    var variacoes = document.getElementsByClassName("varInput");
-
-    for (let i = 0; i < variacoes.length; i++) {
-        const element = variacoes[i];
-        varias.push(element.value);
-    }
-
     formData.append("referencia", document.getElementById("referencia").value);
     formData.append("grupo", document.getElementById("categoria").value);
     formData.append("descricao", document.getElementById("createDesc").value);
@@ -346,13 +330,6 @@ var original;
 
 function editarProduto() {
     formData = new FormData();
-
-    var variacoes = document.getElementsByClassName("varInput");
-
-    for (let i = 0; i < variacoes.length; i++) {
-        const element = variacoes[i];
-        varias.push(element.value);
-    }
 
     formData.append(
         "referencia",
