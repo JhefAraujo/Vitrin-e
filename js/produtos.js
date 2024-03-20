@@ -298,6 +298,17 @@ function enviarProduto() {
         '<span id="load" class="load"></span>';
     formData = new FormData();
 
+    for (
+        let i = 0;
+        i < document.getElementsByClassName("varInput").length - 1;
+        i++
+    ) {
+        if (i == document.getElementsByClassName("varInput").length) {
+            const element = document.getElementsByClassName("varInput")[i];
+            varias[i] = element.value;
+        }
+    }
+
     formData.append("referencia", document.getElementById("referencia").value);
     formData.append("grupo", document.getElementById("categoria").value);
     formData.append("descricao", document.getElementById("createDesc").value);
@@ -330,6 +341,15 @@ var original;
 
 function editarProduto() {
     formData = new FormData();
+
+    for (
+        let i = 0;
+        i < document.getElementsByClassName("varInput").length - 1;
+        i++
+    ) {
+        const element = document.getElementsByClassName("varInput")[i];
+        varias[i] = element.value;
+    }
 
     formData.append(
         "referencia",
