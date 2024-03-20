@@ -78,7 +78,7 @@ async function render(category) {
                 criaDiv.appendChild(criaPara);
                 criaPara.innerHTML = brute[i]["1"];
                 criaImage.innerHTML = `<img src="${
-                    brute[i]["0"].split(" ¨ ")[0]
+                    JSON.parse(brute[i][0])[0]
                 }" alt="${brute[i]["1"]}">`;
             }
         }
@@ -102,6 +102,21 @@ async function render(category) {
         }
     }
     document.getElementById("loader").style.display = "none";
+    try {
+        for (let i = 0; i < brute.length; i++) {
+            const element = brute[i];
+            for (let i = 0; i < JSON.parse(element[5]).length; i++) {
+                const elemento = JSON.parse(element[5]);
+                let index = elemento.indexOf("");
+                if (index !== -1) { // Se o elemento vazio for encontrado
+                    varias = elemento; // Remove o elemento vazio do array
+                }
+            }
+        }
+    }
+    catch (error) {
+        console.error(error);
+    }
 }
 
 async function postForm() {
@@ -139,26 +154,25 @@ function settings(teste) {
     document.getElementById("priceEdit").value = brute[id][6];
     document.getElementsByTagName("a")[0].href = "produtos.html";
 
-    arrayImg = brute[id][0].split(" ¨ ");
+    arrayImg = JSON.parse(brute[id][0]);
+    imagens = arrayImg;
     for (let i = 0; i < arrayImg.length; i++) {
         const element = arrayImg[i];
-        tratado = element.replaceAll("¨", "");
         criaImgCard = document.createElement("div");
         criaImgCard.setAttribute("class", "imgCardTwo");
-        criaImgCard.innerHTML = `<img src="${tratado}" alt="">
+        criaImgCard.innerHTML = `<img src="${element}" alt="">
         <div class="cardBtn" onclick="removerPai(this)">Remover</div>`;
         document
             .getElementsByClassName("firstCardWrapper")[0]
             .appendChild(criaImgCard);
     }
     original = document.getElementById("editReferencia").value;
-    for (let i = 0; i < brute[id][5].split(" - ").length - 1; i++) {
-        const element = brute[id][5].split(" - ")[i];
+    for (let i = 0; i < JSON.parse(brute[id][5]).length; i++) {
+        if (i != 0) {
+            editvariation(document.getElementsByClassName("addBtn")[0]);
+        }
+        const element = JSON.parse(brute[id][5])[i];
         document.getElementsByClassName("varInput")[i].value = element;
-        editvariation(document.getElementsByClassName("addBtn")[0]);
-    }
-    if (brute[id][0].length > 0) {
-        imagens = brute[id][0] + " ¨ ";
     }
 }
 
@@ -190,6 +204,10 @@ function renderimg(input) {
     if (input.value.substring(0, 2) == "C:") {
         fakepath.push(input.value);
         files.push(input.files[0]);
+        imagens.push(
+            "https://raw.githubusercontent.com/JhefAraujo/Clone-conecta/main/imagensProdutos/" +
+                input.value.split("\\")[2]
+        );
     }
 
     // Verifique se um arquivo foi selecionado
@@ -225,7 +243,6 @@ function renderimg(input) {
         input.parentElement.children[2].appendChild(imgCardDiv);
         console.log("2");
     };
-
     // Converta o conteúdo do arquivo para base64
     reader.readAsDataURL(file);
     filer = input;
@@ -272,7 +289,7 @@ function addvariation(element) {
     criaInput.setAttribute("class", "varInput");
     variations.appendChild(criaInput);
     variations.style.height = `${variations.offsetHeight + 50}px`;
-    varias = element.parentElement.children[1].value += " - ";
+    varias.push(element.parentElement.children[1].value);
 }
 
 function editvariation(element) {
@@ -281,11 +298,9 @@ function editvariation(element) {
     criaInput.setAttribute("class", "varInput");
     variations.appendChild(criaInput);
     variations.style.height = `${variations.offsetHeight + 50}px`;
-    //varias = element.parentElement.children[1].value += " - ";
 }
 
-var varias = "";
-let imagens = "";
+let imagens = [];
 
 function enviarProduto() {
     document.getElementById("enviarSalve").innerHTML =
@@ -294,10 +309,9 @@ function enviarProduto() {
 
     var variacoes = document.getElementsByClassName("varInput");
 
-    for (let i = 1; i < variacoes.length; i++) {
+    for (let i = 0; i < variacoes.length; i++) {
         const element = variacoes[i];
-        varias += element.value;
-        varias += element.value + " - ";
+        varias.push(element.value);
     }
 
     formData.append("referencia", document.getElementById("referencia").value);
@@ -305,16 +319,9 @@ function enviarProduto() {
     formData.append("descricao", document.getElementById("createDesc").value);
     formData.append("ativo", "sim");
     formData.append("action", "criar");
-    formData.append("variacao", varias);
+    formData.append("variacao", JSON.stringify(varias));
     formData.append("precos", document.getElementById("price").value);
-    for (let i = 0; i < fakepath.length; i++) {
-        const element = fakepath[i];
-        imagens +=
-            "https://raw.githubusercontent.com/JhefAraujo/Clone-conecta/main/imagensProdutos/" +
-            element.split("\\")[2] +
-            " ¨ ";
-    }
-    formData.append("imagem", imagens);
+    formData.append("imagem", JSON.stringify(imagens));
 
     var requestOptions = {
         method: "POST",
@@ -334,7 +341,7 @@ function enviarProduto() {
     enviarImagem();
 }
 
-var varias = "";
+var varias = [];
 var original;
 
 function editarProduto() {
@@ -342,14 +349,9 @@ function editarProduto() {
 
     var variacoes = document.getElementsByClassName("varInput");
 
-    for (let i = 0; i < variacoes.length - 1; i++) {
+    for (let i = 0; i < variacoes.length; i++) {
         const element = variacoes[i];
-        if (i == variacoes.length - 2) {
-            varias += element.value;
-            break;
-        } else {
-            varias += element.value + " - ";
-        }
+        varias.push(element.value);
     }
 
     formData.append(
@@ -365,16 +367,9 @@ function editarProduto() {
     formData.append("descricao", document.getElementById("editDesc").value);
     formData.append("ativo", "sim");
     formData.append("action", "editarCatalogo");
-    formData.append("variacao", varias);
+    formData.append("variacao", JSON.stringify(varias));
     formData.append("precos", document.getElementById("priceEdit").value);
-    for (let i = 0; i < fakepath.length; i++) {
-        const element = fakepath[i];
-        imagens +=
-            "https://raw.githubusercontent.com/JhefAraujo/Clone-conecta/main/imagensProdutos/" +
-            element.split("\\")[2] +
-            " ¨ ";
-    }
-    formData.append("imagem", imagens.slice(0, -1));
+    formData.append("imagem", JSON.stringify(imagens));
 
     var requestOptions = {
         method: "POST",
