@@ -302,12 +302,12 @@ function enviarProduto() {
     formData = new FormData();
 
     for (
-        let i = 0;
+        let i = 1;
         i < document.getElementsByClassName("varInput").length;
         i++
     ) {
         const element = document.getElementsByClassName("varInput")[i];
-        if (element.value !== "") {
+        if (element.value !== "" || element.value !== undefined || element.value !== null) {
             varias[i] = element.value;
         }
         else {
