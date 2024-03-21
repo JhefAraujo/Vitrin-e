@@ -293,6 +293,9 @@ function editvariation(element) {
 
 let imagens = [];
 
+var varias = [];
+var original;
+
 function enviarProduto() {
     document.getElementById("enviarSalve").innerHTML =
         '<span id="load" class="load"></span>';
@@ -300,12 +303,15 @@ function enviarProduto() {
 
     for (
         let i = 0;
-        i < document.getElementsByClassName("varInput").length - 1;
+        i < document.getElementsByClassName("varInput").length;
         i++
     ) {
-        if (i == document.getElementsByClassName("varInput").length) {
-            const element = document.getElementsByClassName("varInput")[i];
+        const element = document.getElementsByClassName("varInput")[i];
+        if (element.value !== "") {
             varias[i] = element.value;
+        }
+        else {
+            varias.splice(i, 1);
         }
     }
 
@@ -336,8 +342,6 @@ function enviarProduto() {
     enviarImagem();
 }
 
-var varias = [];
-var original;
 
 function editarProduto() {
     formData = new FormData();
