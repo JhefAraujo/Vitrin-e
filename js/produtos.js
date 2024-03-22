@@ -240,6 +240,13 @@ function renderimg(input) {
 }
 
 function removerPai(element) {
+    url = element.parentElement.children[0].src.split('/')[7].replace('%20',' ');
+    for (let i = 0; i < imagens.length; i++) {
+        const index = imagens[i];
+        if (index.split('/')[7] == url) {
+            imagens.splice(i, 1);
+        }
+    }
     element.parentElement.remove();
     for (let i = 0; i < imagens.length; i++) {
         const index = imagens[i];
@@ -307,10 +314,13 @@ function enviarProduto() {
         i++
     ) {
         const element = document.getElementsByClassName("varInput")[i];
-        if (element.value !== "" || element.value !== undefined || element.value !== null) {
-            varias[i] = element.value;
-        }
-        else {
+        if (
+            element.value !== "" ||
+            element.value !== undefined ||
+            element.value !== null
+        ) {
+            varias[i - 1] = element.value;
+        } else {
             varias.splice(i, 1);
         }
     }
@@ -342,10 +352,7 @@ function enviarProduto() {
     enviarImagem();
 }
 
-
 function editarProduto() {
-    formData = new FormData();
-
     for (
         let i = 0;
         i < document.getElementsByClassName("varInput").length - 1;
@@ -354,6 +361,9 @@ function editarProduto() {
         const element = document.getElementsByClassName("varInput")[i];
         varias[i] = element.value;
     }
+
+    formData = new FormData();
+
 
     formData.append(
         "referencia",
