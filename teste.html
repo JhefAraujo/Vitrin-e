@@ -121,10 +121,6 @@
             transition-duration: 0.5s;
         }
 
-        .card img:hover {
-            transform: scale(1.1);
-        }
-
         .cardInfo {
             position: absolute;
             bottom: 0;
@@ -968,7 +964,7 @@
     <script>
         var valorPedido = 0;
         var catalogos = [];
-        var catalogo = "Verano";
+        var catalogo = "asdasd";
         var objetoEncontrado = null;
 
         async function getCatalogos() {
@@ -1378,9 +1374,9 @@
             brute = await response.json();
             for (let i = 0; i < brute.length; i++) {
                 const element = brute[i];
-                imagem = element[0].split(' ');
                 try {
-                    varia = element[5].split('-');
+                    imagem = (JSON.parse(brute[i][0]));
+                    varia = JSON.parse(element[5]);
                 }
                 catch (error) {
                 }
@@ -1402,20 +1398,19 @@
                                             </div>
                                             <a download="${element[0]}" href="${element[0]}"><i class="fa-solid fa-download down" style="color: #ffffff;"></i></a>`
                         if (varia.length > 1) {
-                            criaCard.innerHTML += `<div class="variation"><div class="varWrap">
-                                <p>${varia[0]}</p><div class="wrapQuanti">
+                            criaVar = document.createElement('div');
+                            criaVar.setAttribute('class', 'variation');
+                            criaCard.appendChild(criaVar);
+                            for (let i = 0; i < varia.length; i++) {
+                                const element = varia[i];
+                                criaVar.innerHTML += `<div class="varWrap">
+                                <p>${element}</p><div class="wrapQuanti">
                                     <div class="quanti" onclick="minusVariation(this)">-</div>
                                     <p class="numberVar">0</p>
                                     <div class="quanti plusquanti" onclick="plusVariation(this)">+</div>
-                                </div>
-                            </div>
-                            <div class="varWrap">
-                                <p>${varia[1]}</p><div class="wrapQuanti">
-                                    <div class="quanti" onclick="minusVariation(this)">-</div>
-                                    <p class="numberVar">0</p>
-                                    <div class="quanti plusquanti" onclick="plusVariation(this)">+</div>
-                            </div>`;
-                            criaCard.innerHTML += `</div><div class="closeVar" onclick="closeVariation(this)">X</div>`
+                                </div>`;
+                            criaVar.innerHTML += `</div><div class="closeVar" onclick="closeVariation(this)">X</div>`
+                            }
                         }
                     }
                     else {
@@ -1433,7 +1428,7 @@
                     }
                     document.getElementById('products').appendChild(criaCard);
                     criaCard.innerHTML += '<div class="leftArrow" onclick="carouselleft(this)"><i class="fa-solid fa-arrow-left fa-lg"></i></div><div class="rightArrow" onclick="carouselright(this)"><i class="fa-solid fa-arrow-right fa-lg"></i></div>'
-                    for (let i = 1; i < imagem.length; i++) {
+                    for (let i = 0; i < imagem.length - 1; i++) {
                         const element = imagem[i];
                         criaCard.children[0].innerHTML += `<img src="${imagem[i]}"alt="">`
                     }
